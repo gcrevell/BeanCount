@@ -25,7 +25,7 @@ class AddStudentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func donePressed(sender: AnyObject) {
+    @IBAction func donePressed(_ sender: AnyObject) {
         let db = FIRDatabase.database().reference()
         
         db.child("students").child(nameTextField.text!).setValue(["count" : count, "active" : true])
@@ -33,12 +33,12 @@ class AddStudentViewController: UIViewController {
         unwind()
     }
     
-    @IBAction func cancelPressed(sender: AnyObject) {
+    @IBAction func cancelPressed(_ sender: AnyObject) {
         unwind()
     }
     
     func unwind() {
-        performSegueWithIdentifier("ReturnSegueToHome", sender: self)
+        performSegue(withIdentifier: "ReturnSegueToHome", sender: self)
     }
 
     /*
