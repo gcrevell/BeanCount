@@ -106,9 +106,13 @@ class LoginViewController: UIViewController {
     }
     
 
-    /*
     // MARK: - Navigation
-
+    
+    @IBAction func unwindToLogin(segue:UIStoryboardSegue) {
+        
+    }
+    
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
