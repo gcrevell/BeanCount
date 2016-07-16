@@ -19,6 +19,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     
+    let usernameIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
+    let passwordIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
+    
+    let AD = UIApplication.shared().delegate as! AppDelegate
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,13 +31,11 @@ class LoginViewController: UIViewController {
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         
-        let mainColor = UIColor(red: 150/255, green: 211/255, blue: 41/255, alpha: 1)
+        let mainColor = AD.myThemeColor()
         let buttonColor = UIColor(red: 246/255, green: 175/255, blue: 41/255, alpha: 1)
         
         let fontName = "Avenir-Book"
         let boldFont = "Avenir-Black"
-        
-        self.view.backgroundColor = mainColor
         
         self.usernameField.text = ""
         self.usernameField.backgroundColor = UIColor.white()
@@ -40,8 +43,6 @@ class LoginViewController: UIViewController {
         self.usernameField.placeholder = "Username";
         self.usernameField.font = UIFont(name: fontName, size: 16)
         
-        
-        let usernameIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
         usernameIcon.image = UIImage(named: "username.png")?.withRenderingMode(.alwaysTemplate)
         usernameIcon.tintColor = mainColor
         let usernameIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
@@ -57,7 +58,6 @@ class LoginViewController: UIViewController {
         self.passwordField.placeholder = "Password"
         self.passwordField.font = UIFont(name: fontName, size: 16)
         
-        let passwordIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
         passwordIcon.image = UIImage(named: "lock.png")?.withRenderingMode(.alwaysTemplate)
         passwordIcon.tintColor = mainColor
         passwordIcon.contentMode = .scaleAspectFit
@@ -71,7 +71,7 @@ class LoginViewController: UIViewController {
         self.loginButton.backgroundColor = buttonColor
         self.loginButton.layer.cornerRadius = 3
         self.loginButton.titleLabel?.font = UIFont(name: boldFont, size: 20)
-        self.loginButton.setTitle("Sign up here", for: [])
+        self.loginButton.setTitle("Login", for: [])
         self.loginButton.setTitleColor(UIColor.white(), for: [])
         self.loginButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)
         
@@ -95,6 +95,10 @@ class LoginViewController: UIViewController {
         self.subtitleLabel.font = UIFont(name: fontName, size: 14)
         self.subtitleLabel.text = "Please login below"
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateTheme()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -105,6 +109,13 @@ class LoginViewController: UIViewController {
         self.view.endEditing(false)
     }
     
+    func updateTheme() {
+        let themeColor = AD.myThemeColor()
+        view.backgroundColor = themeColor
+        
+        passwordIcon.tintColor = themeColor
+        usernameIcon.tintColor = themeColor
+    }
 
     // MARK: - Navigation
     

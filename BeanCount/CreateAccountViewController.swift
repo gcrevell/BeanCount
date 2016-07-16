@@ -45,7 +45,7 @@ class CreateAccountViewController: UIViewController {
         style(segmentedControl: themeSelect, fontName: boldFontName, selectedColor: onColor, unselectedColor: UIColor.white(), dividerColor: divider)
         
         themeSelect.addTarget(self, action: #selector(themeChanged), for: .valueChanged)
-        themeSelect.selectedSegmentIndex = AD.selectedTheme != nil ? AD.selectedTheme!.rawValue : 0
+        themeSelect.selectedSegmentIndex = AD.selectedTheme != nil ? AD.selectedTheme!.rawValue - 1 : 0
         
         // Email text field setup
         self.emailTextField.text = ""
@@ -153,6 +153,13 @@ class CreateAccountViewController: UIViewController {
         // Check passwords are same, and follow proper rules
         
         // Upload info to Firebase
+        
+        // Save selected theme
+        AD.selectedTheme = Theme(rawValue: themeSelect.selectedSegmentIndex + 1)
+        let defaults = UserDefaults()
+        defaults.set(themeSelect.selectedSegmentIndex + 1, forKey: "THEME")
+        defaults.synchronize()
+        
         
         // Segue back to login view
         performSegue(withIdentifier: "UnwindToLoginView", sender: self)
