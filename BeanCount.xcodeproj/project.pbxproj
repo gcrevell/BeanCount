@@ -17,7 +17,10 @@
 		7C915A431D39300E0081507E /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A411D39300E0081507E /* check.png */; };
 		7C915A441D39300E0081507E /* uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A421D39300E0081507E /* uncheck.png */; };
 		7C915A461D39B1F20081507E /* AddStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C915A451D39B1F20081507E /* AddStudentViewController.swift */; };
-		EE781D2D40D44A1B09D425E2 /* Pods_BeanCount.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023978D7471B7C79C397E595 /* Pods_BeanCount.framework */; };
+		7CF12A871D3A8317003AE476 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF12A861D3A8317003AE476 /* LoginViewController.swift */; };
+		7CF12A8C1D3A8853003AE476 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF12A8A1D3A8853003AE476 /* lock.png */; };
+		7CF12A8D1D3A8853003AE476 /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF12A8B1D3A8853003AE476 /* mail.png */; };
+		EE781D2D40D44A1B09D425E2 /* Pods_BeanCount.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023978D7471B7C79C397E595 /* Pods_BeanCount.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,9 @@
 		7C915A411D39300E0081507E /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		7C915A421D39300E0081507E /* uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheck.png; sourceTree = "<group>"; };
 		7C915A451D39B1F20081507E /* AddStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStudentViewController.swift; sourceTree = "<group>"; };
+		7CF12A861D3A8317003AE476 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7CF12A8A1D3A8853003AE476 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
+		7CF12A8B1D3A8853003AE476 /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
 		8623A43B2622928630F02922 /* Pods-BeanCount.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeanCount.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BeanCount/Pods-BeanCount.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,19 +94,46 @@
 		7C915A281D3823690081507E /* BeanCount */ = {
 			isa = PBXGroup;
 			children = (
+				7CF12A861D3A8317003AE476 /* LoginViewController.swift */,
 				7C915A3B1D3824AD0081507E /* StudentsTableViewController.swift */,
 				7C915A291D3823690081507E /* AppDelegate.swift */,
 				7C915A2D1D3823690081507E /* Main.storyboard */,
 				7C915A451D39B1F20081507E /* AddStudentViewController.swift */,
 				7C915A3F1D392AD80081507E /* StudentTableViewCell.swift */,
-				7C915A411D39300E0081507E /* check.png */,
-				7C915A421D39300E0081507E /* uncheck.png */,
+				7CF12A881D3A8813003AE476 /* Images */,
 				7C915A301D3823690081507E /* Assets.xcassets */,
 				7C915A321D3823690081507E /* LaunchScreen.storyboard */,
 				7C915A351D3823690081507E /* Info.plist */,
 				7C915A3D1D3834C50081507E /* GoogleService-Info.plist */,
 			);
 			path = BeanCount;
+			sourceTree = "<group>";
+		};
+		7CF12A881D3A8813003AE476 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				7CF12A8E1D3A8859003AE476 /* Login Screen */,
+				7CF12A891D3A881D003AE476 /* Checks */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		7CF12A891D3A881D003AE476 /* Checks */ = {
+			isa = PBXGroup;
+			children = (
+				7C915A411D39300E0081507E /* check.png */,
+				7C915A421D39300E0081507E /* uncheck.png */,
+			);
+			name = Checks;
+			sourceTree = "<group>";
+		};
+		7CF12A8E1D3A8859003AE476 /* Login Screen */ = {
+			isa = PBXGroup;
+			children = (
+				7CF12A8A1D3A8853003AE476 /* lock.png */,
+				7CF12A8B1D3A8853003AE476 /* mail.png */,
+			);
+			name = "Login Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +173,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 6YUP5Q2DLS;
 						DevelopmentTeamName = "Gabe Revells";
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -166,8 +200,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CF12A8C1D3A8853003AE476 /* lock.png in Resources */,
 				7C915A341D3823690081507E /* LaunchScreen.storyboard in Resources */,
 				7C915A431D39300E0081507E /* check.png in Resources */,
+				7CF12A8D1D3A8853003AE476 /* mail.png in Resources */,
 				7C915A3E1D3834C50081507E /* GoogleService-Info.plist in Resources */,
 				7C915A311D3823690081507E /* Assets.xcassets in Resources */,
 				7C915A2F1D3823690081507E /* Main.storyboard in Resources */,
@@ -233,6 +269,7 @@
 				7C915A461D39B1F20081507E /* AddStudentViewController.swift in Sources */,
 				7C915A2A1D3823690081507E /* AppDelegate.swift in Sources */,
 				7C915A3C1D3824AD0081507E /* StudentsTableViewController.swift in Sources */,
+				7CF12A871D3A8317003AE476 /* LoginViewController.swift in Sources */,
 				7C915A401D392AD80081507E /* StudentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +388,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Gabriel.Revells.BeanCount;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -363,6 +401,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Gabriel.Revells.BeanCount;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
