@@ -31,6 +31,7 @@
 		6F70FB857B23537D3491D75A /* Pods-BeanCount.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeanCount.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeanCount/Pods-BeanCount.release.xcconfig"; sourceTree = "<group>"; };
 		7C29E4251D3B069D006088CD /* red x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red x.png"; sourceTree = "<group>"; };
 		7C29E4261D3B069D006088CD /* green check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green check.png"; sourceTree = "<group>"; };
+		7C5F00991D3B55CB0023B2D6 /* BeanCount.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BeanCount.entitlements; sourceTree = "<group>"; };
 		7C83B9531D3AD5D000B3405D /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
 		7C915A261D3823690081507E /* BeanCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeanCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C915A291D3823690081507E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		7C915A281D3823690081507E /* BeanCount */ = {
 			isa = PBXGroup;
 			children = (
+				7C5F00991D3B55CB0023B2D6 /* BeanCount.entitlements */,
 				7CF12A861D3A8317003AE476 /* LoginViewController.swift */,
 				7C915A3B1D3824AD0081507E /* StudentsTableViewController.swift */,
 				7C915A291D3823690081507E /* AppDelegate.swift */,
@@ -183,6 +185,11 @@
 						DevelopmentTeam = 6YUP5Q2DLS;
 						DevelopmentTeamName = "Gabe Revells";
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -396,6 +403,7 @@
 			baseConfigurationReference = 8623A43B2622928630F02922 /* Pods-BeanCount.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BeanCount/BeanCount.entitlements;
 				INFOPLIST_FILE = BeanCount/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Gabriel.Revells.BeanCount;
@@ -409,6 +417,7 @@
 			baseConfigurationReference = 6F70FB857B23537D3491D75A /* Pods-BeanCount.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BeanCount/BeanCount.entitlements;
 				INFOPLIST_FILE = BeanCount/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Gabriel.Revells.BeanCount;

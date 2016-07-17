@@ -18,8 +18,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var rememberLoginSwitch: UISwitch!
     
-    let usernameIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
+    let emailIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
     let passwordIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
     
     let AD = UIApplication.shared().delegate as! AppDelegate
@@ -31,6 +32,8 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        rememberLoginSwitch.onTintColor = UIColor.green()
+        
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         
         let mainColor = AD.myThemeColor()
@@ -41,18 +44,19 @@ class LoginViewController: UIViewController {
         
         self.emailField.text = ""
         self.emailField.backgroundColor = UIColor.white()
-        self.emailField.layer.cornerRadius = 3;
-        self.emailField.placeholder = "Email";
+        self.emailField.layer.cornerRadius = 3
+        self.emailField.placeholder = "Email"
         self.emailField.font = UIFont(name: fontName, size: 16)
         
-        usernameIcon.image = UIImage(named: "mail.png")?.withRenderingMode(.alwaysTemplate)
-        usernameIcon.tintColor = mainColor
-        let usernameIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
-        usernameIconContainer.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
-        usernameIconContainer.addSubview(usernameIcon)
+        emailIcon.image = UIImage(named: "mail.png")?.withRenderingMode(.alwaysTemplate)
+        emailIcon.tintColor = mainColor
+        emailIcon.contentMode = .scaleAspectFit
+        let emailIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
+        emailIconContainer.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+        emailIconContainer.addSubview(emailIcon)
         
         self.emailField.leftViewMode = UITextFieldViewMode.always
-        self.emailField.leftView = usernameIconContainer
+        self.emailField.leftView = emailIconContainer
         
         self.passwordField.text = ""
         self.passwordField.backgroundColor = UIColor.white()
@@ -118,7 +122,7 @@ class LoginViewController: UIViewController {
         view.backgroundColor = themeColor
         
         passwordIcon.tintColor = themeColor
-        usernameIcon.tintColor = themeColor
+        emailIcon.tintColor = themeColor
         
         self.titleLabel.text = introArray[Int(arc4random_uniform(UInt32(introArray.count)))]
     }
@@ -136,6 +140,8 @@ class LoginViewController: UIViewController {
         FIRAuth.auth()?.signIn(withEmail: self.emailField.text!, password: self.passwordField.text!, completion: {(user, error) in
             if user != nil {
                 print("Logged in")
+                
+                self.performSegue(withIdentifier: "SegueToCurrentLocation", sender: self)
             } else {
                 self.loginButton.isEnabled = true
                 activity.removeFromSuperview()

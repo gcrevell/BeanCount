@@ -46,17 +46,18 @@ class CreateAccountViewController: UIViewController {
         style(segmentedControl: themeSelect, fontName: boldFontName, selectedColor: onColor, unselectedColor: UIColor.white(), dividerColor: divider)
         
         themeSelect.addTarget(self, action: #selector(themeChanged), for: .valueChanged)
-        themeSelect.selectedSegmentIndex = AD.selectedTheme != nil ? AD.selectedTheme!.rawValue - 1 : 0
+        themeSelect.selectedSegmentIndex = AD.selectedTheme != Theme.None ? AD.selectedTheme!.rawValue - 1 : 0
         
         // Email text field setup
         self.emailTextField.text = ""
         self.emailTextField.backgroundColor = UIColor.white()
-        self.emailTextField.layer.cornerRadius = 3;
-        self.emailTextField.placeholder = "Email";
+        self.emailTextField.layer.cornerRadius = 3
+        self.emailTextField.placeholder = "Email"
         self.emailTextField.font = UIFont(name: fontName, size: 16)
         
         emailIcon.image = UIImage(named: "mail.png")?.withRenderingMode(.alwaysTemplate)
         emailIcon.tintColor = mainColor
+        emailIcon.contentMode = .scaleAspectFit
         let emailIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
         emailIconContainer.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         emailIconContainer.addSubview(emailIcon)
@@ -67,12 +68,13 @@ class CreateAccountViewController: UIViewController {
         // Username text field setup
         self.usernameTextField.text = ""
         self.usernameTextField.backgroundColor = UIColor.white()
-        self.usernameTextField.layer.cornerRadius = 3;
-        self.usernameTextField.placeholder = "Username";
+        self.usernameTextField.layer.cornerRadius = 3
+        self.usernameTextField.placeholder = "Username"
         self.usernameTextField.font = UIFont(name: fontName, size: 16)
         
         usernameIcon.image = UIImage(named: "username.png")?.withRenderingMode(.alwaysTemplate)
         usernameIcon.tintColor = mainColor
+        usernameIcon.contentMode = .scaleAspectFit
         let usernameIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
         usernameIconContainer.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         usernameIconContainer.addSubview(usernameIcon)
@@ -85,12 +87,13 @@ class CreateAccountViewController: UIViewController {
         // Password text field setup
         self.passwordTextField.text = ""
         self.passwordTextField.backgroundColor = UIColor.white()
-        self.passwordTextField.layer.cornerRadius = 3;
-        self.passwordTextField.placeholder = "Password";
+        self.passwordTextField.layer.cornerRadius = 3
+        self.passwordTextField.placeholder = "Password"
         self.passwordTextField.font = UIFont(name: fontName, size: 16)
         
         passwordIcon.image = UIImage(named: "lock.png")?.withRenderingMode(.alwaysTemplate)
         passwordIcon.tintColor = mainColor
+        passwordIcon.contentMode = .scaleAspectFit
         let passwordIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
         passwordIconContainer.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         passwordIconContainer.addSubview(passwordIcon)
@@ -101,12 +104,13 @@ class CreateAccountViewController: UIViewController {
         // Confirm password text field setup
         self.confirmPasswordTextField.text = ""
         self.confirmPasswordTextField.backgroundColor = UIColor.white()
-        self.confirmPasswordTextField.layer.cornerRadius = 3;
-        self.confirmPasswordTextField.placeholder = "Confirm password";
+        self.confirmPasswordTextField.layer.cornerRadius = 3
+        self.confirmPasswordTextField.placeholder = "Confirm password"
         self.confirmPasswordTextField.font = UIFont(name: fontName, size: 16)
         
         confirmPasswordIcon.image = UIImage(named: "lock.png")?.withRenderingMode(.alwaysTemplate)
         confirmPasswordIcon.tintColor = mainColor
+        confirmPasswordIcon.contentMode = .scaleAspectFit
         let confirmPasswordIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
         confirmPasswordIconContainer.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         confirmPasswordIconContainer.addSubview(confirmPasswordIcon)
@@ -167,8 +171,9 @@ class CreateAccountViewController: UIViewController {
         self.createButton.setTitle("", for: [])
         
         // Upload info to Firebase
+        print(passwordTextField.text!)
         FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: {(user, error) in
-            if error == nil {
+            if user != nil {
                 let changeRequest = user?.profileChangeRequest()
                 
                 changeRequest?.displayName = self.usernameTextField.text!
@@ -181,11 +186,13 @@ class CreateAccountViewController: UIViewController {
                 
                 // Segue back to login view
                 self.performSegue(withIdentifier: "UnwindToLoginView", sender: self)
-            } else {
+            } else if error != nil {
                 // Unable to make the user. Maybe email exists?
                 // TODO: Inform user about fail
                 
+                print("AN ERROR OCCURED")
                 print(error)
+                print(user)
                 
                 var message = ""
                 
