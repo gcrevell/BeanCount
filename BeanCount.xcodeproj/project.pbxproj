@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C29E4271D3B069D006088CD /* red x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C29E4251D3B069D006088CD /* red x.png */; };
+		7C29E4281D3B069D006088CD /* green check.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C29E4261D3B069D006088CD /* green check.png */; };
 		7C83B9541D3AD5D000B3405D /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C83B9531D3AD5D000B3405D /* mail.png */; };
 		7C915A2A1D3823690081507E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C915A291D3823690081507E /* AppDelegate.swift */; };
 		7C915A2F1D3823690081507E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A2D1D3823690081507E /* Main.storyboard */; };
@@ -15,8 +17,6 @@
 		7C915A3C1D3824AD0081507E /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C915A3B1D3824AD0081507E /* StudentsTableViewController.swift */; };
 		7C915A3E1D3834C50081507E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A3D1D3834C50081507E /* GoogleService-Info.plist */; };
 		7C915A401D392AD80081507E /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C915A3F1D392AD80081507E /* StudentTableViewCell.swift */; };
-		7C915A431D39300E0081507E /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A411D39300E0081507E /* check.png */; };
-		7C915A441D39300E0081507E /* uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A421D39300E0081507E /* uncheck.png */; };
 		7C915A461D39B1F20081507E /* AddStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C915A451D39B1F20081507E /* AddStudentViewController.swift */; };
 		7CF12A871D3A8317003AE476 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF12A861D3A8317003AE476 /* LoginViewController.swift */; };
 		7CF12A911D3AB84E003AE476 /* username.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF12A8F1D3AB84E003AE476 /* username.png */; };
@@ -29,6 +29,8 @@
 /* Begin PBXFileReference section */
 		023978D7471B7C79C397E595 /* Pods_BeanCount.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeanCount.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F70FB857B23537D3491D75A /* Pods-BeanCount.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeanCount.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeanCount/Pods-BeanCount.release.xcconfig"; sourceTree = "<group>"; };
+		7C29E4251D3B069D006088CD /* red x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red x.png"; sourceTree = "<group>"; };
+		7C29E4261D3B069D006088CD /* green check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green check.png"; sourceTree = "<group>"; };
 		7C83B9531D3AD5D000B3405D /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
 		7C915A261D3823690081507E /* BeanCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeanCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C915A291D3823690081507E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -39,8 +41,6 @@
 		7C915A3B1D3824AD0081507E /* StudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
 		7C915A3D1D3834C50081507E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C915A3F1D392AD80081507E /* StudentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
-		7C915A411D39300E0081507E /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
-		7C915A421D39300E0081507E /* uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheck.png; sourceTree = "<group>"; };
 		7C915A451D39B1F20081507E /* AddStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStudentViewController.swift; sourceTree = "<group>"; };
 		7CF12A861D3A8317003AE476 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7CF12A8F1D3AB84E003AE476 /* username.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = username.png; sourceTree = "<group>"; };
@@ -129,8 +129,8 @@
 		7CF12A891D3A881D003AE476 /* Checks */ = {
 			isa = PBXGroup;
 			children = (
-				7C915A411D39300E0081507E /* check.png */,
-				7C915A421D39300E0081507E /* uncheck.png */,
+				7C29E4251D3B069D006088CD /* red x.png */,
+				7C29E4261D3B069D006088CD /* green check.png */,
 			);
 			name = Checks;
 			sourceTree = "<group>";
@@ -212,12 +212,12 @@
 				7C915A341D3823690081507E /* LaunchScreen.storyboard in Resources */,
 				7CF12A911D3AB84E003AE476 /* username.png in Resources */,
 				7C83B9541D3AD5D000B3405D /* mail.png in Resources */,
-				7C915A431D39300E0081507E /* check.png in Resources */,
 				7C915A3E1D3834C50081507E /* GoogleService-Info.plist in Resources */,
+				7C29E4281D3B069D006088CD /* green check.png in Resources */,
 				7CF12A921D3AB84E003AE476 /* lock.png in Resources */,
 				7C915A311D3823690081507E /* Assets.xcassets in Resources */,
 				7C915A2F1D3823690081507E /* Main.storyboard in Resources */,
-				7C915A441D39300E0081507E /* uncheck.png in Resources */,
+				7C29E4271D3B069D006088CD /* red x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

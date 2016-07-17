@@ -184,18 +184,42 @@ class CreateAccountViewController: UIViewController {
         
         let text = self.usernameTextField.text!
         
+        if text == "" || text.contains(".") || text.contains("#") || text.contains("$") || text.contains("[") || text.contains("]") {
+            
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
+            imageView.image = UIImage(named: "red x.png")
+            let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+            rightView.addSubview(imageView)
+            imageView.center = CGPoint(x: 20, y: 20)
+            self.usernameTextField.rightView = rightView
+            
+            return
+        }
+        
         // Set right image in text field to be a loading icon
+        let loading = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
+        self.usernameTextField.rightViewMode = .always
+        self.usernameTextField.rightView = loading
+        loading.startAnimating()
+        loading.activityIndicatorViewStyle = .gray
         
         db.child("users").child(self.usernameTextField.text!).observeSingleEvent(of: .value, with: {(snapshot) in
             if text == self.usernameTextField.text! {
                 // Text in text field is unchanged
+                let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
                 if snapshot.exists() {
                     // Value exists. Username is taken
                     // Show red x
+                    imageView.image = UIImage(named: "red x.png")
                 } else {
                     // Value doesnt exist. Username is avaiable
                     // Show green check
+                    imageView.image = UIImage(named: "green check.png")
                 }
+                let rightView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+                rightView.addSubview(imageView)
+                imageView.center = CGPoint(x: 20, y: 20)
+                self.usernameTextField.rightView = rightView
             }
         })
         
