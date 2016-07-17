@@ -11,7 +11,7 @@ import Firebase
 
 class LoginViewController: UIViewController {
 
-    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var forgotButton: UIButton!
@@ -39,20 +39,20 @@ class LoginViewController: UIViewController {
         let fontName = "Avenir-Book"
         let boldFont = "Avenir-Black"
         
-        self.usernameField.text = ""
-        self.usernameField.backgroundColor = UIColor.white()
-        self.usernameField.layer.cornerRadius = 3;
-        self.usernameField.placeholder = "Username";
-        self.usernameField.font = UIFont(name: fontName, size: 16)
+        self.emailField.text = ""
+        self.emailField.backgroundColor = UIColor.white()
+        self.emailField.layer.cornerRadius = 3;
+        self.emailField.placeholder = "Email";
+        self.emailField.font = UIFont(name: fontName, size: 16)
         
-        usernameIcon.image = UIImage(named: "username.png")?.withRenderingMode(.alwaysTemplate)
+        usernameIcon.image = UIImage(named: "mail.png")?.withRenderingMode(.alwaysTemplate)
         usernameIcon.tintColor = mainColor
         let usernameIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
         usernameIconContainer.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         usernameIconContainer.addSubview(usernameIcon)
         
-        self.usernameField.leftViewMode = UITextFieldViewMode.always
-        self.usernameField.leftView = usernameIconContainer
+        self.emailField.leftViewMode = UITextFieldViewMode.always
+        self.emailField.leftView = usernameIconContainer
         
         self.passwordField.text = ""
         self.passwordField.backgroundColor = UIColor.white()
@@ -76,6 +76,8 @@ class LoginViewController: UIViewController {
         self.loginButton.setTitle("Login", for: [])
         self.loginButton.setTitleColor(UIColor.white(), for: [])
         self.loginButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)
+        
+        self.loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
         
         self.forgotButton.backgroundColor = UIColor.clear()
         self.forgotButton.titleLabel?.font = UIFont(name: fontName, size: 12)
@@ -117,6 +119,29 @@ class LoginViewController: UIViewController {
         
         passwordIcon.tintColor = themeColor
         usernameIcon.tintColor = themeColor
+        
+        self.titleLabel.text = introArray[Int(arc4random_uniform(UInt32(introArray.count)))]
+    }
+    
+    func login() {
+        dismissKeyboard()
+        
+        self.loginButton.isEnabled = false
+        let activity = UIActivityIndicatorView()
+        activity.startAnimating()
+        activity.center = CGPoint(x: self.loginButton.frame.size.width/2, y: self.loginButton.frame.size.height/2)
+        self.loginButton.addSubview(activity)
+        self.loginButton.setTitle("", for: [])
+        
+        FIRAuth.auth()?.signIn(withEmail: self.emailField.text!, password: self.passwordField.text!, completion: {(user, error) in
+            if user != nil {
+                print("Logged in")
+            } else {
+                self.loginButton.isEnabled = true
+                activity.removeFromSuperview()
+                self.loginButton.setTitle("Login", for: [])
+            }
+        })
     }
 
     // MARK: - Navigation

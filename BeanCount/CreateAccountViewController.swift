@@ -149,6 +149,8 @@ class CreateAccountViewController: UIViewController {
     }
 
     @IBAction func createButtonPressed(_ sender: AnyObject) {
+        dismissKeyboard()
+        
         // TODO: Implement checks
         // Create account
         // Check email is correct email
@@ -166,9 +168,7 @@ class CreateAccountViewController: UIViewController {
         
         // Upload info to Firebase
         FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: {(user, error) in
-            print("here1")
             if error == nil {
-                print("success")
                 let changeRequest = user?.profileChangeRequest()
                 
                 changeRequest?.displayName = self.usernameTextField.text!
@@ -177,13 +177,42 @@ class CreateAccountViewController: UIViewController {
                 let db = FIRDatabase.database().reference()
                 db.child("users").child(user!.uid).setValue(["username" : self.usernameTextField.text!,
                                                              "theme" : self.themeSelect.selectedSegmentIndex + 1])
-                db.child("usernames").setValue([self.usernameTextField.text! : user!.uid])
+                db.child("usernames").child(self.usernameTextField.text!).setValue(user!.uid)
                 
                 // Segue back to login view
                 self.performSegue(withIdentifier: "UnwindToLoginView", sender: self)
             } else {
                 // Unable to make the user. Maybe email exists?
                 // TODO: Inform user about fail
+                
+                print(error)
+                
+                var message = ""
+                
+                switch error!.code {
+                case FIRAuthErrorCode.errorCodeInvalidEmail.rawValue:
+                    print("Invalid email")
+                    message = "The email address entered is invalid."
+                    
+                case FIRAuthErrorCode.errorCodeEmailAlreadyInUse.rawValue:
+                    print("Email in use")
+                    message = "That email address is already registered. Forgot your email? Recover it from the login screen."
+                    
+                case FIRAuthErrorCode.errorCodeWeakPassword.rawValue:
+                    print("Password game is weak")
+                    message = "The password entered is too weak. Please try another."
+                    
+                case FIRAuthErrorCode.errorCodeNetworkError.rawValue:
+                    print("Network error")
+                    message = "There was a network error. Please check your connection and try again."
+                    
+                default:
+                    print("Not there")
+                }
+                
+                let alert = UIAlertController(title: "Failure", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
                 
                 self.createButton.isEnabled = true
                 activity.removeFromSuperview()

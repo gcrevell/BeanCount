@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="16A239j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="E6J-eg-3vU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11163.2" systemVersion="16A239j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="E6J-eg-3vU">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11103.10"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11133"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -173,12 +173,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PWl-gg-iVP">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PWl-gg-iVP">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="fjH-Wk-V2g"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KzD-nx-FFf">
                                 <constraints>
@@ -218,6 +218,25 @@
                                     <constraint firstItem="1Xl-eT-HBM" firstAttribute="top" secondItem="z1T-wu-x6K" secondAttribute="top" constant="8" id="sUZ-up-PEb"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Fp-H6-Zzv">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZF-fc-Bjg">
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AR5-pi-atp"/>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="AR5-pi-atp" firstAttribute="leading" secondItem="vZF-fc-Bjg" secondAttribute="trailing" constant="8" id="5LS-1f-u5J"/>
+                                    <constraint firstAttribute="height" constant="47" id="5dF-n9-Amq"/>
+                                    <constraint firstItem="vZF-fc-Bjg" firstAttribute="centerY" secondItem="8Fp-H6-Zzv" secondAttribute="centerY" id="Dc0-qE-Baz"/>
+                                    <constraint firstItem="AR5-pi-atp" firstAttribute="top" secondItem="8Fp-H6-Zzv" secondAttribute="top" constant="8" id="WK0-fu-Rf9"/>
+                                    <constraint firstAttribute="trailing" secondItem="AR5-pi-atp" secondAttribute="trailing" constant="20" id="d7W-i8-LZj"/>
+                                    <constraint firstAttribute="width" constant="184" id="hRK-Wt-BdV"/>
+                                    <constraint firstAttribute="bottom" secondItem="AR5-pi-atp" secondAttribute="bottom" constant="8" id="iYU-EJ-sed"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -232,8 +251,10 @@
                             <constraint firstItem="KzD-nx-FFf" firstAttribute="leading" secondItem="3YA-0O-YXg" secondAttribute="leadingMargin" id="gcl-24-vsH"/>
                             <constraint firstItem="gXB-D3-aeM" firstAttribute="top" secondItem="z1T-wu-x6K" secondAttribute="bottom" constant="8" id="ghu-p9-jQK"/>
                             <constraint firstItem="VUB-es-7aU" firstAttribute="top" secondItem="l1A-c6-zdC" secondAttribute="bottom" constant="8" id="hQz-gO-92q"/>
+                            <constraint firstItem="8Fp-H6-Zzv" firstAttribute="trailing" secondItem="3YA-0O-YXg" secondAttribute="trailingMargin" id="hn1-eL-6kc"/>
                             <constraint firstItem="z1T-wu-x6K" firstAttribute="centerX" secondItem="3YA-0O-YXg" secondAttribute="centerX" id="iDL-aL-EG9"/>
                             <constraint firstItem="PWl-gg-iVP" firstAttribute="trailing" secondItem="3YA-0O-YXg" secondAttribute="trailingMargin" id="iTB-4R-qGm"/>
+                            <constraint firstItem="8Fp-H6-Zzv" firstAttribute="top" secondItem="29N-ai-riz" secondAttribute="bottom" constant="8" id="khS-d6-llW"/>
                             <constraint firstItem="z1T-wu-x6K" firstAttribute="leading" secondItem="3YA-0O-YXg" secondAttribute="leadingMargin" id="n6b-23-m97"/>
                             <constraint firstItem="VUB-es-7aU" firstAttribute="trailing" secondItem="3YA-0O-YXg" secondAttribute="trailingMargin" id="nCV-do-GzT"/>
                             <constraint firstItem="29N-ai-riz" firstAttribute="leading" secondItem="3YA-0O-YXg" secondAttribute="leadingMargin" id="nkp-cF-ryh"/>
@@ -244,12 +265,12 @@
                     </view>
                     <connections>
                         <outlet property="createButton" destination="1Xl-eT-HBM" id="7UT-5b-m6H"/>
+                        <outlet property="emailField" destination="PWl-gg-iVP" id="t3o-7D-1ls"/>
                         <outlet property="forgotButton" destination="buY-hG-gQf" id="TVO-bt-Wws"/>
                         <outlet property="loginButton" destination="29N-ai-riz" id="rvB-wy-YuP"/>
                         <outlet property="passwordField" destination="KzD-nx-FFf" id="EmL-mD-8av"/>
                         <outlet property="subtitleLabel" destination="VUB-es-7aU" id="a5Q-zM-A4y"/>
                         <outlet property="titleLabel" destination="l1A-c6-zdC" id="KXY-Hu-XGp"/>
-                        <outlet property="usernameField" destination="PWl-gg-iVP" id="3xK-Nf-17T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dFy-kH-ACy" userLabel="First Responder" sceneMemberID="firstResponder"/>
