@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CreateAccountViewController: UIViewController {
 
@@ -78,6 +79,8 @@ class CreateAccountViewController: UIViewController {
         
         self.usernameTextField.leftViewMode = UITextFieldViewMode.always
         self.usernameTextField.leftView = usernameIconContainer
+        
+        self.usernameTextField.addTarget(self, action: #selector(checkUsernameUnique), for: .editingChanged)
         
         // Password text field setup
         self.passwordTextField.text = ""
@@ -153,6 +156,17 @@ class CreateAccountViewController: UIViewController {
         // Check passwords are same, and follow proper rules
         
         // Upload info to Firebase
+        FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: {(user, error) in
+            if error == nil {
+                let changeRequest = user?.profileChangeRequest()
+                
+                changeRequest?.displayName = self.usernameTextField.text!
+                changeRequest?.commitChanges(completion: { (error) in })
+                
+                let db = FIRDatabase.database().reference()
+                db.child("users").setValue([self.usernameTextField.text! : user!.uid])
+            }
+        })
         
         // Save selected theme
         AD.selectedTheme = Theme(rawValue: themeSelect.selectedSegmentIndex + 1)
@@ -163,6 +177,52 @@ class CreateAccountViewController: UIViewController {
         
         // Segue back to login view
         performSegue(withIdentifier: "UnwindToLoginView", sender: self)
+    }
+    
+    func checkUsernameUnique() {
+        let db = FIRDatabase.database().reference()
+        
+        let text = self.usernameTextField.text!
+        
+        // Set right image in text field to be a loading icon
+        
+        db.child("users").child(self.usernameTextField.text!).observeSingleEvent(of: .value, with: {(snapshot) in
+            if text == self.usernameTextField.text! {
+                // Text in text field is unchanged
+                if snapshot.exists() {
+                    // Value exists. Username is taken
+                    // Show red x
+                } else {
+                    // Value doesnt exist. Username is avaiable
+                    // Show green check
+                }
+            }
+        })
+        
+//        db.child("users").observeSingleEvent(of: .value, with: {(snapshot) in
+//            let name = (snapshot.value as! [String : String])["wowza7125"]!
+//            db.child("users").queryEqual(toValue: name).observeSingleEvent(of: .value, with: {(snapshot) in
+//                print(snapshot)
+//            })
+//        })
+        
+//        db.child("users").queryEqual(toValue: usernameTextField.text!).observeSingleEvent(of: .value, with: {(snapshot) in
+//            print(snapshot)
+//            if snapshot.exists() {
+//                print("HEY IM HERE!!!!!!")
+//                print()
+//                print()
+//                print()
+//                print()
+//                print()
+//                print()
+//                print()
+//                print()
+//                print()
+//            } else {
+//                print("Not there :(")
+//            }
+//        })
     }
     
     /*
