@@ -24,6 +24,8 @@ class LoginViewController: UIViewController {
     
     let AD = UIApplication.shared().delegate as! AppDelegate
     
+    let introArray = ["Good to see you", "Hello, world!", "You look beautiful today"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -89,7 +91,7 @@ class LoginViewController: UIViewController {
         
         self.titleLabel.textColor = UIColor.white()
         self.titleLabel.font = UIFont(name: boldFont, size: 24)
-        self.titleLabel.text = "Good to see you"
+        self.titleLabel.text = introArray[Int(arc4random_uniform(UInt32(introArray.count)))]
         
         self.subtitleLabel.textColor = UIColor.white()
         self.subtitleLabel.font = UIFont(name: fontName, size: 14)
