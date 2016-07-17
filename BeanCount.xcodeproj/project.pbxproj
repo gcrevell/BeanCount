@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		7C29E4271D3B069D006088CD /* red x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C29E4251D3B069D006088CD /* red x.png */; };
 		7C29E4281D3B069D006088CD /* green check.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C29E4261D3B069D006088CD /* green check.png */; };
+		7C5F009D1D3BCB950023B2D6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F009C1D3BCB950023B2D6 /* SettingsViewController.swift */; };
+		7C5F009F1D3BCE250023B2D6 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C5F009E1D3BCE250023B2D6 /* location.png */; };
+		7C5F00A31D3BE1880023B2D6 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F00A21D3BE1880023B2D6 /* AddLocationViewController.swift */; };
 		7C83B9541D3AD5D000B3405D /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C83B9531D3AD5D000B3405D /* mail.png */; };
 		7C915A2A1D3823690081507E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C915A291D3823690081507E /* AppDelegate.swift */; };
 		7C915A2F1D3823690081507E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A2D1D3823690081507E /* Main.storyboard */; };
@@ -32,6 +35,9 @@
 		7C29E4251D3B069D006088CD /* red x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red x.png"; sourceTree = "<group>"; };
 		7C29E4261D3B069D006088CD /* green check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green check.png"; sourceTree = "<group>"; };
 		7C5F00991D3B55CB0023B2D6 /* BeanCount.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BeanCount.entitlements; sourceTree = "<group>"; };
+		7C5F009C1D3BCB950023B2D6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7C5F009E1D3BCE250023B2D6 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
+		7C5F00A21D3BE1880023B2D6 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		7C83B9531D3AD5D000B3405D /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
 		7C915A261D3823690081507E /* BeanCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeanCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C915A291D3823690081507E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +107,8 @@
 		7C915A281D3823690081507E /* BeanCount */ = {
 			isa = PBXGroup;
 			children = (
+				7C5F00A21D3BE1880023B2D6 /* AddLocationViewController.swift */,
+				7C5F009C1D3BCB950023B2D6 /* SettingsViewController.swift */,
 				7C5F00991D3B55CB0023B2D6 /* BeanCount.entitlements */,
 				7CF12A861D3A8317003AE476 /* LoginViewController.swift */,
 				7C915A3B1D3824AD0081507E /* StudentsTableViewController.swift */,
@@ -122,6 +130,7 @@
 		7CF12A881D3A8813003AE476 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7C5F009E1D3BCE250023B2D6 /* location.png */,
 				7CF12A8E1D3A8859003AE476 /* Login Screen */,
 				7CF12A891D3A881D003AE476 /* Checks */,
 			);
@@ -218,6 +227,7 @@
 			files = (
 				7C915A341D3823690081507E /* LaunchScreen.storyboard in Resources */,
 				7CF12A911D3AB84E003AE476 /* username.png in Resources */,
+				7C5F009F1D3BCE250023B2D6 /* location.png in Resources */,
 				7C83B9541D3AD5D000B3405D /* mail.png in Resources */,
 				7C915A3E1D3834C50081507E /* GoogleService-Info.plist in Resources */,
 				7C29E4281D3B069D006088CD /* green check.png in Resources */,
@@ -287,9 +297,11 @@
 				7C915A461D39B1F20081507E /* AddStudentViewController.swift in Sources */,
 				7C915A2A1D3823690081507E /* AppDelegate.swift in Sources */,
 				7C915A3C1D3824AD0081507E /* StudentsTableViewController.swift in Sources */,
+				7C5F00A31D3BE1880023B2D6 /* AddLocationViewController.swift in Sources */,
 				7CF12A871D3A8317003AE476 /* LoginViewController.swift in Sources */,
 				7C915A401D392AD80081507E /* StudentTableViewCell.swift in Sources */,
 				7CF12A961D3AC017003AE476 /* Theme.swift in Sources */,
+				7C5F009D1D3BCB950023B2D6 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
