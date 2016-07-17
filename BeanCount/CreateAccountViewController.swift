@@ -149,34 +149,53 @@ class CreateAccountViewController: UIViewController {
     }
 
     @IBAction func createButtonPressed(_ sender: AnyObject) {
+        // TODO: Implement checks
         // Create account
         // Check email is correct email
         // Check it doesnt exist in DB
         // Check username is unique
         // Check passwords are same, and follow proper rules
         
+        // Deactivate button and set image to activity indicator
+        self.createButton.isEnabled = false
+        let activity = UIActivityIndicatorView()
+        activity.startAnimating()
+        activity.center = CGPoint(x: self.createButton.frame.size.width/2, y: self.createButton.frame.size.height/2)
+        self.createButton.addSubview(activity)
+        self.createButton.setTitle("", for: [])
+        
         // Upload info to Firebase
         FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: {(user, error) in
+            print("here1")
             if error == nil {
+                print("success")
                 let changeRequest = user?.profileChangeRequest()
                 
                 changeRequest?.displayName = self.usernameTextField.text!
                 changeRequest?.commitChanges(completion: { (error) in })
                 
                 let db = FIRDatabase.database().reference()
-                db.child("users").setValue([self.usernameTextField.text! : user!.uid])
+                db.child("users").child(user!.uid).setValue(["username" : self.usernameTextField.text!,
+                                                             "theme" : self.themeSelect.selectedSegmentIndex + 1])
+                db.child("usernames").setValue([self.usernameTextField.text! : user!.uid])
+                
+                // Segue back to login view
+                self.performSegue(withIdentifier: "UnwindToLoginView", sender: self)
+            } else {
+                // Unable to make the user. Maybe email exists?
+                // TODO: Inform user about fail
+                
+                self.createButton.isEnabled = true
+                activity.removeFromSuperview()
+                self.createButton.setTitle("Create!", for: [])
             }
         })
         
-        // Save selected theme
+        // Save selected theme locally
         AD.selectedTheme = Theme(rawValue: themeSelect.selectedSegmentIndex + 1)
         let defaults = UserDefaults()
         defaults.set(themeSelect.selectedSegmentIndex + 1, forKey: "THEME")
         defaults.synchronize()
-        
-        
-        // Segue back to login view
-        performSegue(withIdentifier: "UnwindToLoginView", sender: self)
     }
     
     func checkUsernameUnique() {
@@ -203,7 +222,7 @@ class CreateAccountViewController: UIViewController {
         loading.startAnimating()
         loading.activityIndicatorViewStyle = .gray
         
-        db.child("users").child(self.usernameTextField.text!).observeSingleEvent(of: .value, with: {(snapshot) in
+        db.child("usernames").child(self.usernameTextField.text!).observeSingleEvent(of: .value, with: {(snapshot) in
             if text == self.usernameTextField.text! {
                 // Text in text field is unchanged
                 let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
