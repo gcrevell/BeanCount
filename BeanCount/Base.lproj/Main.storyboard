@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11163.2" systemVersion="16A239j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="E6J-eg-3vU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11163.2" systemVersion="16A239j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="i5B-rB-VnN">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11133"/>
@@ -421,12 +421,39 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NkV-oU-SoJ">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lu6-4g-LWD">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="lu6-4g-LWD" secondAttribute="height" multiplier="1:1" id="9G9-3b-6wq"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqi-N0-6JS">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="iqi-N0-6JS" firstAttribute="leading" secondItem="lu6-4g-LWD" secondAttribute="trailing" id="V6L-4a-QxG"/>
+                                    <constraint firstAttribute="trailing" secondItem="iqi-N0-6JS" secondAttribute="trailing" constant="8" id="Xpw-30-UAL"/>
+                                    <constraint firstItem="lu6-4g-LWD" firstAttribute="leading" secondItem="NkV-oU-SoJ" secondAttribute="leading" id="f0Y-oZ-62v"/>
+                                    <constraint firstAttribute="bottom" secondItem="lu6-4g-LWD" secondAttribute="bottom" id="g4t-3k-ubn"/>
+                                    <constraint firstItem="iqi-N0-6JS" firstAttribute="centerY" secondItem="NkV-oU-SoJ" secondAttribute="centerY" id="lsG-32-ZfT"/>
+                                    <constraint firstAttribute="height" constant="41" id="mxr-2i-OqR"/>
+                                    <constraint firstItem="lu6-4g-LWD" firstAttribute="top" secondItem="NkV-oU-SoJ" secondAttribute="top" id="qB4-Ca-i1U"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="NkV-oU-SoJ" firstAttribute="leading" secondItem="3Ed-bd-SFt" secondAttribute="leadingMargin" id="5WY-Ez-eEi"/>
                             <constraint firstItem="SKu-vf-HGQ" firstAttribute="trailing" secondItem="3Ed-bd-SFt" secondAttribute="trailingMargin" id="IBa-zm-Boh"/>
                             <constraint firstItem="SKu-vf-HGQ" firstAttribute="leading" secondItem="3Ed-bd-SFt" secondAttribute="leadingMargin" id="Muq-mC-ySo"/>
                             <constraint firstItem="SKu-vf-HGQ" firstAttribute="top" secondItem="qQB-WB-Nwc" secondAttribute="bottom" constant="45" id="RPz-sT-Ugd"/>
+                            <constraint firstItem="NkV-oU-SoJ" firstAttribute="trailing" secondItem="3Ed-bd-SFt" secondAttribute="trailingMargin" id="Tb9-mp-6tj"/>
+                            <constraint firstItem="NkV-oU-SoJ" firstAttribute="top" secondItem="SKu-vf-HGQ" secondAttribute="bottom" constant="8" id="c4p-DD-rry"/>
                             <constraint firstItem="qQB-WB-Nwc" firstAttribute="centerX" secondItem="3Ed-bd-SFt" secondAttribute="centerX" id="cF7-6Z-rMX"/>
                             <constraint firstItem="qQB-WB-Nwc" firstAttribute="top" secondItem="qZN-Hx-QP7" secondAttribute="bottom" constant="8" id="kR7-qo-u59"/>
                         </constraints>
@@ -434,6 +461,13 @@
                     <navigationItem key="navigationItem" id="n78-NV-9GV">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="0RX-cG-H3W"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="locationIconView" destination="lu6-4g-LWD" id="7fb-bu-ms0"/>
+                        <outlet property="locationNameTextField" destination="SKu-vf-HGQ" id="mmV-rZ-hbY"/>
+                        <outlet property="locationPickerView" destination="NkV-oU-SoJ" id="j4w-4d-ANx"/>
+                        <outlet property="locationTextLabel" destination="iqi-N0-6JS" id="gzQ-4G-4UH"/>
+                        <outlet property="viewHeightConstraint" destination="mxr-2i-OqR" id="iDG-hF-J0o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EHm-cB-EN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -452,7 +486,7 @@
                                 <frame key="frameInset" minY="92" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D6P-yG-tIQ" id="7za-8z-jn6">
-                                    <frame key="frameInset" width="414" height="43.666666666666664"/>
+                                    <frame key="frameInset" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
