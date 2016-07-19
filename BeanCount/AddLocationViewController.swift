@@ -58,7 +58,6 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         self.locationIconView.contentMode = .scaleAspectFit
         self.locationIconView.tintColor = mainColor
         self.locationIconView.backgroundColor = UIColor(white: 0.9, alpha: 1)
-        //        self.locationNameTextField.placehold
         
         self.locationTextLabel.text = "Choose a location"
         self.locationTextLabel.textColor = UIColor(red: 199/255, green: 199/255, blue: 205/255, alpha: 1)
@@ -81,6 +80,16 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         locationIconView.tintColor = mainColor
     }
     
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print("My location is \(mapView.centerCoordinate)")
+        AD.currentLocation = mapView.centerCoordinate
+        self.locationToCityState(location: self.AD.currentLocation!)
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        print("My location 2 is \(mapView.centerCoordinate)")
+    }
+    
     func expandLocationView() {
         print("Opening map")
         
@@ -90,9 +99,6 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         
         self.locationIconView.isHidden = true
         self.locationTextLabel.isHidden = true
-        
-        self.locationIconView.removeFromSuperview()
-        self.locationTextLabel.removeFromSuperview()
         
         self.viewHeightConstraint.constant = width + 41
         
@@ -116,19 +122,13 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        print("My location is \(mapView.centerCoordinate)")
-    }
-    
-    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        print("My location 2 is \(mapView.centerCoordinate)")
-    }
-    
     func closeMapView() {
         print("Closing map")
         
         for view in self.locationPickerView.subviews {
-            view.removeFromSuperview()
+            if view != locationIconView && view != locationTextLabel {
+                view.removeFromSuperview()
+            }
         }
         
         self.locationPickerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(expandLocationView)))
@@ -141,12 +141,23 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         UIView.animate(withDuration: 1, animations: {
             self.locationPickerView.frame.size = CGSize(width: width, height: height)
         }) { (completed) in
+            self.locationIconView.isHidden = false
+            self.locationTextLabel.isHidden = false
+        }
+    }
+    
+    func locationToCityState(location: CLLocationCoordinate2D) {
+        let lat = location.latitude
+        let lon = location.longitude
+        
+        let loc = CLLocation(latitude: lat, longitude: lon)
+        
+        CLGeocoder().reverseGeocodeLocation(loc) { (placemarks, error) in
+            let placemark = placemarks![0]
+            print(placemark.locality)
+            print(placemark.administrativeArea)
             
-//            self.locationPickerView.addSubview(self.locationIconView)
-//            self.locationPickerView.addSubview(self.locationTextLabel)
-//            
-//            self.locationIconView.isHidden = false
-//            self.locationTextLabel.isHidden = false
+            self.locationTextLabel.text = "\(placemark.locality!), \(placemark.administrativeArea!)"
         }
     }
     
