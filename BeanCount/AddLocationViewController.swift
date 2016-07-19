@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class AddLocationViewController: UIViewController {
+class AddLocationViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var locationNameTextField: UITextField!
     
@@ -21,6 +21,7 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
     
     let AD = UIApplication.shared().delegate as! AppDelegate
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +82,10 @@ class AddLocationViewController: UIViewController {
     }
     
     func expandLocationView() {
+        print("Opening map")
+        
+        self.locationPickerView.gestureRecognizers = nil
+        
         let width = self.locationPickerView.frame.size.width
         
         self.locationIconView.isHidden = true
@@ -96,7 +101,52 @@ class AddLocationViewController: UIViewController {
         }) { (completed) in
             let mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: width, height: width))
             mapView.showsUserLocation = true
+            mapView.userTrackingMode = MKUserTrackingMode.follow
+            mapView.delegate = self
             self.locationPickerView.addSubview(mapView)
+            
+            let closeButton = UIButton(frame: CGRect(x: 0, y: width, width: width, height: 41))
+            closeButton.backgroundColor = UIColor(red: 246/255, green: 175/255, blue: 41/255, alpha: 1)
+            closeButton.setTitle("Set location", for: [])
+            closeButton.setTitleColor(UIColor.white(), for: [])
+            closeButton.addTarget(self, action: #selector(self.closeMapView), for: .touchUpInside)
+            self.locationPickerView.addSubview(closeButton)
+            
+            self.locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        print("My location is \(mapView.centerCoordinate)")
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        print("My location 2 is \(mapView.centerCoordinate)")
+    }
+    
+    func closeMapView() {
+        print("Closing map")
+        
+        for view in self.locationPickerView.subviews {
+            view.removeFromSuperview()
+        }
+        
+        self.locationPickerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(expandLocationView)))
+        
+        let width = self.locationPickerView.frame.size.width
+        let height = CGFloat(41)
+        
+        self.viewHeightConstraint.constant = height
+        
+        UIView.animate(withDuration: 1, animations: {
+            self.locationPickerView.frame.size = CGSize(width: width, height: height)
+        }) { (completed) in
+            
+//            self.locationPickerView.addSubview(self.locationIconView)
+//            self.locationPickerView.addSubview(self.locationTextLabel)
+//            
+//            self.locationIconView.isHidden = false
+//            self.locationTextLabel.isHidden = false
         }
     }
     
