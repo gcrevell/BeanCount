@@ -17,6 +17,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var locationPickerView: UIView!
     @IBOutlet weak var locationIconView: UIImageView!
     @IBOutlet weak var locationTextLabel: UILabel!
+    @IBOutlet weak var submitButton: UIButton!
     
     @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
     
@@ -64,6 +65,12 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         self.locationTextLabel.font = UIFont(name: fontName, size: 16)
         
         self.locationPickerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(expandLocationView)))
+        
+        self.submitButton.backgroundColor = UIColor(red: 246/255, green: 175/255, blue: 41/255, alpha: 1)
+        self.submitButton.setTitle("Submit", for: [])
+        self.submitButton.setTitleColor(UIColor.white(), for: [])
+        self.submitButton.layer.cornerRadius = 3
+        self.submitButton.titleLabel?.font = UIFont(name: "Avenir-Black", size: 20)
     }
     
     override func didReceiveMemoryWarning() {
@@ -102,9 +109,16 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         
         self.viewHeightConstraint.constant = width + 41
         
+        self.submitButton.isUserInteractionEnabled = false
+        
         UIView.animate(withDuration: 1, animations: {
             self.locationPickerView.frame.size = CGSize(width: width, height: width + 41)
+            
+            self.submitButton.alpha = 0
+            self.submitButton.frame.origin = CGPoint(x: self.submitButton.frame.origin.x, y: self.submitButton.frame.origin.y + width)
         }) { (completed) in
+            self.submitButton.isHidden = true
+            
             let mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: width, height: width))
             mapView.showsUserLocation = true
             mapView.userTrackingMode = MKUserTrackingMode.follow
@@ -116,6 +130,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             closeButton.setTitle("Set location", for: [])
             closeButton.setTitleColor(UIColor.white(), for: [])
             closeButton.addTarget(self, action: #selector(self.closeMapView), for: .touchUpInside)
+            closeButton.titleLabel?.font = UIFont(name: "Avenir-Book", size: 20)
             self.locationPickerView.addSubview(closeButton)
             
             self.locationManager.requestWhenInUseAuthorization()
@@ -138,11 +153,18 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         
         self.viewHeightConstraint.constant = height
         
+        self.submitButton.isHidden = false
+        
         UIView.animate(withDuration: 1, animations: {
             self.locationPickerView.frame.size = CGSize(width: width, height: height)
+            
+            self.submitButton.alpha = 1
+            self.submitButton.frame.origin = CGPoint(x: self.submitButton.frame.origin.x, y: self.locationPickerView.frame.origin.y + 41 + 60)
         }) { (completed) in
             self.locationIconView.isHidden = false
             self.locationTextLabel.isHidden = false
+            
+            self.submitButton.isUserInteractionEnabled = true
         }
     }
     
