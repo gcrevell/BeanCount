@@ -26,7 +26,28 @@ class LocationsSelectTableViewController: UITableViewController {
         self.tableView.backgroundColor = AD.myThemeColor()
         self.tableView.separatorColor = UIColor.clear()
         self.tableView.sectionIndexColor = UIColor.clear()
-//        self.tableView.tintColor = UIColor.white()
+        
+//        self.refreshControl = UIRefreshControl()
+//        self.refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
+//        self.refreshControl?.tintColor = UIColor.white()
+//        self.refreshControl?.beginRefreshing()
+//        self.tableView.setContentOffset(CGPoint(x: 0, y: self.refreshControl!.frame.size.height), animated: false)
+        
+        
+        let activity = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        activity.center = self.view.center
+        activity.startAnimating()
+        
+        self.tableView.backgroundView = activity
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        label.textColor = UIColor.black()
+        label.text = "HEY"
+        label.textAlignment = .center
+//        tableView.backgroundView = label
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,13 +56,18 @@ class LocationsSelectTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+    
+    func loadData() {
+        print("Reload")
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return ""
         return names[section]
     }
     
@@ -54,7 +80,7 @@ class LocationsSelectTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
