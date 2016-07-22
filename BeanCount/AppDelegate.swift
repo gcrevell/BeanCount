@@ -19,11 +19,20 @@ enum Theme: Int {
     case iDMini = 5
 }
 
+struct Location {
+    let latitude: Double
+    let longitude: Double
+    let name: String
+    let UID: String
+    let cityState: String
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var selectedTheme: Theme?
+    var selectedLocation: Location?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

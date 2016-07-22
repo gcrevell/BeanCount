@@ -38,14 +38,15 @@ class SettingsViewController: UIViewController {
         let divider = UIColor(red: 192/255, green: 192/255, blue: 192/255, alpha: 1)
         
         style(segmentedControl: themeSelector, fontName: fontNameBold, selectedColor: onColor, unselectedColor: UIColor.white(), dividerColor: divider)
+        themeSelector.selectedSegmentIndex = AD.selectedTheme != Theme.None ? AD.selectedTheme!.rawValue - 1 : 0
         
         locationImageView.image = UIImage(named: "location.png")?.withRenderingMode(.alwaysTemplate)
         locationImageView.tintColor = mainColor
         locationImageView.contentMode = .scaleAspectFit
         locationImageView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         
-        locationLabel.text = "Please set your location..."
-        locationLabel.textColor = UIColor.lightGray()
+        locationLabel.text = AD.selectedLocation == nil ? "Please set your location." : AD.selectedLocation?.name
+        locationLabel.textColor = AD.selectedLocation == nil ? UIColor.lightGray() : UIColor.black()
         
         
 //        locationIcon.image = UIImage(named: "location.png")?.withRenderingMode(.alwaysTemplate)
@@ -85,6 +86,10 @@ class SettingsViewController: UIViewController {
     func updateLocation() {
         print("PRESSED")
         performSegue(withIdentifier: "SegueToLocationsListView", sender: self)
+    }
+    
+    @IBAction func unwindToSettings(segue: UIStoryboardSegue) {
+        
     }
 
     /*

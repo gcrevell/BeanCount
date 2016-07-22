@@ -219,6 +219,13 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         // Add location Lat, Long, Name, City/State name to firebase with UID as key
         
         locationToCityState(location: self.currentLocation!) { (placemarks, error) in
+            if error != nil {
+                print("Error: there was an error with finding the current location name.")
+                print(error)
+                
+                return
+            }
+            
             let placemark = placemarks![0]
             let db = FIRDatabase.database().reference()
             let cityState = "\(placemark.locality!), \(placemark.administrativeArea!)"
@@ -238,7 +245,9 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
                 
                 // Success!
                 // Set as current location
+                self.AD.selectedLocation = Location(latitude: self.currentLocation!.latitude, longitude: self.currentLocation!.longitude, name: self.locationNameTextField.text!, UID: UID, cityState: cityState)
                 // Unwind to settings view
+                self.performSegue(withIdentifier: "UnwindToSettingsView", sender: self)
             })
         }
     }

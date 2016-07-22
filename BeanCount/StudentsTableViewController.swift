@@ -93,6 +93,8 @@ class StudentsTableViewController: UITableViewController {
         //        print(query)
         
         navigationController?.hidesBarsOnSwipe = true
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
