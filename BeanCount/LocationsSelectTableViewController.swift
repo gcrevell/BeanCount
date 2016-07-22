@@ -11,6 +11,8 @@ import UIKit
 class LocationsSelectTableViewController: UITableViewController {
     
     let AD = UIApplication.shared().delegate as! AppDelegate
+    
+    let names = ["Michigan", "New Jersey", "Maryland"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,9 @@ class LocationsSelectTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.tableView.backgroundColor = AD.myThemeColor()
+        self.tableView.separatorColor = UIColor.clear()
+        self.tableView.sectionIndexColor = UIColor.clear()
+//        self.tableView.tintColor = UIColor.white()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,12 +38,23 @@ class LocationsSelectTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 3
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return names[section]
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+        
+        header.textLabel?.textColor = UIColor.white()
+        header.backgroundView?.backgroundColor = UIColor.clear()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 20
+        return 5
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
