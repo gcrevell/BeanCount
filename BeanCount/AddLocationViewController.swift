@@ -228,12 +228,14 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             
             let placemark = placemarks![0]
             let db = FIRDatabase.database().reference()
-            let cityState = "\(placemark.locality!), \(placemark.administrativeArea!)"
+            let city = placemark.locality!
+            let state = placemark.administrativeArea!
             
             let values:[String : AnyObject] = ["latitude" : self.currentLocation!.latitude,
                                                "longitude" : self.currentLocation!.longitude,
                                                "locationName" : self.locationNameTextField.text!,
-                                               "cityState" : cityState]
+                                               "city" : city,
+                                               "state" : state]
             
             db.child("locations").child(UID).setValue(values, withCompletionBlock: { (error, dbRef) in
                 if error != nil {
@@ -245,7 +247,8 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
                 
                 // Success!
                 // Set as current location
-                self.AD.selectedLocation = Location(latitude: self.currentLocation!.latitude, longitude: self.currentLocation!.longitude, name: self.locationNameTextField.text!, UID: UID, cityState: cityState)
+                self.AD.selectedLocation = Location(latitude: self.currentLocation!.latitude, longitude: self.currentLocation!.longitude, name: self.locationNameTextField.text!, UID: UID, city: city, state: state)
+                
                 // Unwind to settings view
                 self.performSegue(withIdentifier: "UnwindToSettingsView", sender: self)
             })

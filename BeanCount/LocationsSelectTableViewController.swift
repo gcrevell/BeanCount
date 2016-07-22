@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 class LocationsSelectTableViewController: UITableViewController {
     
+    let activity = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    
     let AD = UIApplication.shared().delegate as! AppDelegate
+    let db = FIRDatabase.database().reference()
     
     let names = ["Michigan", "New Jersey", "Maryland"]
 
@@ -27,24 +31,16 @@ class LocationsSelectTableViewController: UITableViewController {
         self.tableView.separatorColor = UIColor.clear()
         self.tableView.sectionIndexColor = UIColor.clear()
         
+        
+        // Dont need following code because theres no pull to refresh
+        // Using firebase means database is live updating
 //        self.refreshControl = UIRefreshControl()
 //        self.refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
 //        self.refreshControl?.tintColor = UIColor.white()
 //        self.refreshControl?.beginRefreshing()
 //        self.tableView.setContentOffset(CGPoint(x: 0, y: self.refreshControl!.frame.size.height), animated: false)
         
-        
-        let activity = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
-        activity.center = self.view.center
-        activity.startAnimating()
-        
-        self.tableView.backgroundView = activity
-        
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-        label.textColor = UIColor.black()
-        label.text = "HEY"
-        label.textAlignment = .center
-//        tableView.backgroundView = label
+        loadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,6 +55,32 @@ class LocationsSelectTableViewController: UITableViewController {
     
     func loadData() {
         print("Reload")
+        
+        activity.center = self.view.center
+        activity.startAnimating()
+        
+        self.tableView.backgroundView = activity
+        
+        db.child("locations").queryOrdered(byChild: "city").observe(.value, with: { (snapshot) in
+            if snapshot.value == nil || snapshot.value is NSNull {
+                // Null. Tell user to add a new location
+                return
+            }
+            
+            for value in snapshot.children {
+                print(value)
+            }
+            
+//            print(snapshot.children)
+        })
+        
+//        db.child("locations").queryOrdered(byChild: "name").observe(.value) { (snapshot) in
+//            if snapshot == nil || snapshot is NSNull {
+//                // Null. Tell user to add a new location
+//                return
+//            }
+//            
+//        }
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

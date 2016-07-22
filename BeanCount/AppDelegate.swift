@@ -24,7 +24,8 @@ struct Location {
     let longitude: Double
     let name: String
     let UID: String
-    let cityState: String
+    let city: String
+    let state: String
 }
 
 @UIApplicationMain
@@ -32,7 +33,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var selectedTheme: Theme?
-    var selectedLocation: Location?
+    private var _location: Location?
+    var selectedLocation: Location? {
+        get {
+            return _location
+        }
+        set (newVal) {
+            let defaults = UserDefaults()
+            
+            defaults.set(newVal?.UID, forKey: "LOCATION_UID")
+            defaults.synchronize()
+            
+            _location = newVal
+        }
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

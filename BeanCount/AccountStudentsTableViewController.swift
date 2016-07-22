@@ -30,7 +30,7 @@ class AccountStudentsTableViewController: UITableViewController {
         if let uid = defaults.string(forKey: "LOCATION_UID") {
             db.child("locations").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 
-                if snapshot.value == nil {
+                if snapshot.value == nil || snapshot.value is NSNull {
                     print("Could not find location in Firebase")
                     return
                 }
@@ -41,13 +41,15 @@ class AccountStudentsTableViewController: UITableViewController {
                 let latitude = data["latitude"] as! Double
                 let longitude = data["longitude"] as! Double
                 let name = data["locationName"] as! String
-                let cityState = data["cityState"] as! String
+                let city = data["city"] as! String
+                let state = data["state"] as! String
                 
                 self.AD.selectedLocation = Location(latitude: latitude,
                                                     longitude: longitude,
                                                     name: name,
                                                     UID: uid,
-                                                    cityState: cityState)
+                                                    city: city,
+                                                    state: state)
                 
                 //                self.selectedLocation
             })
