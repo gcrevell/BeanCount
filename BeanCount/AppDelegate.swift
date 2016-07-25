@@ -11,6 +11,7 @@ import Firebase
 import CoreLocation
 import CoreData
 
+
 enum Theme: Int {
     case None = 0
     case iDTC = 1
@@ -57,6 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let defaults = UserDefaults()
         selectedTheme = Theme(rawValue: defaults.integer(forKey: "THEME"))
+        
+        
         
         return true
     }

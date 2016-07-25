@@ -249,6 +249,8 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
                 // Set as current location
                 self.AD.selectedLocation = Location(latitude: self.currentLocation!.latitude, longitude: self.currentLocation!.longitude, name: self.locationNameTextField.text!, UID: UID, city: city, state: state)
                 
+                
+                
                 // Unwind to settings view
                 self.performSegue(withIdentifier: "UnwindToSettingsView", sender: self)
             })
