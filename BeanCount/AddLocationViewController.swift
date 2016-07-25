@@ -228,8 +228,8 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             
             let placemark = placemarks![0]
             let db = FIRDatabase.database().reference()
-            let city = placemark.locality!
-            let state = placemark.administrativeArea!
+            let city = placemark.locality == nil ? "" : placemark.locality!
+            let state = placemark.administrativeArea == nil ? "" : placemark.administrativeArea!
             
             let values:[String : AnyObject] = ["latitude" : self.currentLocation!.latitude,
                                                "longitude" : self.currentLocation!.longitude,
