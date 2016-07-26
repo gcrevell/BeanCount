@@ -21,14 +21,14 @@ enum Theme: Int {
     case iDMini = 5
 }
 
-//struct Location {
-//    let latitude: Double
-//    let longitude: Double
-//    let name: String
-//    let UID: String
-//    let city: String
-//    let state: String
-//}
+struct Location {
+    let latitude: Double
+    let longitude: Double
+    let name: String
+    let UID: String
+    let city: String
+    let state: String
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         set (newVal) {
             let defaults = UserDefaults()
             
-            defaults.set(newVal?.uid, forKey: "LOCATION_UID")
+            defaults.set(newVal?.UID, forKey: "LOCATION_UID")
             defaults.synchronize()
             
             _location = newVal
