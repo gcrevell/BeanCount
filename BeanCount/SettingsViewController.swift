@@ -45,7 +45,6 @@ class SettingsViewController: UIViewController {
         locationImageView.contentMode = .scaleAspectFit
         locationImageView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         
-        locationLabel.text = AD.selectedLocation == nil ? "Please set your location." : AD.selectedLocation?.name
         locationLabel.textColor = AD.selectedLocation == nil ? UIColor.lightGray() : UIColor.black()
         
         
@@ -68,6 +67,7 @@ class SettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         updateTheme()
+        updateLocationLabel()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,6 +81,10 @@ class SettingsViewController: UIViewController {
         self.view.backgroundColor = mainColor
         
         locationImageView.tintColor = mainColor
+    }
+    
+    func updateLocationLabel() {
+        locationLabel.text = AD.selectedLocation == nil ? "Please set your location." : AD.selectedLocation?.name
     }
     
     func updateLocation() {

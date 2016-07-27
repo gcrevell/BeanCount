@@ -12,7 +12,9 @@ import MapKit
 class LocationTableViewCell: UITableViewCell {
 
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var labelsView: UIView!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapViewAspectConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var subTitle: UILabel!
     
@@ -26,5 +28,7 @@ class LocationTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    
 
 }

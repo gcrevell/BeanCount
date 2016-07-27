@@ -8,15 +8,17 @@
 
 import UIKit
 import Firebase
+import MapKit
 
 class LocationsSelectTableViewController: UITableViewController {
     
-    let activity = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    var selected: IndexPath?
     
     let AD = UIApplication.shared().delegate as! AppDelegate
     let db = FIRDatabase.database().reference()
     
-    let names = ["Michigan", "New Jersey", "Maryland"]
+    var recievedLocations: [String : [Location]] = [:]
+    var sortedStates: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +58,8 @@ class LocationsSelectTableViewController: UITableViewController {
     func loadData() {
         print("Reload")
         
+        let activity = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        
         activity.center = self.view.center
         activity.startAnimating()
         
@@ -67,9 +71,51 @@ class LocationsSelectTableViewController: UITableViewController {
                 return
             }
             
-            for value in snapshot.children {
-                print(value)
+            for child in snapshot.children {
+                print(child)
+                let uid = (child as! FIRDataSnapshot).key
+                let values = (child as! FIRDataSnapshot).value as! [String : AnyObject]
+                
+                let state = values["state"] as! String
+                
+                let location = Location(latitude: values["latitude"] as! Double,
+                                        longitude: values["longitude"] as! Double,
+                                        name: values["locationName"] as! String,
+                                        UID: uid,
+                                        city: values["city"] as! String,
+                                        state: state)
+                
+                if self.recievedLocations[state] != nil {
+                    // State exists
+                    if !self.recievedLocations[state]!.contains({ (loc) -> Bool in
+                        return loc.UID == uid
+                    }) {
+                        // UID does not exist. This location wasn't already in the dic
+                        self.recievedLocations[state]!.append(location)
+                    }
+                } else {
+                    // State doesn't exist yet
+                    self.recievedLocations[state] = [location]
+                }
+                print(values)
             }
+            
+            print(self.recievedLocations)
+            print(self.recievedLocations.count)
+            
+            self.sortedStates = Array(self.recievedLocations.keys).sorted()
+            
+            print(self.sortedStates)
+            
+            for state in self.sortedStates {
+                self.recievedLocations[state] = self.recievedLocations[state]?.sorted(isOrderedBefore: { (left, right) -> Bool in
+                    left.name < right.name
+                })
+            }
+            
+            self.tableView.backgroundView = nil
+            
+            self.tableView.reloadData()
             
 //            print(snapshot.children)
         })
@@ -85,32 +131,58 @@ class LocationsSelectTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return self.sortedStates.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ""
-        return names[section]
+        return sortedStates[section]
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         
         header.textLabel?.textColor = UIColor.white()
-        header.backgroundView?.backgroundColor = UIColor.clear()
+        header.backgroundView?.backgroundColor = AD.myThemeColor()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return recievedLocations[sortedStates[section]]!.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationTableCell", for: indexPath) as! LocationTableViewCell
         
+        cell.clipsToBounds = true
+        
+        if indexPath == selected {
+            cell.labelsView.backgroundColor = UIColor(colorLiteralRed: 160/255, green: 160/255, blue: 160/255, alpha: 0.55)
+        } else {
+            cell.labelsView.backgroundColor = UIColor.white()
+        }
+        
         cell.mainView.layer.cornerRadius = 4
         cell.mainView.backgroundColor = UIColor.white()
+        cell.mainView.clipsToBounds = true
         cell.backgroundColor = AD.myThemeColor()
+        
+        let location = recievedLocations[sortedStates[indexPath.section]]![indexPath.row]
+        
+        cell.mapView.centerCoordinate = location.coordinate
+        cell.mapView.isUserInteractionEnabled = false
+        
+        cell.mapView.removeAnnotations(cell.mapView.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location.coordinate
+        cell.mapView.addAnnotation(annotation)
+        cell.mapView.center = cell.mainView.center
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        
+        cell.mapView.setRegion(region, animated: false)
+        
+        cell.mainTitle.text = location.name
+        cell.subTitle.text = "\(location.city), \(location.state)"
 
         // Configure the cell...
 
@@ -119,6 +191,30 @@ class LocationsSelectTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        
+        self.AD.selectedLocation = recievedLocations[sortedStates[indexPath.section]]![indexPath.row]
+        
+        if let current = selected {
+            selected = nil
+//            tableView.reloadRows(at: [current], with: .none)
+            (self.tableView(tableView, cellForRowAt: current) as! LocationTableViewCell).labelsView.backgroundColor = UIColor.white()
+        }
+        
+        selected = indexPath
+        tableView.reloadRows(at: [indexPath], with: .none)
+//        tableView.reloadData()
+        
+        // Save selected location to UserDefaults...
+        
+//        self.performSegue(withIdentifier: "UnwindToSettingsView", sender: self)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath == selected {
+            return tableView.frame.width
+        }
+        
+        return 100
     }
 
     /*
