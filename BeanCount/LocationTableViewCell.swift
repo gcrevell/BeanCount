@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import MapKit
 
 class LocationTableViewCell: UITableViewCell {
 
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mainTitle: UILabel!
+    @IBOutlet weak var subTitle: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
