@@ -38,20 +38,41 @@ struct Location {
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var selectedTheme: Theme?
-    private var _location: Location?
     
-    var selectedLocation: Location? {
+    private var _theme: Theme?
+    var selectedTheme: Theme? {
         get {
-            return _location
+            if _theme == nil {
+                let defaults = UserDefaults()
+                
+                _theme = Theme(rawValue: defaults.integer(forKey: "THEME"))
+            }
+            
+            return _theme
         }
-        set (newVal) {
+        set (newTheme) {
             let defaults = UserDefaults()
             
-            defaults.set(newVal?.UID, forKey: "LOCATION_UID")
+            defaults.set(newTheme?.rawValue, forKey: "THEME")
             defaults.synchronize()
             
-            _location = newVal
+            _theme = newTheme
+        }
+    }
+    
+    private var _location: Location?
+    var selectedLocation: Location? {
+        get {
+            
+            return _location
+        }
+        set (newLocation) {
+            let defaults = UserDefaults()
+            
+            defaults.set(newLocation?.UID, forKey: "LOCATION_UID")
+            defaults.synchronize()
+            
+            _location = newLocation
         }
     }
     
@@ -59,11 +80,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FIRApp.configure()
-        
         let defaults = UserDefaults()
-        selectedTheme = Theme(rawValue: defaults.integer(forKey: "THEME"))
+        let db = FIRDatabase.database().reference()
         
-        
+        if let uid = defaults.string(forKey: "LOCATION_UID") {
+            db.child("locations").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if snapshot.value == nil || snapshot.value is NSNull {
+                    print("Could not find location in Firebase")
+                    return
+                }
+                
+                let data = snapshot.value! as! [String : AnyObject]
+                print("My location data: \(data)")
+                
+                let latitude = data["latitude"] as! Double
+                let longitude = data["longitude"] as! Double
+                let name = data["locationName"] as! String
+                let city = data["city"] as! String
+                let state = data["state"] as! String
+                
+                self.selectedLocation = Location(latitude: latitude,
+                                                    longitude: longitude,
+                                                    name: name,
+                                                    UID: uid,
+                                                    city: city,
+                                                    state: state)
+            })
+        }
         
         return true
     }
@@ -120,6 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
     
+    /*
     // MARK: - Core Data iOS 9
     
     lazy var applicationDocumentsDirectory: NSURL = {
@@ -198,6 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+ */
     
     // MARK: - Global functions
     

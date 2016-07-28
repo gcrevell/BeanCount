@@ -99,7 +99,15 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             print(placemark.locality)
             print(placemark.administrativeArea)
             
-            self.locationTextLabel.text = "\(placemark.locality!), \(placemark.administrativeArea!)"
+            if placemark.locality != nil && placemark.administrativeArea != nil {
+                self.locationTextLabel.text = "\(placemark.locality!), \(placemark.administrativeArea!)"
+            } else if placemark.administrativeArea != nil {
+                self.locationTextLabel.text = "\(placemark.administrativeArea!)"
+            } else {
+                self.locationTextLabel.text = "Unknown location"
+            }
+            
+            
             self.locationTextLabel.textColor = UIColor.black()
         }
     }

@@ -18,6 +18,8 @@ class LocationTableViewCell: UITableViewCell {
     @IBOutlet weak var mainTitle: UILabel!
     @IBOutlet weak var subTitle: UILabel!
     
+    var location: Location!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

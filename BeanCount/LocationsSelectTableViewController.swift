@@ -19,13 +19,13 @@ class LocationsSelectTableViewController: UITableViewController {
     
     var recievedLocations: [String : [Location]] = [:]
     var sortedStates: [String] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
@@ -33,26 +33,17 @@ class LocationsSelectTableViewController: UITableViewController {
         self.tableView.separatorColor = UIColor.clear()
         self.tableView.sectionIndexColor = UIColor.clear()
         
-        
-        // Dont need following code because theres no pull to refresh
-        // Using firebase means database is live updating
-//        self.refreshControl = UIRefreshControl()
-//        self.refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
-//        self.refreshControl?.tintColor = UIColor.white()
-//        self.refreshControl?.beginRefreshing()
-//        self.tableView.setContentOffset(CGPoint(x: 0, y: self.refreshControl!.frame.size.height), animated: false)
-        
         loadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
     
     func loadData() {
@@ -116,19 +107,9 @@ class LocationsSelectTableViewController: UITableViewController {
             self.tableView.backgroundView = nil
             
             self.tableView.reloadData()
-            
-//            print(snapshot.children)
         })
-        
-//        db.child("locations").queryOrdered(byChild: "name").observe(.value) { (snapshot) in
-//            if snapshot == nil || snapshot is NSNull {
-//                // Null. Tell user to add a new location
-//                return
-//            }
-//            
-//        }
     }
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return self.sortedStates.count
@@ -144,28 +125,24 @@ class LocationsSelectTableViewController: UITableViewController {
         header.textLabel?.textColor = UIColor.white()
         header.backgroundView?.backgroundColor = AD.myThemeColor()
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recievedLocations[sortedStates[section]]!.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationTableCell", for: indexPath) as! LocationTableViewCell
         
-        cell.clipsToBounds = true
+        let location = recievedLocations[sortedStates[indexPath.section]]![indexPath.row]
         
-        if indexPath == selected {
-            cell.labelsView.backgroundColor = UIColor(colorLiteralRed: 160/255, green: 160/255, blue: 160/255, alpha: 0.55)
-        } else {
-            cell.labelsView.backgroundColor = UIColor.white()
-        }
+        cell.location = location
+        
+        cell.clipsToBounds = true
         
         cell.mainView.layer.cornerRadius = 4
         cell.mainView.backgroundColor = UIColor.white()
         cell.mainView.clipsToBounds = true
-        cell.backgroundColor = AD.myThemeColor()
-        
-        let location = recievedLocations[sortedStates[indexPath.section]]![indexPath.row]
+        cell.backgroundColor = UIColor.clear()
         
         cell.mapView.centerCoordinate = location.coordinate
         cell.mapView.isUserInteractionEnabled = false
@@ -174,39 +151,67 @@ class LocationsSelectTableViewController: UITableViewController {
         let annotation = MKPointAnnotation()
         annotation.coordinate = location.coordinate
         cell.mapView.addAnnotation(annotation)
-        cell.mapView.center = cell.mainView.center
+//        cell.mapView.center = cell.mainView.center
         
-        let span = MKCoordinateSpan(latitudeDelta: 0.075, longitudeDelta: 0.075)
+        let span = MKCoordinateSpan(latitudeDelta: 0.0075, longitudeDelta: 0.0075)
         let region = MKCoordinateRegion(center: location.coordinate, span: span)
         
         cell.mapView.setRegion(region, animated: false)
         
         cell.mainTitle.text = location.name
         cell.subTitle.text = "\(location.city), \(location.state)"
-
-        // Configure the cell...
-
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
+        if indexPath == selected {
+            AD.selectedLocation = (tableView.cellForRow(at: indexPath) as! LocationTableViewCell).location
+            
+            self.performSegue(withIdentifier: "UnwindToSettingsView", sender: self)
+            return
+        }
+        
         self.AD.selectedLocation = recievedLocations[sortedStates[indexPath.section]]![indexPath.row]
+        
+        var oldCell: LocationTableViewCell?
         
         if let current = selected {
             selected = nil
-//            tableView.reloadRows(at: [current], with: .none)
-            (self.tableView(tableView, cellForRowAt: current) as! LocationTableViewCell).labelsView.backgroundColor = UIColor.white()
+            oldCell = tableView.cellForRow(at: current) as? LocationTableViewCell
         }
         
         selected = indexPath
-        tableView.reloadRows(at: [indexPath], with: .none)
-//        tableView.reloadData()
         
-        // Save selected location to UserDefaults...
+        let currentCell = tableView.cellForRow(at: indexPath) as! LocationTableViewCell
         
-//        self.performSegue(withIdentifier: "UnwindToSettingsView", sender: self)
+        tableView.beginUpdates()
+        oldCell?.mapView.frame = CGRect(x: 0,
+                                        y: 0,
+                                        width: tableView.frame.width,
+                                        height: tableView.frame.width)
+        
+        UIView.animate(withDuration: 0.8,
+                       delay: 0,
+                       usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 0.3,
+                       options: .beginFromCurrentState,
+                       animations: {
+            oldCell?.mainView.frame.size.height = 90
+            if oldCell != nil {
+                print("Here")
+                let x = oldCell!.mainView.frame.width - oldCell!.mainView.frame.height
+                oldCell!.mapView.frame = CGRect(x: x,
+                                                y: 0,
+                                                width: oldCell!.mainView.frame.height,
+                                                height: oldCell!.mainView.frame.height)
+            }
+            currentCell.mapView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.width)
+            
+            tableView.endUpdates()
+            }, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -216,50 +221,50 @@ class LocationsSelectTableViewController: UITableViewController {
         
         return 100
     }
-
+    
     /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
     /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
     /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
     /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

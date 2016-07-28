@@ -229,9 +229,9 @@ class CreateAccountViewController: UIViewController {
         
         // Save selected theme locally
         AD.selectedTheme = Theme(rawValue: themeSelect.selectedSegmentIndex + 1)
-        let defaults = UserDefaults()
-        defaults.set(themeSelect.selectedSegmentIndex + 1, forKey: "THEME")
-        defaults.synchronize()
+//        let defaults = UserDefaults()
+//        defaults.set(themeSelect.selectedSegmentIndex + 1, forKey: "THEME")
+//        defaults.synchronize()
     }
     
     func checkUsernameUnique() {

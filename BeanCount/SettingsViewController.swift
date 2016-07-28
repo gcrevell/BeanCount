@@ -38,6 +38,7 @@ class SettingsViewController: UIViewController {
         let divider = UIColor(red: 192/255, green: 192/255, blue: 192/255, alpha: 1)
         
         style(segmentedControl: themeSelector, fontName: fontNameBold, selectedColor: onColor, unselectedColor: UIColor.white(), dividerColor: divider)
+        themeSelector.addTarget(self, action: #selector(themeChanged), for: .valueChanged)
         themeSelector.selectedSegmentIndex = AD.selectedTheme != Theme.None ? AD.selectedTheme!.rawValue - 1 : 0
         
         locationImageView.image = UIImage(named: "location.png")?.withRenderingMode(.alwaysTemplate)
@@ -46,23 +47,6 @@ class SettingsViewController: UIViewController {
         locationImageView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         
         locationLabel.textColor = AD.selectedLocation == nil ? UIColor.lightGray() : UIColor.black()
-        
-        
-//        locationIcon.image = UIImage(named: "location.png")?.withRenderingMode(.alwaysTemplate)
-//        locationIcon.tintColor = mainColor
-//        locationIcon.contentMode = .scaleAspectFit
-//        let locationIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
-//        locationIconContainer.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
-//        locationIconContainer.addSubview(locationIcon)
-//        
-//        locationButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        locationButton.setImage(UIImage(named: "location.png")?.withRenderingMode(.alwaysTemplate), for: [])
-//        locationButton.contentMode = .scaleAspectFit
-//        locationButton.tintColor = mainColor
-//        locationButton.setTitle("Add a location...", for: [])
-//        self.locationButton.leftViewMode = UITextFieldViewMode.always
-//        self.locationButton.leftView = locationIconContainer
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +57,11 @@ class SettingsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func themeChanged() {
+        AD.selectedTheme = Theme(rawValue: themeSelector.selectedSegmentIndex + 1)
+        updateTheme()
     }
     
     func updateTheme() {

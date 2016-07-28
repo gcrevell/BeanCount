@@ -24,36 +24,6 @@ class AccountStudentsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        let defaults = UserDefaults()
-        
-        if let uid = defaults.string(forKey: "LOCATION_UID") {
-            db.child("locations").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                if snapshot.value == nil || snapshot.value is NSNull {
-                    print("Could not find location in Firebase")
-                    return
-                }
-                
-                let data = snapshot.value! as! [String : AnyObject]
-                print("My location data: \(data)")
-                
-                let latitude = data["latitude"] as! Double
-                let longitude = data["longitude"] as! Double
-                let name = data["locationName"] as! String
-                let city = data["city"] as! String
-                let state = data["state"] as! String
-                
-                self.AD.selectedLocation = Location(latitude: latitude,
-                                                    longitude: longitude,
-                                                    name: name,
-                                                    UID: uid,
-                                                    city: city,
-                                                    state: state)
-                
-                //                self.selectedLocation
-            })
-        }
     }
 
     override func didReceiveMemoryWarning() {

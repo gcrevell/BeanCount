@@ -107,6 +107,22 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         updateTheme()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let defaults = UserDefaults()
+        
+        if defaults.bool(forKey: "AUTO_LOGIN") {
+            self.rememberLoginSwitch.isOn = true
+            
+            self.emailField.text = defaults.string(forKey: "USER_EMAIL")
+            self.passwordField.text = defaults.string(forKey: "USER_PASSWORD")
+            
+            self.emailField.isHidden = true
+            self.passwordField.isHidden = true
+            
+            login()
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -136,6 +152,16 @@ class LoginViewController: UIViewController {
         activity.center = CGPoint(x: self.loginButton.frame.size.width/2, y: self.loginButton.frame.size.height/2)
         self.loginButton.addSubview(activity)
         self.loginButton.setTitle("", for: [])
+        
+        if self.rememberLoginSwitch.isOn {
+            let defaults = UserDefaults()
+            
+            defaults.set(true, forKey: "AUTO_LOGIN")
+            defaults.set(self.emailField.text!, forKey: "USER_EMAIL")
+            defaults.set(self.passwordField.text!, forKey: "USER_PASSWORD")
+            
+            defaults.synchronize()
+        }
         
         FIRAuth.auth()?.signIn(withEmail: self.emailField.text!, password: self.passwordField.text!, completion: {(user, error) in
             if user != nil {
