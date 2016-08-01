@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     
     let AD = UIApplication.shared().delegate as! AppDelegate
     
-    let introArray = ["Good to see you", "Hello, world!", "You look beautiful today"]
+    let introArray = ["Good to see you", "Hello, world!", "You look beautiful today", "Howdy", "Good day", "Bonjour"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +121,14 @@ class LoginViewController: UIViewController {
             self.passwordField.isHidden = true
             
             login()
+        } else {
+            self.rememberLoginSwitch.isOn = false
+            
+            self.emailField.isHidden = false
+            self.passwordField.isHidden = false
+            
+            self.emailField.placeholder = "Email"
+            self.passwordField.placeholder = "Password"
         }
     }
 
@@ -146,33 +154,27 @@ class LoginViewController: UIViewController {
     func login() {
         dismissKeyboard()
         
-        self.loginButton.isEnabled = false
-        let activity = UIActivityIndicatorView()
-        activity.startAnimating()
-        activity.center = CGPoint(x: self.loginButton.frame.size.width/2, y: self.loginButton.frame.size.height/2)
-        self.loginButton.addSubview(activity)
-        self.loginButton.setTitle("", for: [])
+        let overlay = waitScene(ofSize: self.view.frame.size)
+        self.view.addSubview(overlay)
         
-        if self.rememberLoginSwitch.isOn {
-            let defaults = UserDefaults()
-            
-            defaults.set(true, forKey: "AUTO_LOGIN")
-            defaults.set(self.emailField.text!, forKey: "USER_EMAIL")
-            defaults.set(self.passwordField.text!, forKey: "USER_PASSWORD")
-            
-            defaults.synchronize()
-        }
+        self.loginButton.isEnabled = false
+        
+        let defaults = UserDefaults()
+        defaults.set(self.rememberLoginSwitch.isOn, forKey: "AUTO_LOGIN")
         
         FIRAuth.auth()?.signIn(withEmail: self.emailField.text!, password: self.passwordField.text!, completion: {(user, error) in
+            
+            overlay.removeFromSuperview()
+            self.loginButton.isEnabled = true
+            self.passwordField.text = ""
+            
             if user != nil {
                 print("Logged in")
                 
                 self.performSegue(withIdentifier: "SegueToCurrentLocation", sender: self)
-            } else {
-                self.loginButton.isEnabled = true
-                activity.removeFromSuperview()
-                self.loginButton.setTitle("Login", for: [])
-            }
+                
+                self.emailField.text = ""
+            } else {}
         })
     }
 
@@ -180,6 +182,12 @@ class LoginViewController: UIViewController {
     
     @IBAction func unwindToLogin(segue:UIStoryboardSegue) {
         
+    }
+    
+    @IBAction func logout(segue:UIStoryboardSegue) {
+        let defaults = UserDefaults()
+        
+        defaults.set(false, forKey: "AUTO_LOGIN")
     }
     
     /*

@@ -44,3 +44,28 @@ func drawImage(ofSize size:CGSize, andColor color:UIColor) -> UIImage {
     
     return image!
 }
+
+func waitScene(ofSize size: CGSize) -> UIView {
+    let overlay = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
+    overlay.backgroundColor = UIColor(white: 0.2, alpha: 0.6)
+    
+    let whiteBackground = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 141, height: 51)))
+    whiteBackground.center = overlay.center
+    whiteBackground.backgroundColor = UIColor.white()
+    overlay.addSubview(whiteBackground)
+    
+    let greenBackground = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 135, height: 45)))
+    greenBackground.center = CGPoint(x: whiteBackground.frame.width / 2, y: whiteBackground.frame.height / 2)
+    greenBackground.backgroundColor = UIColor(red: 161/255, green: 191/255, blue: 58/255, alpha: 1)
+    whiteBackground.addSubview(greenBackground)
+    
+    let waitLabel = UILabel(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 135, height: 45)))
+    waitLabel.text = "Please wait..."
+    waitLabel.textColor = UIColor.white()
+    waitLabel.textAlignment = .center
+    waitLabel.font = UIFont(name: "Avenir-Black", size: 19)
+    waitLabel.center = CGPoint(x: greenBackground.frame.width / 2, y: greenBackground.frame.height / 2)
+    greenBackground.addSubview(waitLabel)
+    
+    return overlay
+}

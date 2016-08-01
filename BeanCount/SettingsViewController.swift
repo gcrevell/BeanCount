@@ -14,6 +14,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var locationImageView: UIImageView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var locationView: UIView!
+    @IBOutlet weak var logoutButton: UIButton!
     
     let AD = UIApplication.shared().delegate as! AppDelegate
     
@@ -47,6 +48,11 @@ class SettingsViewController: UIViewController {
         locationImageView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         
         locationLabel.textColor = AD.selectedLocation == nil ? UIColor.lightGray() : UIColor.black()
+        
+        // Setup logout button
+        logoutButton.layer.borderWidth = 1
+        logoutButton.layer.borderColor = UIColor.red().cgColor
+        logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +85,10 @@ class SettingsViewController: UIViewController {
     func updateLocation() {
         print("PRESSED")
         performSegue(withIdentifier: "SegueToLocationsListView", sender: self)
+    }
+    
+    func logout() {
+        self.performSegue(withIdentifier: "UnwindToLogout", sender: self)
     }
     
     @IBAction func unwindToSettings(segue: UIStoryboardSegue) {

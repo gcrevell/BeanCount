@@ -334,14 +334,38 @@
                                     <constraint firstAttribute="height" constant="41" id="wS6-E3-Dal"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fPg-bx-LEc">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JuI-Ut-d9y">
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="0.25" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="kcO-gy-oLa"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Logout">
+                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="JuI-Ut-d9y" secondAttribute="bottom" id="PRf-Uj-HOt"/>
+                                    <constraint firstAttribute="trailing" secondItem="JuI-Ut-d9y" secondAttribute="trailing" id="bJq-BS-Jlb"/>
+                                    <constraint firstItem="JuI-Ut-d9y" firstAttribute="leading" secondItem="fPg-bx-LEc" secondAttribute="leading" id="ddB-U1-yVj"/>
+                                    <constraint firstItem="JuI-Ut-d9y" firstAttribute="top" secondItem="fPg-bx-LEc" secondAttribute="top" id="n3Z-ga-DVv"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fPg-bx-LEc" secondAttribute="trailing" id="1h8-Az-r8u"/>
                             <constraint firstItem="pQ9-Iw-euX" firstAttribute="top" secondItem="EGs-hf-mxd" secondAttribute="bottom" constant="60" id="3d5-oI-5zq"/>
                             <constraint firstItem="75J-De-hld" firstAttribute="centerX" secondItem="j6r-xe-zjm" secondAttribute="centerX" id="6cB-oA-OOe"/>
                             <constraint firstItem="UZH-bQ-FiF" firstAttribute="trailing" secondItem="j6r-xe-zjm" secondAttribute="trailingMargin" id="GJC-yb-Pr1"/>
                             <constraint firstItem="UZH-bQ-FiF" firstAttribute="leading" secondItem="j6r-xe-zjm" secondAttribute="leadingMargin" id="HY1-89-bRI"/>
                             <constraint firstItem="yxK-bv-Wpf" firstAttribute="trailing" secondItem="j6r-xe-zjm" secondAttribute="trailingMargin" id="IGn-NJ-x47"/>
+                            <constraint firstItem="fPg-bx-LEc" firstAttribute="leading" secondItem="j6r-xe-zjm" secondAttribute="leading" id="YlF-a8-50p"/>
+                            <constraint firstItem="fPg-bx-LEc" firstAttribute="top" secondItem="yxK-bv-Wpf" secondAttribute="bottom" constant="45" id="beV-XW-Hst"/>
                             <constraint firstItem="75J-De-hld" firstAttribute="top" secondItem="EGs-hf-mxd" secondAttribute="bottom" constant="8" id="ikY-eG-YHQ"/>
                             <constraint firstItem="pQ9-Iw-euX" firstAttribute="leading" secondItem="j6r-xe-zjm" secondAttribute="leadingMargin" id="jwP-MD-wNh"/>
                             <constraint firstItem="UZH-bQ-FiF" firstAttribute="top" secondItem="pQ9-Iw-euX" secondAttribute="bottom" constant="8" id="pbJ-xH-uQm"/>
@@ -354,13 +378,16 @@
                         <outlet property="locationImageView" destination="yvL-Hn-6qf" id="p0A-eB-2KU"/>
                         <outlet property="locationLabel" destination="uw5-xC-aYo" id="XNK-5f-sr9"/>
                         <outlet property="locationView" destination="yxK-bv-Wpf" id="WWc-Dc-tGw"/>
+                        <outlet property="logoutButton" destination="JuI-Ut-d9y" id="BtV-Pa-CRs"/>
                         <outlet property="themeSelector" destination="UZH-bQ-FiF" id="Gc9-cY-Uwg"/>
                         <segue destination="nAl-iH-Vr0" kind="show" identifier="SegueToLocationsListView" id="x31-Gv-kG4"/>
+                        <segue destination="gV6-gx-G0j" kind="unwind" identifier="UnwindToLogout" unwindAction="logoutWithSegue:" id="QLu-Lc-3BE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbt-pX-N8X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="gV6-gx-G0j" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3275.36231884058" y="-1707.0652173913045"/>
+            <point key="canvasLocation" x="3274.4000000000001" y="-1707.7961019490256"/>
         </scene>
         <!--Locations Select Table View Controller-->
         <scene sceneID="CkN-Ix-VkL">
