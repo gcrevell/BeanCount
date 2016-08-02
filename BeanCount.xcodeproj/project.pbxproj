@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C0741BE1D513E880039D42C /* AddStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0741BD1D513E880039D42C /* AddStudentViewController.swift */; };
+		7C0741C01D51406A0039D42C /* InformationLabelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0741BF1D51406A0039D42C /* InformationLabelTableViewController.swift */; };
 		7C0B35351D464DDE00C6DFFB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C0B35331D464DDE00C6DFFB /* Model.xcdatamodeld */; };
 		7C29E4271D3B069D006088CD /* red x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C29E4251D3B069D006088CD /* red x.png */; };
 		7C29E4281D3B069D006088CD /* green check.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C29E4261D3B069D006088CD /* green check.png */; };
@@ -37,6 +39,8 @@
 /* Begin PBXFileReference section */
 		023978D7471B7C79C397E595 /* Pods_BeanCount.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeanCount.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F70FB857B23537D3491D75A /* Pods-BeanCount.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeanCount.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeanCount/Pods-BeanCount.release.xcconfig"; sourceTree = "<group>"; };
+		7C0741BD1D513E880039D42C /* AddStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStudentViewController.swift; sourceTree = "<group>"; };
+		7C0741BF1D51406A0039D42C /* InformationLabelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationLabelTableViewController.swift; sourceTree = "<group>"; };
 		7C0B35341D464DDE00C6DFFB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		7C29E4251D3B069D006088CD /* red x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red x.png"; sourceTree = "<group>"; };
 		7C29E4261D3B069D006088CD /* green check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green check.png"; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 		7C915A281D3823690081507E /* BeanCount */ = {
 			isa = PBXGroup;
 			children = (
+				7C0741BF1D51406A0039D42C /* InformationLabelTableViewController.swift */,
 				7C0B35321D4593F000C6DFFB /* Core Data */,
 				7C5F00A21D3BE1880023B2D6 /* AddLocationViewController.swift */,
 				7C5F009C1D3BCB950023B2D6 /* SettingsViewController.swift */,
@@ -137,6 +142,7 @@
 				7CFF63D61D41B41000F526CE /* AccountStudentsTableViewController.swift */,
 				7C915A291D3823690081507E /* AppDelegate.swift */,
 				7C915A2D1D3823690081507E /* Main.storyboard */,
+				7C0741BD1D513E880039D42C /* AddStudentViewController.swift */,
 				7CA1326A1D5039DF0048DDFE /* StudentTableViewCell.swift */,
 				7CFC925F1D5030730083E1E6 /* FillButtonView.swift */,
 				7CF12A951D3AC017003AE476 /* Theme.swift */,
@@ -327,9 +333,11 @@
 				7CF12A871D3A8317003AE476 /* LoginViewController.swift in Sources */,
 				7C418FAE1D4A60A6005DD026 /* LocationsSelectTableViewController.swift in Sources */,
 				7CA1326B1D5039DF0048DDFE /* StudentTableViewCell.swift in Sources */,
+				7C0741C01D51406A0039D42C /* InformationLabelTableViewController.swift in Sources */,
 				7CF12A961D3AC017003AE476 /* Theme.swift in Sources */,
 				7C0B35351D464DDE00C6DFFB /* Model.xcdatamodeld in Sources */,
 				7C5F009D1D3BCB950023B2D6 /* SettingsViewController.swift in Sources */,
+				7C0741BE1D513E880039D42C /* AddStudentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
