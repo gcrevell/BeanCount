@@ -24,7 +24,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
     
     var currentLocation: CLLocationCoordinate2D?
     
-    let AD = UIApplication.shared().delegate as! AppDelegate
+    let AD = UIApplication.shared.delegate as! AppDelegate
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -38,7 +38,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         updateTheme()
         
         self.locationNameTextField.text = ""
-        self.locationNameTextField.backgroundColor = UIColor.white()
+        self.locationNameTextField.backgroundColor = UIColor.white
         self.locationNameTextField.layer.cornerRadius = 3
         self.locationNameTextField.placeholder = "Enter a name for this location"
         self.locationNameTextField.font = UIFont(name: fontName, size: 16)
@@ -56,7 +56,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         // Setup location view
         self.locationPickerView.clipsToBounds = true
         self.locationPickerView.layer.cornerRadius = 3
-        self.locationPickerView.backgroundColor = UIColor.white()
+        self.locationPickerView.backgroundColor = UIColor.white
         
         self.locationIconView.image = UIImage(named: "location.png")?.withRenderingMode(.alwaysTemplate)
         self.locationIconView.contentMode = .scaleAspectFit
@@ -71,7 +71,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         
         self.submitButton.backgroundColor = UIColor(red: 246/255, green: 175/255, blue: 41/255, alpha: 1)
         self.submitButton.setTitle("Submit", for: [])
-        self.submitButton.setTitleColor(UIColor.white(), for: [])
+        self.submitButton.setTitleColor(UIColor.white, for: [])
         self.submitButton.layer.cornerRadius = 3
         self.submitButton.titleLabel?.font = UIFont(name: "Avenir-Black", size: 20)
         self.submitButton.addTarget(self, action: #selector(submit), for: .touchUpInside)
@@ -108,7 +108,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             }
             
             
-            self.locationTextLabel.textColor = UIColor.black()
+            self.locationTextLabel.textColor = UIColor.black
         }
     }
     
@@ -149,7 +149,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             let closeButton = UIButton(frame: CGRect(x: 0, y: width, width: width, height: 41))
             closeButton.backgroundColor = UIColor(red: 246/255, green: 175/255, blue: 41/255, alpha: 1)
             closeButton.setTitle("Set location", for: [])
-            closeButton.setTitleColor(UIColor.white(), for: [])
+            closeButton.setTitleColor(UIColor.white, for: [])
             closeButton.addTarget(self, action: #selector(self.closeMapView), for: .touchUpInside)
             closeButton.titleLabel?.font = UIFont(name: "Avenir-Book", size: 20)
             self.locationPickerView.addSubview(closeButton)

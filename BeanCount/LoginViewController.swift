@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
     let emailIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
     let passwordIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
     
-    let AD = UIApplication.shared().delegate as! AppDelegate
+    let AD = UIApplication.shared.delegate as! AppDelegate
     
     let introArray = ["Good to see you", "Hello, world!", "You look beautiful today", "Howdy", "Good day", "Bonjour"]
     
@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        rememberLoginSwitch.onTintColor = UIColor.green()
+        rememberLoginSwitch.onTintColor = UIColor.green
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         
@@ -40,7 +40,7 @@ class LoginViewController: UIViewController {
         let buttonColor = UIColor(red: 246/255, green: 175/255, blue: 41/255, alpha: 1)
         
         self.emailField.text = ""
-        self.emailField.backgroundColor = UIColor.white()
+        self.emailField.backgroundColor = UIColor.white
         self.emailField.layer.cornerRadius = 3
         self.emailField.placeholder = "Email"
         self.emailField.font = UIFont(name: themeFont, size: 16)
@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
         self.emailField.leftView = emailIconContainer
         
         self.passwordField.text = ""
-        self.passwordField.backgroundColor = UIColor.white()
+        self.passwordField.backgroundColor = UIColor.white
         self.passwordField.layer.cornerRadius = 3
         self.passwordField.placeholder = "Password"
         self.passwordField.font = UIFont(name: themeFont, size: 16)
@@ -75,28 +75,28 @@ class LoginViewController: UIViewController {
         self.loginButton.layer.cornerRadius = 3
         self.loginButton.titleLabel?.font = UIFont(name: themeFontBold, size: 20)
         self.loginButton.setTitle("Login", for: [])
-        self.loginButton.setTitleColor(UIColor.white(), for: [])
+        self.loginButton.setTitleColor(UIColor.white, for: [])
         self.loginButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)
         
         self.loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
         
-        self.forgotButton.backgroundColor = UIColor.clear()
+        self.forgotButton.backgroundColor = UIColor.clear
         self.forgotButton.titleLabel?.font = UIFont(name: themeFont, size: 12)
         self.forgotButton.setTitle("Forgot password?", for: [])
-        self.forgotButton.setTitleColor(UIColor.white(), for: [])
+        self.forgotButton.setTitleColor(UIColor.white, for: [])
         self.forgotButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)
         
-        self.createButton.backgroundColor = UIColor.clear()
+        self.createButton.backgroundColor = UIColor.clear
         self.createButton.titleLabel?.font = UIFont(name: themeFont, size: 12)
         self.createButton.setTitle("Create an account", for: [])
-        self.createButton.setTitleColor(UIColor.white(), for: [])
+        self.createButton.setTitleColor(UIColor.white, for: [])
         self.createButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)
         
-        self.titleLabel.textColor = UIColor.white()
+        self.titleLabel.textColor = UIColor.white
         self.titleLabel.font = UIFont(name: themeFontBold, size: 24)
         self.titleLabel.text = introArray[Int(arc4random_uniform(UInt32(introArray.count)))]
         
-        self.subtitleLabel.textColor = UIColor.white()
+        self.subtitleLabel.textColor = UIColor.white
         self.subtitleLabel.font = UIFont(name: themeFont, size: 14)
         self.subtitleLabel.text = "Please login below"
     }

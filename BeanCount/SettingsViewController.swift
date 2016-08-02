@@ -16,7 +16,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var logoutButton: UIButton!
     
-    let AD = UIApplication.shared().delegate as! AppDelegate
+    let AD = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class SettingsViewController: UIViewController {
         updateTheme()
         
         locationView.layer.cornerRadius = 3
-        locationView.backgroundColor = UIColor.white()
+        locationView.backgroundColor = UIColor.white
         locationView.contentScaleFactor = 0.5
         locationView.clipsToBounds = true
         
@@ -38,7 +38,7 @@ class SettingsViewController: UIViewController {
         let onColor = UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1)
         let divider = UIColor(red: 192/255, green: 192/255, blue: 192/255, alpha: 1)
         
-        style(segmentedControl: themeSelector, fontName: fontNameBold, selectedColor: onColor, unselectedColor: UIColor.white(), dividerColor: divider)
+        style(segmentedControl: themeSelector, fontName: fontNameBold, selectedColor: onColor, unselectedColor: UIColor.white, dividerColor: divider)
         themeSelector.addTarget(self, action: #selector(themeChanged), for: .valueChanged)
         themeSelector.selectedSegmentIndex = AD.selectedTheme != Theme.None ? AD.selectedTheme!.rawValue - 1 : 0
         
@@ -47,11 +47,11 @@ class SettingsViewController: UIViewController {
         locationImageView.contentMode = .scaleAspectFit
         locationImageView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         
-        locationLabel.textColor = AD.selectedLocation == nil ? UIColor.lightGray() : UIColor.black()
+        locationLabel.textColor = AD.selectedLocation == nil ? UIColor.lightGray : UIColor.black
         
         // Setup logout button
         logoutButton.layer.borderWidth = 1
-        logoutButton.layer.borderColor = UIColor.red().cgColor
+        logoutButton.layer.borderColor = UIColor.red.cgColor
         logoutButton.addTarget(self, action: #selector(logout), for: .touchUpInside)
     }
     

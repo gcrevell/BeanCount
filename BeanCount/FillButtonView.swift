@@ -14,7 +14,7 @@ class FillButtonView: UIView {
     
     var active: Bool = true
     
-    let AD = UIApplication.shared().delegate as! AppDelegate
+    let AD = UIApplication.shared.delegate as! AppDelegate
     
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

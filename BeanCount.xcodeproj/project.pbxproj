@@ -22,11 +22,8 @@
 		7C915A2F1D3823690081507E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A2D1D3823690081507E /* Main.storyboard */; };
 		7C915A311D3823690081507E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A301D3823690081507E /* Assets.xcassets */; };
 		7C915A341D3823690081507E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A321D3823690081507E /* LaunchScreen.storyboard */; };
-		7C915A3C1D3824AD0081507E /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C915A3B1D3824AD0081507E /* StudentsTableViewController.swift */; };
 		7C915A3E1D3834C50081507E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A3D1D3834C50081507E /* GoogleService-Info.plist */; };
-		7C915A401D392AD80081507E /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C915A3F1D392AD80081507E /* StudentTableViewCell.swift */; };
-		7C915A461D39B1F20081507E /* AddStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C915A451D39B1F20081507E /* AddStudentViewController.swift */; };
-		7CE1B08C1D495C4D00FEEFAE /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE1B08B1D495C4D00FEEFAE /* FoldingCell.swift */; };
+		7CA1326B1D5039DF0048DDFE /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1326A1D5039DF0048DDFE /* StudentTableViewCell.swift */; };
 		7CF12A871D3A8317003AE476 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF12A861D3A8317003AE476 /* LoginViewController.swift */; };
 		7CF12A911D3AB84E003AE476 /* username.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF12A8F1D3AB84E003AE476 /* username.png */; };
 		7CF12A921D3AB84E003AE476 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF12A901D3AB84E003AE476 /* lock.png */; };
@@ -58,11 +55,8 @@
 		7C915A301D3823690081507E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C915A331D3823690081507E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7C915A351D3823690081507E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7C915A3B1D3824AD0081507E /* StudentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
 		7C915A3D1D3834C50081507E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		7C915A3F1D392AD80081507E /* StudentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
-		7C915A451D39B1F20081507E /* AddStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStudentViewController.swift; sourceTree = "<group>"; };
-		7CE1B08B1D495C4D00FEEFAE /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
+		7CA1326A1D5039DF0048DDFE /* StudentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
 		7CF12A861D3A8317003AE476 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7CF12A8F1D3AB84E003AE476 /* username.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = username.png; sourceTree = "<group>"; };
 		7CF12A901D3AB84E003AE476 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
@@ -134,22 +128,19 @@
 			isa = PBXGroup;
 			children = (
 				7C0B35321D4593F000C6DFFB /* Core Data */,
-				7CE1B08B1D495C4D00FEEFAE /* FoldingCell.swift */,
 				7C5F00A21D3BE1880023B2D6 /* AddLocationViewController.swift */,
 				7C5F009C1D3BCB950023B2D6 /* SettingsViewController.swift */,
 				7C5F00991D3B55CB0023B2D6 /* BeanCount.entitlements */,
 				7CF12A861D3A8317003AE476 /* LoginViewController.swift */,
-				7C915A3B1D3824AD0081507E /* StudentsTableViewController.swift */,
 				7C418FAC1D4A60A6005DD026 /* LocationsSelectTableViewController.swift */,
 				7C418FAD1D4A60A6005DD026 /* LocationTableViewCell.swift */,
 				7CFF63D61D41B41000F526CE /* AccountStudentsTableViewController.swift */,
 				7C915A291D3823690081507E /* AppDelegate.swift */,
 				7C915A2D1D3823690081507E /* Main.storyboard */,
+				7CA1326A1D5039DF0048DDFE /* StudentTableViewCell.swift */,
 				7CFC925F1D5030730083E1E6 /* FillButtonView.swift */,
 				7CF12A951D3AC017003AE476 /* Theme.swift */,
 				7CF12A931D3ABDE8003AE476 /* CreateAccountViewController.swift */,
-				7C915A451D39B1F20081507E /* AddStudentViewController.swift */,
-				7C915A3F1D392AD80081507E /* StudentTableViewCell.swift */,
 				7CF12A881D3A8813003AE476 /* Images */,
 				7C915A301D3823690081507E /* Assets.xcassets */,
 				7C915A321D3823690081507E /* LaunchScreen.storyboard */,
@@ -328,17 +319,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CF12A941D3ABDE8003AE476 /* CreateAccountViewController.swift in Sources */,
-				7CE1B08C1D495C4D00FEEFAE /* FoldingCell.swift in Sources */,
-				7C915A461D39B1F20081507E /* AddStudentViewController.swift in Sources */,
 				7C915A2A1D3823690081507E /* AppDelegate.swift in Sources */,
-				7C915A3C1D3824AD0081507E /* StudentsTableViewController.swift in Sources */,
 				7C418FAF1D4A60A6005DD026 /* LocationTableViewCell.swift in Sources */,
 				7C5F00A31D3BE1880023B2D6 /* AddLocationViewController.swift in Sources */,
 				7CFF63D71D41B41000F526CE /* AccountStudentsTableViewController.swift in Sources */,
 				7CFC92601D5030730083E1E6 /* FillButtonView.swift in Sources */,
 				7CF12A871D3A8317003AE476 /* LoginViewController.swift in Sources */,
-				7C915A401D392AD80081507E /* StudentTableViewCell.swift in Sources */,
 				7C418FAE1D4A60A6005DD026 /* LocationsSelectTableViewController.swift in Sources */,
+				7CA1326B1D5039DF0048DDFE /* StudentTableViewCell.swift in Sources */,
 				7CF12A961D3AC017003AE476 /* Theme.swift in Sources */,
 				7C0B35351D464DDE00C6DFFB /* Model.xcdatamodeld in Sources */,
 				7C5F009D1D3BCB950023B2D6 /* SettingsViewController.swift in Sources */,

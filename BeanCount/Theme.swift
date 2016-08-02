@@ -25,11 +25,11 @@ func style(segmentedControl: UISegmentedControl, fontName: String, selectedColor
     let shadow = NSShadow()
     shadow.shadowOffset = CGSize(width: 0, height: 0)
     
-    segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.lightGray(),
+    segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.lightGray,
                                           NSFontAttributeName : font!,
                                           NSShadowAttributeName : shadow], for: [])
     
-    segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.white(),
+    segmentedControl.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.white,
                                           NSFontAttributeName : font!,
                                           NSShadowAttributeName : shadow], for: .selected)
 }
@@ -54,7 +54,7 @@ func waitScene(ofSize size: CGSize) -> UIView {
     
     let whiteBackground = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 141, height: 51)))
     whiteBackground.center = overlay.center
-    whiteBackground.backgroundColor = UIColor.white()
+    whiteBackground.backgroundColor = UIColor.white
     overlay.addSubview(whiteBackground)
     
     let greenBackground = UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 135, height: 45)))
@@ -64,7 +64,7 @@ func waitScene(ofSize size: CGSize) -> UIView {
     
     let waitLabel = UILabel(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 135, height: 45)))
     waitLabel.text = "Please wait..."
-    waitLabel.textColor = UIColor.white()
+    waitLabel.textColor = UIColor.white
     waitLabel.textAlignment = .center
     waitLabel.font = UIFont(name: "Avenir-Black", size: 19)
     waitLabel.center = CGPoint(x: greenBackground.frame.width / 2, y: greenBackground.frame.height / 2)

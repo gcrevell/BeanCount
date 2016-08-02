@@ -24,7 +24,7 @@ class CreateAccountViewController: UIViewController {
     let passwordIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
     let confirmPasswordIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
     
-    let AD = UIApplication.shared().delegate as! AppDelegate
+    let AD = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,14 +43,14 @@ class CreateAccountViewController: UIViewController {
         
         updateTheme()
         
-        style(segmentedControl: themeSelect, fontName: boldFontName, selectedColor: onColor, unselectedColor: UIColor.white(), dividerColor: divider)
+        style(segmentedControl: themeSelect, fontName: boldFontName, selectedColor: onColor, unselectedColor: UIColor.white, dividerColor: divider)
         
         themeSelect.addTarget(self, action: #selector(themeChanged), for: .valueChanged)
         themeSelect.selectedSegmentIndex = AD.selectedTheme != Theme.None ? AD.selectedTheme!.rawValue - 1 : 0
         
         // Email text field setup
         self.emailTextField.text = ""
-        self.emailTextField.backgroundColor = UIColor.white()
+        self.emailTextField.backgroundColor = UIColor.white
         self.emailTextField.layer.cornerRadius = 3
         self.emailTextField.placeholder = "Email"
         self.emailTextField.font = UIFont(name: fontName, size: 16)
@@ -67,7 +67,7 @@ class CreateAccountViewController: UIViewController {
         
         // Username text field setup
         self.usernameTextField.text = ""
-        self.usernameTextField.backgroundColor = UIColor.white()
+        self.usernameTextField.backgroundColor = UIColor.white
         self.usernameTextField.layer.cornerRadius = 3
         self.usernameTextField.placeholder = "Username"
         self.usernameTextField.font = UIFont(name: fontName, size: 16)
@@ -86,7 +86,7 @@ class CreateAccountViewController: UIViewController {
         
         // Password text field setup
         self.passwordTextField.text = ""
-        self.passwordTextField.backgroundColor = UIColor.white()
+        self.passwordTextField.backgroundColor = UIColor.white
         self.passwordTextField.layer.cornerRadius = 3
         self.passwordTextField.placeholder = "Password"
         self.passwordTextField.font = UIFont(name: fontName, size: 16)
@@ -103,7 +103,7 @@ class CreateAccountViewController: UIViewController {
         
         // Confirm password text field setup
         self.confirmPasswordTextField.text = ""
-        self.confirmPasswordTextField.backgroundColor = UIColor.white()
+        self.confirmPasswordTextField.backgroundColor = UIColor.white
         self.confirmPasswordTextField.layer.cornerRadius = 3
         self.confirmPasswordTextField.placeholder = "Confirm password"
         self.confirmPasswordTextField.font = UIFont(name: fontName, size: 16)
@@ -123,7 +123,7 @@ class CreateAccountViewController: UIViewController {
         self.createButton.layer.cornerRadius = 3
         self.createButton.titleLabel?.font = UIFont(name: boldFontName, size: 20)
         self.createButton.setTitle("Create!", for: [])
-        self.createButton.setTitleColor(UIColor.white(), for: [])
+        self.createButton.setTitleColor(UIColor.white, for: [])
         self.createButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)
     }
 
@@ -196,26 +196,26 @@ class CreateAccountViewController: UIViewController {
                 
                 var message = ""
                 
-                switch error!.code {
-                case FIRAuthErrorCode.errorCodeInvalidEmail.rawValue:
-                    print("Invalid email")
-                    message = "The email address entered is invalid."
-                    
-                case FIRAuthErrorCode.errorCodeEmailAlreadyInUse.rawValue:
-                    print("Email in use")
-                    message = "That email address is already registered. Forgot your email? Recover it from the login screen."
-                    
-                case FIRAuthErrorCode.errorCodeWeakPassword.rawValue:
-                    print("Password game is weak")
-                    message = "The password entered is too weak. Please try another."
-                    
-                case FIRAuthErrorCode.errorCodeNetworkError.rawValue:
-                    print("Network error")
-                    message = "There was a network error. Please check your connection and try again."
-                    
-                default:
-                    print("Not there")
-                }
+//                switch error!.code {
+//                case FIRAuthErrorCode.errorCodeInvalidEmail.rawValue:
+//                    print("Invalid email")
+//                    message = "The email address entered is invalid."
+//                    
+//                case FIRAuthErrorCode.errorCodeEmailAlreadyInUse.rawValue:
+//                    print("Email in use")
+//                    message = "That email address is already registered. Forgot your email? Recover it from the login screen."
+//                    
+//                case FIRAuthErrorCode.errorCodeWeakPassword.rawValue:
+//                    print("Password game is weak")
+//                    message = "The password entered is too weak. Please try another."
+//                    
+//                case FIRAuthErrorCode.errorCodeNetworkError.rawValue:
+//                    print("Network error")
+//                    message = "There was a network error. Please check your connection and try again."
+//                    
+//                default:
+//                    print("Not there")
+//                }
                 
                 let alert = UIAlertController(title: "Failure", message: message, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

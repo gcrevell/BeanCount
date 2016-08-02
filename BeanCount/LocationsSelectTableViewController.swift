@@ -14,7 +14,7 @@ class LocationsSelectTableViewController: UITableViewController {
     
     var selected: IndexPath?
     
-    let AD = UIApplication.shared().delegate as! AppDelegate
+    let AD = UIApplication.shared.delegate as! AppDelegate
     let db = FIRDatabase.database().reference()
     
     var recievedLocations: [String : [Location]] = [:]
@@ -30,8 +30,8 @@ class LocationsSelectTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.tableView.backgroundColor = AD.myThemeColor()
-        self.tableView.separatorColor = UIColor.clear()
-        self.tableView.sectionIndexColor = UIColor.clear()
+        self.tableView.separatorColor = UIColor.clear
+        self.tableView.sectionIndexColor = UIColor.clear
         
         loadData()
     }
@@ -78,7 +78,7 @@ class LocationsSelectTableViewController: UITableViewController {
                 
                 if self.recievedLocations[state] != nil {
                     // State exists
-                    if !self.recievedLocations[state]!.contains({ (loc) -> Bool in
+                    if !self.recievedLocations[state]!.contains(where: { (loc) -> Bool in
                         return loc.UID == uid
                     }) {
                         // UID does not exist. This location wasn't already in the dic
@@ -99,7 +99,7 @@ class LocationsSelectTableViewController: UITableViewController {
             print(self.sortedStates)
             
             for state in self.sortedStates {
-                self.recievedLocations[state] = self.recievedLocations[state]?.sorted(isOrderedBefore: { (left, right) -> Bool in
+                self.recievedLocations[state] = self.recievedLocations[state]?.sorted(by: { (left, right) -> Bool in
                     left.name < right.name
                 })
             }
@@ -122,7 +122,7 @@ class LocationsSelectTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         
-        header.textLabel?.textColor = UIColor.white()
+        header.textLabel?.textColor = UIColor.white
         header.backgroundView?.backgroundColor = AD.myThemeColor()
     }
     
@@ -140,9 +140,9 @@ class LocationsSelectTableViewController: UITableViewController {
         cell.clipsToBounds = true
         
         cell.mainView.layer.cornerRadius = 4
-        cell.mainView.backgroundColor = UIColor.white()
+        cell.mainView.backgroundColor = UIColor.white
         cell.mainView.clipsToBounds = true
-        cell.backgroundColor = UIColor.clear()
+        cell.backgroundColor = UIColor.clear
         
         cell.mapView.centerCoordinate = location.coordinate
         cell.mapView.isUserInteractionEnabled = false
