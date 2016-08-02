@@ -21,6 +21,7 @@ class AccountStudentsTableViewController: UITableViewController {
         
         tableView.backgroundColor = AD.myThemeColor()
         tableView.separatorStyle = .none
+        tableView.allowsSelectionDuringEditing = true
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -100,6 +101,14 @@ class AccountStudentsTableViewController: UITableViewController {
         
         cell.radialView.active = !cell.radialView.active
         cell.radialView.setNeedsDisplay()
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
+    }
+    
+    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
     
     /*
