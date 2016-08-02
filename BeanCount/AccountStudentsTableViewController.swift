@@ -21,17 +21,20 @@ class AccountStudentsTableViewController: UITableViewController {
         
         db = FIRDatabase.database().reference()
         
-//        if AD.selectedLocation == nil {
-//            let label = UILabel()
-//            label.text = "Please select a location in settings."
-//            label.numberOfLines = 0
-//            label.textColor = UIColor.white
-//            label.textAlignment = .center
-//            label.font = UIFont(name: themeFontBold, size: 17)
-//            
-//            tableView.backgroundView = label
-//            return
-//        }
+        tableView.backgroundColor = AD.myThemeColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 0.7)
+        
+        if AD.selectedLocation == nil {
+            let label = UILabel()
+            label.text = "Please select a location in settings."
+            label.numberOfLines = 0
+            label.textColor = UIColor.white
+            label.textAlignment = .center
+            label.font = UIFont(name: themeFontBold, size: 17)
+            
+            tableView.backgroundView = label
+            return
+        }
         
         tableView.separatorStyle = .none
         tableView.allowsSelectionDuringEditing = true

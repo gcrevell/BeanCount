@@ -24,11 +24,15 @@ class LoginViewController: UIViewController {
     let passwordIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
     
     let AD = UIApplication.shared.delegate as! AppDelegate
+    var db:FIRDatabaseReference?
     
     let introArray = ["Good to see you", "Hello, world!", "You look beautiful today", "Howdy", "Good day", "Bonjour"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        FIRApp.configure()
+        db = FIRDatabase.database().reference()
 
         // Do any additional setup after loading the view.
         
@@ -161,17 +165,48 @@ class LoginViewController: UIViewController {
         
         FIRAuth.auth()?.signIn(withEmail: self.emailField.text!, password: self.passwordField.text!, completion: {(user, error) in
             
-            overlay.removeFromSuperview()
-            self.loginButton.isEnabled = true
-            self.passwordField.text = ""
-            
             if user != nil {
                 print("Logged in")
+                let uid = user!.uid
                 
-                self.performSegue(withIdentifier: "SegueToCurrentLocation", sender: self)
-                
+                self.db!.child("users").child(uid).observeSingleEvent(of: .value, with: {(snapshot) in
+                    
+                    let values = snapshot.value as! [String : AnyObject]
+                    
+                    // Set theme to stored theme
+                    self.AD.selectedTheme = Theme(rawValue: values["theme"] as! Int)
+                    // Set location to stored location
+                    let locationUID = values["selectedLocation"] as! String
+                    self.db!.child("locations").child(locationUID).observeSingleEvent(of: .value, with: {(snapshot) in
+                        
+                        let values = snapshot.value as! [String : AnyObject]
+                        
+                        let latitude = values["latitude"] as! Double
+                        let longitude = values["longitude"] as! Double
+                        let city = values["city"] as! String
+                        let state = values["state"] as! String
+                        let name = values["locationName"] as! String
+                        
+                        self.AD.selectedLocation = Location(latitude: latitude,
+                                                            longitude: longitude,
+                                                            name: name,
+                                                            UID: locationUID,
+                                                            city: city,
+                                                            state: state)
+                        
+                        overlay.removeFromSuperview()
+                        self.loginButton.isEnabled = true
+                        self.passwordField.text = ""
+                        
+                        self.performSegue(withIdentifier: "SegueToCurrentLocation", sender: self)
+                    })
+                })
                 self.emailField.text = ""
-            } else {}
+            } else {
+                overlay.removeFromSuperview()
+                self.loginButton.isEnabled = true
+                self.passwordField.text = ""
+            }
         })
     }
 

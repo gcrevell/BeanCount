@@ -79,35 +79,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        FIRApp.configure()
+//        FIRApp.configure()
         let defaults = UserDefaults()
-        let db = FIRDatabase.database().reference()
+//        let db = FIRDatabase.database().reference()
         
-        if let uid = defaults.string(forKey: "LOCATION_UID") {
-            db.child("locations").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                if snapshot.value == nil || snapshot.value is NSNull {
-                    print("Could not find location in Firebase")
-                    return
-                }
-                
-                let data = snapshot.value! as! [String : AnyObject]
-                print("My location data: \(data)")
-                
-                let latitude = data["latitude"] as! Double
-                let longitude = data["longitude"] as! Double
-                let name = data["locationName"] as! String
-                let city = data["city"] as! String
-                let state = data["state"] as! String
-                
-                self.selectedLocation = Location(latitude: latitude,
-                                                    longitude: longitude,
-                                                    name: name,
-                                                    UID: uid,
-                                                    city: city,
-                                                    state: state)
-            })
-        }
+//        if let uid = defaults.string(forKey: "LOCATION_UID") {
+//            db.child("locations").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+//                
+//                if snapshot.value == nil || snapshot.value is NSNull {
+//                    print("Could not find location in Firebase")
+//                    return
+//                }
+//                
+//                let data = snapshot.value! as! [String : AnyObject]
+//                print("My location data: \(data)")
+//                
+//                let latitude = data["latitude"] as! Double
+//                let longitude = data["longitude"] as! Double
+//                let name = data["locationName"] as! String
+//                let city = data["city"] as! String
+//                let state = data["state"] as! String
+//                
+//                self.selectedLocation = Location(latitude: latitude,
+//                                                    longitude: longitude,
+//                                                    name: name,
+//                                                    UID: uid,
+//                                                    city: city,
+//                                                    state: state)
+//            })
+//        }
         
         return true
     }
