@@ -8,6 +8,9 @@
 
 import UIKit
 
+let themeFont: String = "Avenir-Book"
+let themeFontBold: String = "Avenir-Black"
+
 func style(segmentedControl: UISegmentedControl, fontName: String, selectedColor: UIColor, unselectedColor: UIColor, dividerColor: UIColor) {
     let font = UIFont(name: fontName, size: 13)
     
