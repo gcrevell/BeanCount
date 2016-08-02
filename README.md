@@ -34,9 +34,10 @@ some super extra awesome feature :D
 
 #### History
 
-Not much. I just started this app reciently. I have
-thus far added a login screen and a create account
-screen (as of 7-16-2016). 
+This app is still in its infancy. The user can create
+an account on the device and change some settings, such
+as their location. The students list populates, but
+with dummy data. 
 
 #### Credits
 
