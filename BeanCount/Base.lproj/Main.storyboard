@@ -456,37 +456,38 @@
                                 <frame key="frameInset" minY="92" width="375" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MMN-oc-afT" id="GSP-Zt-pKU">
-                                    <frame key="frameInset" width="375" height="55.5"/>
+                                    <frame key="frameInset" width="375" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oCA-VX-gMS">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztG-v9-eyL">
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIU-vs-8eC" customClass="FillButtonView" customModule="BeanCount" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPQ-Cf-cEh" customClass="FillButtonView" customModule="BeanCount" customModuleProvider="target">
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="sIU-vs-8eC" secondAttribute="height" multiplier="1:1" id="SZE-kH-d5f"/>
+                                                        <constraint firstAttribute="width" secondItem="LPQ-Cf-cEh" secondAttribute="height" multiplier="1:1" id="0N5-Z6-zX7"/>
+                                                        <constraint firstAttribute="width" constant="25" id="Rui-rP-sY8"/>
+                                                        <constraint firstAttribute="height" constant="25" id="uCy-Y0-eLy"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="sIU-vs-8eC" secondAttribute="trailing" constant="8" id="Fm8-xM-GGB"/>
-                                                <constraint firstItem="sIU-vs-8eC" firstAttribute="top" secondItem="oCA-VX-gMS" secondAttribute="top" constant="8" id="ZnT-hp-gCV"/>
-                                                <constraint firstAttribute="bottom" secondItem="sIU-vs-8eC" secondAttribute="bottom" constant="8" id="efi-SP-ZWs"/>
-                                                <constraint firstAttribute="height" constant="46" id="ptM-uQ-wjV"/>
+                                                <constraint firstAttribute="height" constant="48" id="J7m-Jm-H4V"/>
+                                                <constraint firstItem="LPQ-Cf-cEh" firstAttribute="centerY" secondItem="ztG-v9-eyL" secondAttribute="centerY" id="pkO-9A-oQf"/>
+                                                <constraint firstAttribute="trailing" secondItem="LPQ-Cf-cEh" secondAttribute="trailing" constant="8" id="tcW-pe-q0w"/>
                                             </constraints>
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="oCA-VX-gMS" firstAttribute="top" secondItem="GSP-Zt-pKU" secondAttribute="top" constant="5" id="Awu-dZ-M8O"/>
-                                        <constraint firstAttribute="bottom" secondItem="oCA-VX-gMS" secondAttribute="bottom" constant="5" id="ahX-3J-hyG"/>
-                                        <constraint firstAttribute="trailing" secondItem="oCA-VX-gMS" secondAttribute="trailing" constant="8" id="dPK-V5-z0I"/>
-                                        <constraint firstItem="oCA-VX-gMS" firstAttribute="leading" secondItem="GSP-Zt-pKU" secondAttribute="leading" constant="8" id="iAS-Ei-y7S"/>
+                                        <constraint firstItem="ztG-v9-eyL" firstAttribute="leading" secondItem="GSP-Zt-pKU" secondAttribute="leading" constant="8" id="KD9-Xn-lB7"/>
+                                        <constraint firstItem="ztG-v9-eyL" firstAttribute="top" secondItem="GSP-Zt-pKU" secondAttribute="top" constant="4" id="hSI-fb-tlC"/>
+                                        <constraint firstAttribute="bottom" secondItem="ztG-v9-eyL" secondAttribute="bottom" constant="4" id="meR-sB-KoR"/>
+                                        <constraint firstAttribute="trailing" secondItem="ztG-v9-eyL" secondAttribute="trailing" constant="8" id="rHP-a5-vK1"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="mainView" destination="oCA-VX-gMS" id="YKh-oJ-Uko"/>
-                                    <outlet property="radialView" destination="sIU-vs-8eC" id="MGU-lU-UVW"/>
+                                    <outlet property="mainView" destination="ztG-v9-eyL" id="sN0-Z6-ufj"/>
+                                    <outlet property="radialView" destination="LPQ-Cf-cEh" id="fkB-5i-gZu"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

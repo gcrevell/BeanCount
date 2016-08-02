@@ -19,7 +19,6 @@ class AccountStudentsTableViewController: UITableViewController {
         
         db = FIRDatabase.database().reference()
         
-        tableView.backgroundColor = AD.myThemeColor()
         tableView.separatorStyle = .none
         tableView.allowsSelectionDuringEditing = true
         
@@ -34,6 +33,10 @@ class AccountStudentsTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.backgroundColor = AD.myThemeColor()
     }
     
     func toggleEditing() {
