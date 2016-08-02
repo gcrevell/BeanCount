@@ -22,7 +22,10 @@ class AccountStudentsTableViewController: UITableViewController {
         db = FIRDatabase.database().reference()
         
         tableView.backgroundColor = AD.myThemeColor()
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 237/255, green: 237/255, blue: 237/255, alpha: 0.7)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 237/255,
+                                                                        green: 237/255,
+                                                                        blue: 237/255,
+                                                                        alpha: 0.7)
         
         if AD.selectedLocation == nil {
             let label = UILabel()
@@ -30,7 +33,8 @@ class AccountStudentsTableViewController: UITableViewController {
             label.numberOfLines = 0
             label.textColor = UIColor.white
             label.textAlignment = .center
-            label.font = UIFont(name: themeFontBold, size: 17)
+            label.font = UIFont(name: themeFontBold,
+                                size: 17)
             
             tableView.backgroundView = label
             return
@@ -62,14 +66,23 @@ class AccountStudentsTableViewController: UITableViewController {
             // Currently editing. Stop
         } else {
             // Not editing. Start
-            self.tableView.setEditing(true, animated: true)
+            self.tableView.setEditing(true,
+                                      animated: true)
             
             self.navigationItem.rightBarButtonItem = nil
             
-            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(toggleEditing)),
-                                                       UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-                                                       UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addStudent)),
-                                                       UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
+            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done,
+                                                                       target: self,
+                                                                       action: #selector(toggleEditing)),
+                                                       UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                                                       target: nil,
+                                                                       action: nil),
+                                                       UIBarButtonItem(barButtonSystemItem: .add,
+                                                                       target: self,
+                                                                       action: #selector(addStudent)),
+                                                       UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                                                       target: nil,
+                                                                       action: nil)]
             
         }
         
