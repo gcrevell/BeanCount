@@ -89,7 +89,7 @@ class AccountStudentsTableViewController: UITableViewController {
     }
     
     func addStudent() {
-        
+        performSegue(withIdentifier: "SegueToAddStudent", sender: self)
     }
     
     // MARK: - Table view data source
@@ -143,6 +143,8 @@ class AccountStudentsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return false
     }
+    
+    @IBAction func unwindToStudentsTableView(segue: UIStoryboardSegue) {}
     
     /*
      // Override to support conditional editing of the table view.

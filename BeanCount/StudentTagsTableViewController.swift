@@ -1,16 +1,18 @@
 //
-//  InformationLabelTableViewController.swift
+//  StudentTagsTableViewController.swift
 //  BeanCount
 //
-//  Created by Voltmeter Amperage on 8/2/16.
+//  Created by Voltmeter Amperage on 8/3/16.
 //  Copyright © 2016 Gabriel Revells. All rights reserved.
 //
 
 import UIKit
 
-class InformationLabelTableViewController: UITableViewController {
+class StudentTagsTableViewController: UITableViewController {
     
-    let labels = ["Phone", "Class"]
+    var tags = ["iOS"]
+    
+    let AD = UIApplication.shared.delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,9 @@ class InformationLabelTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        tableView.backgroundColor = AD.myThemeColor()
+        tableView.separatorStyle = .none
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,18 +41,32 @@ class InformationLabelTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return labels.count
+        return tags.count + 1
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        
+        if indexPath.row == tags.count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddTagCell", for: indexPath) as! AddTagTableViewCell
+            
+            cell.backgroundColor = UIColor.clear
+            cell.mainView.layer.cornerRadius = 3
+            cell.mainView.alpha = 0.5
+            
+            cell.plusImageView.image = UIImage(named: "plus.png")?.withRenderingMode(.alwaysTemplate)
+            cell.plusImageView.tintColor = .darkGray
+            
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentTagCell", for: indexPath) as! StudentTagTableViewCell
+        
+        cell.backgroundColor = UIColor.clear
+        cell.mainTextField.layer.cornerRadius = 3
+        cell.mainTextField.backgroundColor = .white
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

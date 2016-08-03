@@ -26,6 +26,10 @@
 		7C915A341D3823690081507E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A321D3823690081507E /* LaunchScreen.storyboard */; };
 		7C915A3E1D3834C50081507E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A3D1D3834C50081507E /* GoogleService-Info.plist */; };
 		7CA1326B1D5039DF0048DDFE /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA1326A1D5039DF0048DDFE /* StudentTableViewCell.swift */; };
+		7CBBC3561D527773007F2C92 /* StudentTagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBC3551D527773007F2C92 /* StudentTagsTableViewController.swift */; };
+		7CBBC3591D527AB6007F2C92 /* StudentTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBC3581D527AB6007F2C92 /* StudentTagTableViewCell.swift */; };
+		7CBBC35B1D527BFA007F2C92 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CBBC35A1D527BFA007F2C92 /* plus.png */; };
+		7CBBC35D1D527CAF007F2C92 /* AddTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBC35C1D527CAF007F2C92 /* AddTagTableViewCell.swift */; };
 		7CF12A871D3A8317003AE476 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF12A861D3A8317003AE476 /* LoginViewController.swift */; };
 		7CF12A911D3AB84E003AE476 /* username.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF12A8F1D3AB84E003AE476 /* username.png */; };
 		7CF12A921D3AB84E003AE476 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF12A901D3AB84E003AE476 /* lock.png */; };
@@ -61,6 +65,10 @@
 		7C915A351D3823690081507E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C915A3D1D3834C50081507E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7CA1326A1D5039DF0048DDFE /* StudentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
+		7CBBC3551D527773007F2C92 /* StudentTagsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTagsTableViewController.swift; sourceTree = "<group>"; };
+		7CBBC3581D527AB6007F2C92 /* StudentTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTagTableViewCell.swift; sourceTree = "<group>"; };
+		7CBBC35A1D527BFA007F2C92 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		7CBBC35C1D527CAF007F2C92 /* AddTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTagTableViewCell.swift; sourceTree = "<group>"; };
 		7CF12A861D3A8317003AE476 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7CF12A8F1D3AB84E003AE476 /* username.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = username.png; sourceTree = "<group>"; };
 		7CF12A901D3AB84E003AE476 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
@@ -131,7 +139,7 @@
 		7C915A281D3823690081507E /* BeanCount */ = {
 			isa = PBXGroup;
 			children = (
-				7C0741BF1D51406A0039D42C /* InformationLabelTableViewController.swift */,
+				7CBBC3571D5279A3007F2C92 /* Adding Students */,
 				7C0B35321D4593F000C6DFFB /* Core Data */,
 				7C5F00A21D3BE1880023B2D6 /* AddLocationViewController.swift */,
 				7C5F009C1D3BCB950023B2D6 /* SettingsViewController.swift */,
@@ -142,7 +150,6 @@
 				7CFF63D61D41B41000F526CE /* AccountStudentsTableViewController.swift */,
 				7C915A291D3823690081507E /* AppDelegate.swift */,
 				7C915A2D1D3823690081507E /* Main.storyboard */,
-				7C0741BD1D513E880039D42C /* AddStudentViewController.swift */,
 				7CA1326A1D5039DF0048DDFE /* StudentTableViewCell.swift */,
 				7CFC925F1D5030730083E1E6 /* FillButtonView.swift */,
 				7CF12A951D3AC017003AE476 /* Theme.swift */,
@@ -156,9 +163,22 @@
 			path = BeanCount;
 			sourceTree = "<group>";
 		};
+		7CBBC3571D5279A3007F2C92 /* Adding Students */ = {
+			isa = PBXGroup;
+			children = (
+				7CBBC35C1D527CAF007F2C92 /* AddTagTableViewCell.swift */,
+				7CBBC3581D527AB6007F2C92 /* StudentTagTableViewCell.swift */,
+				7CBBC3551D527773007F2C92 /* StudentTagsTableViewController.swift */,
+				7C0741BF1D51406A0039D42C /* InformationLabelTableViewController.swift */,
+				7C0741BD1D513E880039D42C /* AddStudentViewController.swift */,
+			);
+			name = "Adding Students";
+			sourceTree = "<group>";
+		};
 		7CF12A881D3A8813003AE476 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7CBBC35A1D527BFA007F2C92 /* plus.png */,
 				7C7D95321D3C720200066530 /* id card.png */,
 				7C5F009E1D3BCE250023B2D6 /* location.png */,
 				7CF12A8E1D3A8859003AE476 /* Login Screen */,
@@ -266,6 +286,7 @@
 				7C915A311D3823690081507E /* Assets.xcassets in Resources */,
 				7C915A2F1D3823690081507E /* Main.storyboard in Resources */,
 				7C29E4271D3B069D006088CD /* red x.png in Resources */,
+				7CBBC35B1D527BFA007F2C92 /* plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,12 +353,15 @@
 				7CFC92601D5030730083E1E6 /* FillButtonView.swift in Sources */,
 				7CF12A871D3A8317003AE476 /* LoginViewController.swift in Sources */,
 				7C418FAE1D4A60A6005DD026 /* LocationsSelectTableViewController.swift in Sources */,
+				7CBBC35D1D527CAF007F2C92 /* AddTagTableViewCell.swift in Sources */,
 				7CA1326B1D5039DF0048DDFE /* StudentTableViewCell.swift in Sources */,
 				7C0741C01D51406A0039D42C /* InformationLabelTableViewController.swift in Sources */,
 				7CF12A961D3AC017003AE476 /* Theme.swift in Sources */,
 				7C0B35351D464DDE00C6DFFB /* Model.xcdatamodeld in Sources */,
 				7C5F009D1D3BCB950023B2D6 /* SettingsViewController.swift in Sources */,
 				7C0741BE1D513E880039D42C /* AddStudentViewController.swift in Sources */,
+				7CBBC3591D527AB6007F2C92 /* StudentTagTableViewCell.swift in Sources */,
+				7CBBC3561D527773007F2C92 /* StudentTagsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
