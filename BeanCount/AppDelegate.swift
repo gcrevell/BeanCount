@@ -11,6 +11,21 @@ import Firebase
 import CoreLocation
 import CoreData
 
+extension CGRect {
+    var centerPoint: CGPoint {
+        get {
+            return CGPoint(x: self.width/2, y: self.height/2)
+        }
+    }
+}
+
+extension UIView {
+    func removeAllSubviews() {
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+    }
+}
 
 enum Theme: Int {
     case None = 0

@@ -9,9 +9,9 @@
 import UIKit
 
 class AddTagTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var plusImageView: UIImageView!
+    
+    var mainView: UIView!
+    var plusImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
