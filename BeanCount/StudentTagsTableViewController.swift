@@ -60,6 +60,14 @@ class StudentTagsTableViewController: UITableViewController, UIPopoverPresentati
         
     }
     
+    func deleteTagPressed(recognizer: UITapGestureRecognizer) {
+        let location = recognizer.location(in: tableView)
+        
+        let indexPath = tableView.indexPathForRow(at: location)!
+
+        tags.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .bottom)
+    }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
@@ -122,10 +130,29 @@ class StudentTagsTableViewController: UITableViewController, UIPopoverPresentati
         tagView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tagViewPressed)))
         
-        cell.mainTextField.leftViewMode = UITextFieldViewMode.always
+        cell.mainTextField.leftViewMode = .always
         cell.mainTextField.leftView = tagView
         
+        let rightView = UIView(frame: CGRect(x: cell.mainTextField.frame.width - 41, y: 0, width: 41, height: 41))
+        
+        let deleteImageView = UIImageView(frame: CGRect(x: 21,
+                                             y: 2,
+                                             width: 18,
+                                             height: 18))
+        deleteImageView.image = UIImage(named: "close.png")?.withRenderingMode(.alwaysTemplate)
+        deleteImageView.contentMode = .scaleAspectFit
+        deleteImageView.tintColor = .red
+        
+        rightView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(deleteTagPressed)))
+        
+        rightView.addSubview(deleteImageView)
+        
+        cell.mainTextField.rightViewMode = .always
+        cell.mainTextField.rightView = rightView
+        
         cell.mainTextField.font = UIFont(name: themeFont, size: 17)
+        cell.mainTextField.autocorrectionType = .default
+        cell.mainTextField.autocapitalizationType = .words
         
         cell.tintColor = AD.myThemeColor()
         

@@ -31,7 +31,9 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
         self.studentNameField.backgroundColor = UIColor.white
         self.studentNameField.layer.cornerRadius = 3
         self.studentNameField.placeholder = "Name"
-        self.studentNameField.font = UIFont(name: themeFont, size: 16)
+        self.studentNameField.font = UIFont(name: themeFont, size: 17)
+        self.studentNameField.autocapitalizationType = .words
+        self.studentNameField.autocorrectionType = .no
         
         let studentNameIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
         studentNameIcon.image = UIImage(named: "id card.png")?.withRenderingMode(.alwaysTemplate)

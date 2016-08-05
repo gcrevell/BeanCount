@@ -14,6 +14,7 @@
 		7C21812D1D551E5200C29F68 /* file cabinet.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C21812A1D551E5200C29F68 /* file cabinet.png */; };
 		7C21812E1D551E5200C29F68 /* computer.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C21812B1D551E5200C29F68 /* computer.png */; };
 		7C2181321D55201E00C29F68 /* desk.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2181311D55201E00C29F68 /* desk.png */; };
+		7C2181361D552A3B00C29F68 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2181351D552A3B00C29F68 /* close.png */; };
 		7C28D1BE1D5509AA00BDDA77 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C28D1BC1D5509AA00BDDA77 /* phone.png */; };
 		7C28D1C41D550FD300BDDA77 /* TagTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C28D1C31D550FD300BDDA77 /* TagTypes.swift */; };
 		7C28D1C81D551D1E00BDDA77 /* open book.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C28D1C71D551D1E00BDDA77 /* open book.png */; };
@@ -57,6 +58,7 @@
 		7C21812A1D551E5200C29F68 /* file cabinet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file cabinet.png"; sourceTree = "<group>"; };
 		7C21812B1D551E5200C29F68 /* computer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = computer.png; sourceTree = "<group>"; };
 		7C2181311D55201E00C29F68 /* desk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = desk.png; sourceTree = "<group>"; };
+		7C2181351D552A3B00C29F68 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		7C28D1BC1D5509AA00BDDA77 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		7C28D1C31D550FD300BDDA77 /* TagTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTypes.swift; sourceTree = "<group>"; };
 		7C28D1C71D551D1E00BDDA77 /* open book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open book.png"; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 		7CF12A881D3A8813003AE476 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7C2181351D552A3B00C29F68 /* close.png */,
 				7C21812F1D551E5B00C29F68 /* Tags */,
 				7CBBC35A1D527BFA007F2C92 /* plus.png */,
 				7C7D95321D3C720200066530 /* id card.png */,
@@ -338,6 +341,7 @@
 				7C915A3E1D3834C50081507E /* GoogleService-Info.plist in Resources */,
 				7C21812E1D551E5200C29F68 /* computer.png in Resources */,
 				7C29E4281D3B069D006088CD /* green check.png in Resources */,
+				7C2181361D552A3B00C29F68 /* close.png in Resources */,
 				7CF12A921D3AB84E003AE476 /* lock.png in Resources */,
 				7C28D1C81D551D1E00BDDA77 /* open book.png in Resources */,
 				7C915A311D3823690081507E /* Assets.xcassets in Resources */,
