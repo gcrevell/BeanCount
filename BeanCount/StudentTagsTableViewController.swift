@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudentTagsTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
+class StudentTagsTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
     
     var tags:[UITextField] = []
     
@@ -154,6 +154,8 @@ class StudentTagsTableViewController: UITableViewController, UIPopoverPresentati
         cell.mainTextField.font = UIFont(name: themeFont, size: 17)
         cell.mainTextField.autocorrectionType = .default
         cell.mainTextField.autocapitalizationType = .words
+        cell.mainTextField.returnKeyType = .default
+        cell.mainTextField.delegate = self
         
         cell.tintColor = AD.myThemeColor()
         
@@ -215,6 +217,11 @@ class StudentTagsTableViewController: UITableViewController, UIPopoverPresentati
         }
         
         return indexPath
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     

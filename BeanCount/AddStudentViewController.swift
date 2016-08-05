@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
+class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var studentNameField: UITextField!
     
@@ -34,6 +34,9 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
         self.studentNameField.font = UIFont(name: themeFont, size: 17)
         self.studentNameField.autocapitalizationType = .words
         self.studentNameField.autocorrectionType = .no
+        self.studentNameField.delegate = self
+        self.studentNameField.returnKeyType = UIReturnKeyType.default
+        self.studentNameField.keyboardType = .default
         
         let studentNameIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
         studentNameIcon.image = UIImage(named: "id card.png")?.withRenderingMode(.alwaysTemplate)
@@ -84,6 +87,11 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
 //    func adaptivePresentationStyleForPresentationController(
