@@ -28,6 +28,7 @@ class StudentTagsTableViewController: UITableViewController, UIPopoverPresentati
         
         self.tableView.showsVerticalScrollIndicator = false
         self.tableView.showsHorizontalScrollIndicator = false
+        self.tableView.bounces = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -198,12 +199,25 @@ class StudentTagsTableViewController: UITableViewController, UIPopoverPresentati
                                    completion: { (completed) in
                                     self.tags.append(UITextField())
                                     addCell.removeAllSubviews()
+                                    if CGFloat(self.tags.count * 49 + 45) >= self.tableView.frame.height {
+                                        self.tableView.bounces = true
+                                    }
                                     tableView.reloadData()
                                     
                     })
             })
         }
     }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if indexPath.row != tags.count {
+            return nil
+        }
+        
+        return indexPath
+    }
+    
+    
     
     /*
      // Override to support conditional editing of the table view.
