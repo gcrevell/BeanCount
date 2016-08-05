@@ -10,7 +10,9 @@ import UIKit
 
 class InformationLabelTableViewController: UITableViewController {
     
-    let labels = ["Phone", "Class"]
+    let tags:[StudentTags] = tagsArray
+    
+    var editingCell: StudentTagTableViewCell!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,14 @@ class InformationLabelTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        if self.view.frame.height >= CGFloat(tagsArray.count * 41) {
+            // View is tall enough to show all tags. Disable scrolling
+            self.tableView.isScrollEnabled = false
+        }
+        
+        self.tableView.showsHorizontalScrollIndicator = false
+        self.tableView.showsVerticalScrollIndicator = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,18 +46,47 @@ class InformationLabelTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return labels.count
+        return tags.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = UITableViewCell()
+        
+        cell.clipsToBounds = true
+        
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
+        view.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        view.clipsToBounds = true
+        cell.addSubview(view)
+        
+        let imageView = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
+        imageView.image = getImage(of: tags[indexPath.row])
+        imageView.contentMode = .scaleAspectFit
+        view.addSubview(imageView)
+        
+        print(cell.contentView.frame.height)
+        
+        let label = UILabel(frame: CGRect(x: 41, y: 0, width: cell.contentView.frame.width - 41, height: 41))
+        label.font = UIFont(name: themeFont, size: 17)
+        label.text = getTitle(of: tags[indexPath.row])
+        cell.addSubview(label)
 
         // Configure the cell...
 
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 41
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        editingCell.displayedTag = tags[indexPath.row]
+        editingCell.updateTag()
+        
+        self.dismiss(animated: true, completion: nil)
+    }
 
     /*
     // Override to support conditional editing of the table view.

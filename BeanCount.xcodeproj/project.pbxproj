@@ -8,8 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		7C0741BE1D513E880039D42C /* AddStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0741BD1D513E880039D42C /* AddStudentViewController.swift */; };
-		7C0741C01D51406A0039D42C /* InformationLabelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0741BF1D51406A0039D42C /* InformationLabelTableViewController.swift */; };
+		7C0741C01D51406A0039D42C /* TagPopoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0741BF1D51406A0039D42C /* TagPopoverTableViewController.swift */; };
 		7C0B35351D464DDE00C6DFFB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7C0B35331D464DDE00C6DFFB /* Model.xcdatamodeld */; };
+		7C21812C1D551E5200C29F68 /* lightbulb.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2181291D551E5200C29F68 /* lightbulb.png */; };
+		7C21812D1D551E5200C29F68 /* file cabinet.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C21812A1D551E5200C29F68 /* file cabinet.png */; };
+		7C21812E1D551E5200C29F68 /* computer.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C21812B1D551E5200C29F68 /* computer.png */; };
+		7C2181321D55201E00C29F68 /* desk.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2181311D55201E00C29F68 /* desk.png */; };
+		7C28D1BE1D5509AA00BDDA77 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C28D1BC1D5509AA00BDDA77 /* phone.png */; };
+		7C28D1C41D550FD300BDDA77 /* TagTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C28D1C31D550FD300BDDA77 /* TagTypes.swift */; };
+		7C28D1C81D551D1E00BDDA77 /* open book.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C28D1C71D551D1E00BDDA77 /* open book.png */; };
 		7C29E4271D3B069D006088CD /* red x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C29E4251D3B069D006088CD /* red x.png */; };
 		7C29E4281D3B069D006088CD /* green check.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C29E4261D3B069D006088CD /* green check.png */; };
 		7C418FAE1D4A60A6005DD026 /* LocationsSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C418FAC1D4A60A6005DD026 /* LocationsSelectTableViewController.swift */; };
@@ -44,8 +51,15 @@
 		023978D7471B7C79C397E595 /* Pods_BeanCount.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeanCount.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F70FB857B23537D3491D75A /* Pods-BeanCount.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeanCount.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeanCount/Pods-BeanCount.release.xcconfig"; sourceTree = "<group>"; };
 		7C0741BD1D513E880039D42C /* AddStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStudentViewController.swift; sourceTree = "<group>"; };
-		7C0741BF1D51406A0039D42C /* InformationLabelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationLabelTableViewController.swift; sourceTree = "<group>"; };
+		7C0741BF1D51406A0039D42C /* TagPopoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagPopoverTableViewController.swift; sourceTree = "<group>"; };
 		7C0B35341D464DDE00C6DFFB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		7C2181291D551E5200C29F68 /* lightbulb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightbulb.png; sourceTree = "<group>"; };
+		7C21812A1D551E5200C29F68 /* file cabinet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file cabinet.png"; sourceTree = "<group>"; };
+		7C21812B1D551E5200C29F68 /* computer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = computer.png; sourceTree = "<group>"; };
+		7C2181311D55201E00C29F68 /* desk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = desk.png; sourceTree = "<group>"; };
+		7C28D1BC1D5509AA00BDDA77 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
+		7C28D1C31D550FD300BDDA77 /* TagTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTypes.swift; sourceTree = "<group>"; };
+		7C28D1C71D551D1E00BDDA77 /* open book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open book.png"; sourceTree = "<group>"; };
 		7C29E4251D3B069D006088CD /* red x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red x.png"; sourceTree = "<group>"; };
 		7C29E4261D3B069D006088CD /* green check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green check.png"; sourceTree = "<group>"; };
 		7C418FAC1D4A60A6005DD026 /* LocationsSelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsSelectTableViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +132,44 @@
 			name = "Core Data";
 			sourceTree = "<group>";
 		};
+		7C21812F1D551E5B00C29F68 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				7C2181301D551E6800C29F68 /* Other Tags */,
+				7C28D1BC1D5509AA00BDDA77 /* phone.png */,
+				7C2181311D55201E00C29F68 /* desk.png */,
+			);
+			name = Tags;
+			sourceTree = "<group>";
+		};
+		7C2181301D551E6800C29F68 /* Other Tags */ = {
+			isa = PBXGroup;
+			children = (
+				7C2181291D551E5200C29F68 /* lightbulb.png */,
+				7C21812A1D551E5200C29F68 /* file cabinet.png */,
+				7C21812B1D551E5200C29F68 /* computer.png */,
+				7C28D1C71D551D1E00BDDA77 /* open book.png */,
+			);
+			name = "Other Tags";
+			sourceTree = "<group>";
+		};
+		7C28D1C51D55138A00BDDA77 /* Popover */ = {
+			isa = PBXGroup;
+			children = (
+				7C0741BF1D51406A0039D42C /* TagPopoverTableViewController.swift */,
+			);
+			name = Popover;
+			sourceTree = "<group>";
+		};
+		7C28D1C61D55139D00BDDA77 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				7C28D1C51D55138A00BDDA77 /* Popover */,
+				7C28D1C31D550FD300BDDA77 /* TagTypes.swift */,
+			);
+			name = Tags;
+			sourceTree = "<group>";
+		};
 		7C915A1D1D3823690081507E = {
 			isa = PBXGroup;
 			children = (
@@ -166,10 +218,10 @@
 		7CBBC3571D5279A3007F2C92 /* Adding Students */ = {
 			isa = PBXGroup;
 			children = (
+				7C28D1C61D55139D00BDDA77 /* Tags */,
 				7CBBC35C1D527CAF007F2C92 /* AddTagTableViewCell.swift */,
 				7CBBC3581D527AB6007F2C92 /* StudentTagTableViewCell.swift */,
 				7CBBC3551D527773007F2C92 /* StudentTagsTableViewController.swift */,
-				7C0741BF1D51406A0039D42C /* InformationLabelTableViewController.swift */,
 				7C0741BD1D513E880039D42C /* AddStudentViewController.swift */,
 			);
 			name = "Adding Students";
@@ -178,6 +230,7 @@
 		7CF12A881D3A8813003AE476 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7C21812F1D551E5B00C29F68 /* Tags */,
 				7CBBC35A1D527BFA007F2C92 /* plus.png */,
 				7C7D95321D3C720200066530 /* id card.png */,
 				7C5F009E1D3BCE250023B2D6 /* location.png */,
@@ -277,14 +330,20 @@
 			files = (
 				7C7D95331D3C720200066530 /* id card.png in Resources */,
 				7C915A341D3823690081507E /* LaunchScreen.storyboard in Resources */,
+				7C2181321D55201E00C29F68 /* desk.png in Resources */,
 				7CF12A911D3AB84E003AE476 /* username.png in Resources */,
 				7C5F009F1D3BCE250023B2D6 /* location.png in Resources */,
 				7C83B9541D3AD5D000B3405D /* mail.png in Resources */,
+				7C21812D1D551E5200C29F68 /* file cabinet.png in Resources */,
 				7C915A3E1D3834C50081507E /* GoogleService-Info.plist in Resources */,
+				7C21812E1D551E5200C29F68 /* computer.png in Resources */,
 				7C29E4281D3B069D006088CD /* green check.png in Resources */,
 				7CF12A921D3AB84E003AE476 /* lock.png in Resources */,
+				7C28D1C81D551D1E00BDDA77 /* open book.png in Resources */,
 				7C915A311D3823690081507E /* Assets.xcassets in Resources */,
+				7C28D1BE1D5509AA00BDDA77 /* phone.png in Resources */,
 				7C915A2F1D3823690081507E /* Main.storyboard in Resources */,
+				7C21812C1D551E5200C29F68 /* lightbulb.png in Resources */,
 				7C29E4271D3B069D006088CD /* red x.png in Resources */,
 				7CBBC35B1D527BFA007F2C92 /* plus.png in Resources */,
 			);
@@ -355,7 +414,8 @@
 				7C418FAE1D4A60A6005DD026 /* LocationsSelectTableViewController.swift in Sources */,
 				7CBBC35D1D527CAF007F2C92 /* AddTagTableViewCell.swift in Sources */,
 				7CA1326B1D5039DF0048DDFE /* StudentTableViewCell.swift in Sources */,
-				7C0741C01D51406A0039D42C /* InformationLabelTableViewController.swift in Sources */,
+				7C28D1C41D550FD300BDDA77 /* TagTypes.swift in Sources */,
+				7C0741C01D51406A0039D42C /* TagPopoverTableViewController.swift in Sources */,
 				7CF12A961D3AC017003AE476 /* Theme.swift in Sources */,
 				7C0B35351D464DDE00C6DFFB /* Model.xcdatamodeld in Sources */,
 				7C5F009D1D3BCB950023B2D6 /* SettingsViewController.swift in Sources */,

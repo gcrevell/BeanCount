@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudentTagsTableViewController: UITableViewController {
+class StudentTagsTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
     
     var tags:[UITextField] = []
     
@@ -25,6 +25,9 @@ class StudentTagsTableViewController: UITableViewController {
         
         tableView.backgroundColor = AD.myThemeColor()
         tableView.separatorStyle = .none
+        
+        self.tableView.showsVerticalScrollIndicator = false
+        self.tableView.showsHorizontalScrollIndicator = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,22 +35,53 @@ class StudentTagsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func tagViewPressed(recognizer: UITapGestureRecognizer) {
+        let location = recognizer.location(in: tableView)
+        
+        let indexPath = tableView.indexPathForRow(at: location)!
+        
+        let cell = tableView.cellForRow(at: indexPath) as! StudentTagTableViewCell
+        
+        let tags = InformationLabelTableViewController()
+        tags.modalPresentationStyle = .popover
+        tags.preferredContentSize = CGSize(width: 200,
+                                           height: min(400,
+                                                       tagsArray.count * 41))
+        
+        let popover = tags.popoverPresentationController
+        popover?.delegate = self
+        popover?.permittedArrowDirections = .any
+        popover?.sourceView = recognizer.view!
+        popover?.sourceRect = recognizer.view!.bounds
+        
+        tags.editingCell = cell
+        
+        present(tags, animated: true, completion: nil)
+        
+    }
+    
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return tags.count + 1
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == tags.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AddTagCell", for: indexPath) as! AddTagTableViewCell
+            
+            cell.removeAllSubviews()
             
             cell.selectionStyle = .none
             
@@ -84,6 +118,19 @@ class StudentTagsTableViewController: UITableViewController {
         cell.mainTextField.layer.cornerRadius = 3
         cell.mainTextField.backgroundColor = .white
         
+        let tagView = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
+        tagView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+        tagView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tagViewPressed)))
+        
+        cell.mainTextField.leftViewMode = UITextFieldViewMode.always
+        cell.mainTextField.leftView = tagView
+        
+        cell.mainTextField.font = UIFont(name: themeFont, size: 17)
+        
+        cell.tintColor = AD.myThemeColor()
+        
+        cell.updateTag()
+        
         cell.mainTextField.text = tags[indexPath.row].text
         tags[indexPath.row] = cell.mainTextField
         
@@ -97,9 +144,9 @@ class StudentTagsTableViewController: UITableViewController {
         if indexPath.row == tags.count {
             let addCell = tableView.cellForRow(at: indexPath) as! AddTagTableViewCell
             
-            UIView.animate(withDuration: 1.5,
+            UIView.animate(withDuration: 1.2,
                            delay: 0,
-                           usingSpringWithDamping: 0.7,
+                           usingSpringWithDamping: 1,
                            initialSpringVelocity: 0.3,
                            options: .curveEaseInOut,
                            animations: {
@@ -109,9 +156,9 @@ class StudentTagsTableViewController: UITableViewController {
                             addCell.plusImageView.center = addCell.mainView.frame.centerPoint
                 }, completion: {(completed) in
 //                    addCell.plusImageView.rem
-                    UIView.animate(withDuration: 1.5,
+                    UIView.animate(withDuration: 1.0,
                                    delay: 0.2,
-                                   usingSpringWithDamping: 0.7,
+                                   usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.3,
                                    options: .beginFromCurrentState,
                                    animations: { 

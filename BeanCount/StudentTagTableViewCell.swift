@@ -11,6 +11,8 @@ import UIKit
 class StudentTagTableViewCell: UITableViewCell {
 
     @IBOutlet weak var mainTextField: UITextField!
+    var displayedTag: StudentTags = .otherBook
+//    var color
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,6 +23,18 @@ class StudentTagTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func updateTag() {
+        mainTextField.leftView?.removeAllSubviews()
+        
+        mainTextField.placeholder = getTextPlaceholder(of: displayedTag)
+        
+        let imageView = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
+        imageView.image = getImage(of: displayedTag).withRenderingMode(.alwaysTemplate)
+        imageView.contentMode = .scaleAspectFit
+        
+        mainTextField.leftView?.addSubview(imageView)
     }
 
 }
