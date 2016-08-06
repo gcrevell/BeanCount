@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         
         let mainColor = AD.myThemeColor()
-        let buttonColor = UIColor(red: 246/255, green: 175/255, blue: 41/255, alpha: 1)
+//        let buttonColor = UIColor(red: 246/255, green: 175/255, blue: 41/255, alpha: 1)
         
         self.emailField.text = ""
         self.emailField.backgroundColor = UIColor.white
@@ -75,12 +75,12 @@ class LoginViewController: UIViewController {
         self.passwordField.leftViewMode = UITextFieldViewMode.always
         self.passwordField.leftView = passwordIconContainer
         
-        self.loginButton.backgroundColor = buttonColor
-        self.loginButton.layer.cornerRadius = 3
-        self.loginButton.titleLabel?.font = UIFont(name: themeFontBold, size: 20)
+//        self.loginButton.backgroundColor = buttonColor
+//        self.loginButton.layer.cornerRadius = 3
+//        self.loginButton.titleLabel?.font = UIFont(name: themeFontBold, size: 20)
         self.loginButton.setTitle("Login", for: [])
-        self.loginButton.setTitleColor(UIColor.white, for: [])
-        self.loginButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)
+//        self.loginButton.setTitleColor(UIColor.white, for: [])
+//        self.loginButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)
         
         self.loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
         

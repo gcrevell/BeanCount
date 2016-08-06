@@ -38,7 +38,7 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
         self.studentNameField.autocapitalizationType = .words
         self.studentNameField.autocorrectionType = .no
         self.studentNameField.delegate = self
-        self.studentNameField.returnKeyType = UIReturnKeyType.default
+        self.studentNameField.returnKeyType = .default
         self.studentNameField.keyboardType = .default
         
         self.studentNameField.leftImage = UIImage(named: "id card.png")?.withRenderingMode(.alwaysTemplate)
@@ -65,7 +65,8 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
         // Save user into firebase, under location's students
         let saveLocation = db.child("locations").child(AD.selectedLocation!.UID).child("students").child(uid)
         
-        saveLocation.setValue(values, withCompletionBlock: {(error, reference) in
+        saveLocation.setValue(values,
+                              withCompletionBlock: {(error, reference) in
             // Segue back after saving
             self.finish()
         })
@@ -76,8 +77,6 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
     }
     
     func labelPressed() {
-        print("Label Pressed")
-        
         let labels = InformationLabelTableViewController()
         
         labels.modalPresentationStyle = .popover
@@ -87,9 +86,6 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
         popover?.permittedArrowDirections = .any
         popover?.delegate = self
         popover?.sourceView = self.view
-//        popover?.sourceRect = typeLabel.frame
-        
-//        self.present(labels, animated: true, completion: nil)
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -109,7 +105,7 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
     override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "LoadTableView" {
             // Set global table view to the destination
-            tagsTableView = segue.destination as! StudentTagsTableViewController
+            tagsTableView = segue.destination as? StudentTagsTableViewController
         }
     }
 
