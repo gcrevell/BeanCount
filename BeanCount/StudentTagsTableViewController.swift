@@ -153,7 +153,7 @@ class StudentTagsTableViewController: UITableViewController, UIPopoverPresentati
         
         cell.mainTextField.font = UIFont(name: themeFont, size: 17)
         cell.mainTextField.autocorrectionType = .default
-        cell.mainTextField.autocapitalizationType = .words
+        cell.mainTextField.autocapitalizationType = .sentences
         cell.mainTextField.returnKeyType = .default
         cell.mainTextField.delegate = self
         

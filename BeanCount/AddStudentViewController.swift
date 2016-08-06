@@ -94,6 +94,10 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
         return true
     }
     
+    func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+    
 //    func adaptivePresentationStyleForPresentationController(
 //        controller: UIPresentationController!) -> UIModalPresentationStyle {
 //        return .none
