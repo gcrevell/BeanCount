@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var studentNameField: UITextField!
+    var tagsTableView: StudentTagsTableViewController?
     
     let AD = UIApplication.shared.delegate as! AppDelegate
+    let db = FIRDatabase.database().reference()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +24,7 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         let mainColor = AD.myThemeColor()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(finish))
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
         
@@ -61,10 +64,28 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
     }
     
     func done() {
-        cancel()
+        // Create user UID
+        let uid = NSUUID().uuidString
+        
+        var values: [String : String] = [:]
+        
+        // Get student name and all data
+        if let tableView = tagsTableView {
+            values = tableView.getTags()
+        }
+        values["name"] = self.studentNameField.text!
+        print(values)
+        
+        // Save user into firebase, under location's students
+        let saveLocation = db.child("locations").child(AD.selectedLocation!.UID).child("students").child(uid)
+        
+        saveLocation.setValue(values, withCompletionBlock: {(error, reference) in
+            // Segue back after saving
+            self.finish()
+        })
     }
     
-    func cancel() {
+    func finish() {
         performSegue(withIdentifier: "UnwindToStudentsTableView", sender: self)
     }
     
@@ -97,19 +118,13 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
     func dismissKeyboard() {
         self.view.endEditing(true)
     }
-    
-//    func adaptivePresentationStyleForPresentationController(
-//        controller: UIPresentationController!) -> UIModalPresentationStyle {
-//        return .none
-//    }
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "LoadTableView" {
+            // Set global table view to the destination
+            tagsTableView = segue.destination as! StudentTagsTableViewController
+        }
     }
-    */
 
 }

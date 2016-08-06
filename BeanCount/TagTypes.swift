@@ -83,3 +83,25 @@ func getTextPlaceholder(of tag: StudentTags) -> String {
         return "Enter information"
     }
 }
+
+func getSaveTitle(of tag: StudentTags) -> String {
+    switch tag {
+    case .phoneNumber:
+        return "Phone Number"
+        
+    case .studentClass:
+        return "Class"
+        
+    case .otherBook:
+        return "Other Book"
+        
+    case .otherLightbulb:
+        return "Other Light Bulb"
+        
+    case .otherFileCabinet:
+        return "Other File Cabinet"
+        
+    case .otherComputer:
+        return "Other Computer"
+    }
+}

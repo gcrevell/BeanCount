@@ -224,7 +224,17 @@ class StudentTagsTableViewController: UITableViewController, UIPopoverPresentati
         return true
     }
     
-    
+    func getTags() -> [String : String] {
+        var values: [String : String] = [:]
+        
+        for i in 0..<tags.count {
+            let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! StudentTagTableViewCell
+            
+            values[getSaveTitle(of: cell.displayedTag)] = cell.mainTextField.text!
+        }
+        
+        return values
+    }
     
     /*
      // Override to support conditional editing of the table view.
