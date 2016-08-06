@@ -27,6 +27,8 @@
 		7C7D95331D3C720200066530 /* id card.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C7D95321D3C720200066530 /* id card.png */; };
 		7C7D95351D3C801200066530 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7D95341D3C801200066530 /* MapKit.framework */; };
 		7C83B9541D3AD5D000B3405D /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C83B9531D3AD5D000B3405D /* mail.png */; };
+		7C84E2351D566EC4007BAB74 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C84E2341D566EC4007BAB74 /* RoundedTextField.swift */; };
+		7C8719C51D566194006138C0 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8719C41D566194006138C0 /* RoundedView.swift */; };
 		7C915A2A1D3823690081507E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C915A291D3823690081507E /* AppDelegate.swift */; };
 		7C915A2F1D3823690081507E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A2D1D3823690081507E /* Main.storyboard */; };
 		7C915A311D3823690081507E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C915A301D3823690081507E /* Assets.xcassets */; };
@@ -71,6 +73,8 @@
 		7C7D95321D3C720200066530 /* id card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "id card.png"; sourceTree = "<group>"; };
 		7C7D95341D3C801200066530 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7C83B9531D3AD5D000B3405D /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
+		7C84E2341D566EC4007BAB74 /* RoundedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
+		7C8719C41D566194006138C0 /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		7C915A261D3823690081507E /* BeanCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeanCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C915A291D3823690081507E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C915A2E1D3823690081507E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -156,10 +160,32 @@
 		7C28D1C61D55139D00BDDA77 /* Tags */ = {
 			isa = PBXGroup;
 			children = (
-				7C28D1C51D55138A00BDDA77 /* Popover */,
+				7CBBC35C1D527CAF007F2C92 /* AddTagTableViewCell.swift */,
+				7CBBC3581D527AB6007F2C92 /* StudentTagTableViewCell.swift */,
+				7CBBC3551D527773007F2C92 /* StudentTagsTableViewController.swift */,
 				7C28D1C31D550FD300BDDA77 /* TagTypes.swift */,
+				7C28D1C51D55138A00BDDA77 /* Popover */,
 			);
 			name = Tags;
+			sourceTree = "<group>";
+		};
+		7C8719C21D565C6F006138C0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7C8719C31D565C7C006138C0 /* Locations */,
+				7C5F009C1D3BCB950023B2D6 /* SettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		7C8719C31D565C7C006138C0 /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				7C5F00A21D3BE1880023B2D6 /* AddLocationViewController.swift */,
+				7C418FAC1D4A60A6005DD026 /* LocationsSelectTableViewController.swift */,
+				7C418FAD1D4A60A6005DD026 /* LocationTableViewCell.swift */,
+			);
+			name = Locations;
 			sourceTree = "<group>";
 		};
 		7C915A1D1D3823690081507E = {
@@ -184,19 +210,18 @@
 			isa = PBXGroup;
 			children = (
 				7CBBC3571D5279A3007F2C92 /* Adding Students */,
-				7C5F00A21D3BE1880023B2D6 /* AddLocationViewController.swift */,
-				7C5F009C1D3BCB950023B2D6 /* SettingsViewController.swift */,
+				7C8719C21D565C6F006138C0 /* Settings */,
 				7C5F00991D3B55CB0023B2D6 /* BeanCount.entitlements */,
 				7CF12A861D3A8317003AE476 /* LoginViewController.swift */,
-				7C418FAC1D4A60A6005DD026 /* LocationsSelectTableViewController.swift */,
-				7C418FAD1D4A60A6005DD026 /* LocationTableViewCell.swift */,
 				7CFF63D61D41B41000F526CE /* AccountStudentsTableViewController.swift */,
 				7C915A291D3823690081507E /* AppDelegate.swift */,
 				7C915A2D1D3823690081507E /* Main.storyboard */,
+				7C84E2341D566EC4007BAB74 /* RoundedTextField.swift */,
 				7CA1326A1D5039DF0048DDFE /* StudentTableViewCell.swift */,
 				7CFC925F1D5030730083E1E6 /* FillButtonView.swift */,
 				7CF12A951D3AC017003AE476 /* Theme.swift */,
 				7CF12A931D3ABDE8003AE476 /* CreateAccountViewController.swift */,
+				7C8719C41D566194006138C0 /* RoundedView.swift */,
 				7CF12A881D3A8813003AE476 /* Images */,
 				7C915A301D3823690081507E /* Assets.xcassets */,
 				7C915A321D3823690081507E /* LaunchScreen.storyboard */,
@@ -210,9 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				7C28D1C61D55139D00BDDA77 /* Tags */,
-				7CBBC35C1D527CAF007F2C92 /* AddTagTableViewCell.swift */,
-				7CBBC3581D527AB6007F2C92 /* StudentTagTableViewCell.swift */,
-				7CBBC3551D527773007F2C92 /* StudentTagsTableViewController.swift */,
 				7C0741BD1D513E880039D42C /* AddStudentViewController.swift */,
 			);
 			name = "Adding Students";
@@ -399,6 +421,7 @@
 			files = (
 				7CF12A941D3ABDE8003AE476 /* CreateAccountViewController.swift in Sources */,
 				7C915A2A1D3823690081507E /* AppDelegate.swift in Sources */,
+				7C8719C51D566194006138C0 /* RoundedView.swift in Sources */,
 				7C418FAF1D4A60A6005DD026 /* LocationTableViewCell.swift in Sources */,
 				7C5F00A31D3BE1880023B2D6 /* AddLocationViewController.swift in Sources */,
 				7CFF63D71D41B41000F526CE /* AccountStudentsTableViewController.swift in Sources */,
@@ -414,6 +437,7 @@
 				7C0741BE1D513E880039D42C /* AddStudentViewController.swift in Sources */,
 				7CBBC3591D527AB6007F2C92 /* StudentTagTableViewCell.swift in Sources */,
 				7CBBC3561D527773007F2C92 /* StudentTagsTableViewController.swift in Sources */,
+				7C84E2351D566EC4007BAB74 /* RoundedTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

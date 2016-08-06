@@ -23,7 +23,6 @@ class SettingsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        let fontNameBold = "Avenir-Black"
         let mainColor = AD.myThemeColor()
         
         updateTheme()
@@ -38,7 +37,7 @@ class SettingsViewController: UIViewController {
         let onColor = UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1)
         let divider = UIColor(red: 192/255, green: 192/255, blue: 192/255, alpha: 1)
         
-        style(segmentedControl: themeSelector, fontName: fontNameBold, selectedColor: onColor, unselectedColor: UIColor.white, dividerColor: divider)
+        style(segmentedControl: themeSelector, fontName: themeFontBold, selectedColor: onColor, unselectedColor: UIColor.white, dividerColor: divider)
         themeSelector.addTarget(self, action: #selector(themeChanged), for: .valueChanged)
         themeSelector.selectedSegmentIndex = AD.selectedTheme != Theme.None ? AD.selectedTheme!.rawValue - 1 : 0
         

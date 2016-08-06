@@ -19,10 +19,22 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var createButton: UIButton!
     
-    let emailIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
-    let usernameIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
-    let passwordIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
-    let confirmPasswordIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
+    let emailIcon =             UIImageView(frame: CGRect(x: 9,
+                                                          y: 9,
+                                                          width: 24,
+                                                          height: 24))
+    let usernameIcon =          UIImageView(frame: CGRect(x: 9,
+                                                          y: 9,
+                                                          width: 24,
+                                                          height: 24))
+    let passwordIcon =          UIImageView(frame: CGRect(x: 9,
+                                                          y: 9,
+                                                          width: 24,
+                                                          height: 24))
+    let confirmPasswordIcon =   UIImageView(frame: CGRect(x: 9,
+                                                          y: 9,
+                                                          width: 24,
+                                                          height: 24))
     
     let AD = UIApplication.shared.delegate as! AppDelegate
     
@@ -31,29 +43,44 @@ class CreateAccountViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                              action: #selector(dismissKeyboard)))
         
-        let boldFontName = "Avenir-Black"
-        let fontName = "Avenir-Book"
-        
-        let onColor = UIColor(red: 58/255, green: 58/255, blue: 58/255, alpha: 1)
-        let divider = UIColor(red: 192/255, green: 192/255, blue: 192/255, alpha: 1)
-        let mainColor = AD.myThemeColor()
-        let buttonColor = UIColor(red: 246/255, green: 175/255, blue: 41/255, alpha: 1)
+        let mainColor =     AD.myThemeColor()
+        let onColor =       UIColor(red: 58/255,
+                                    green: 58/255,
+                                    blue: 58/255,
+                                    alpha: 1)
+        let divider =       UIColor(red: 192/255,
+                                    green: 192/255,
+                                    blue: 192/255,
+                                    alpha: 1)
+        let buttonColor =   UIColor(red: 246/255,
+                                    green: 175/255,
+                                    blue: 41/255,
+                                    alpha: 1)
         
         updateTheme()
         
-        style(segmentedControl: themeSelect, fontName: boldFontName, selectedColor: onColor, unselectedColor: UIColor.white, dividerColor: divider)
+        style(segmentedControl: themeSelect,
+              fontName: themeFontBold,
+              selectedColor: onColor,
+              unselectedColor: UIColor.white,
+              dividerColor: divider)
         
-        themeSelect.addTarget(self, action: #selector(themeChanged), for: .valueChanged)
+        themeSelect.addTarget(self,
+                              action: #selector(themeChanged),
+                              for: .valueChanged)
+        
         themeSelect.selectedSegmentIndex = AD.selectedTheme != Theme.None ? AD.selectedTheme!.rawValue - 1 : 0
         
         // Email text field setup
-        self.emailTextField.text = ""
-        self.emailTextField.backgroundColor = UIColor.white
-        self.emailTextField.layer.cornerRadius = 3
-        self.emailTextField.placeholder = "Email"
-        self.emailTextField.font = UIFont(name: fontName, size: 16)
+        self.emailTextField.text                = ""
+        self.emailTextField.backgroundColor     = UIColor.white
+        self.emailTextField.layer.cornerRadius  = 3
+        self.emailTextField.placeholder         = "Email"
+        self.emailTextField.font                = UIFont(name: themeFont,
+                                                         size: 16)
         
         emailIcon.image = UIImage(named: "mail.png")?.withRenderingMode(.alwaysTemplate)
         emailIcon.tintColor = mainColor
@@ -70,7 +97,7 @@ class CreateAccountViewController: UIViewController {
         self.usernameTextField.backgroundColor = UIColor.white
         self.usernameTextField.layer.cornerRadius = 3
         self.usernameTextField.placeholder = "Username"
-        self.usernameTextField.font = UIFont(name: fontName, size: 16)
+        self.usernameTextField.font = UIFont(name: themeFont, size: 16)
         
         usernameIcon.image = UIImage(named: "username.png")?.withRenderingMode(.alwaysTemplate)
         usernameIcon.tintColor = mainColor
@@ -89,7 +116,7 @@ class CreateAccountViewController: UIViewController {
         self.passwordTextField.backgroundColor = UIColor.white
         self.passwordTextField.layer.cornerRadius = 3
         self.passwordTextField.placeholder = "Password"
-        self.passwordTextField.font = UIFont(name: fontName, size: 16)
+        self.passwordTextField.font = UIFont(name: themeFont, size: 16)
         
         passwordIcon.image = UIImage(named: "lock.png")?.withRenderingMode(.alwaysTemplate)
         passwordIcon.tintColor = mainColor
@@ -106,7 +133,7 @@ class CreateAccountViewController: UIViewController {
         self.confirmPasswordTextField.backgroundColor = UIColor.white
         self.confirmPasswordTextField.layer.cornerRadius = 3
         self.confirmPasswordTextField.placeholder = "Confirm password"
-        self.confirmPasswordTextField.font = UIFont(name: fontName, size: 16)
+        self.confirmPasswordTextField.font = UIFont(name: themeFont, size: 16)
         
         confirmPasswordIcon.image = UIImage(named: "lock.png")?.withRenderingMode(.alwaysTemplate)
         confirmPasswordIcon.tintColor = mainColor
@@ -121,7 +148,7 @@ class CreateAccountViewController: UIViewController {
         // Setup create account button
         self.createButton.backgroundColor = buttonColor
         self.createButton.layer.cornerRadius = 3
-        self.createButton.titleLabel?.font = UIFont(name: boldFontName, size: 20)
+        self.createButton.titleLabel?.font = UIFont(name: themeFontBold, size: 20)
         self.createButton.setTitle("Create!", for: [])
         self.createButton.setTitleColor(UIColor.white, for: [])
         self.createButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)

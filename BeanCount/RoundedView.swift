@@ -1,0 +1,36 @@
+//
+//  RoundedView.swift
+//  BeanCount
+//
+//  Created by Voltmeter Amperage on 8/6/16.
+//  Copyright © 2016 Gabriel Revells. All rights reserved.
+//
+
+import UIKit
+
+@IBDesignable
+class RoundedView: UIView {
+    
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
+    }
+    
+    override func awakeFromNib() {
+        cornerRadius = 3
+    }
+
+    /*
+    // Only override draw() if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func draw(_ rect: CGRect) {
+        // Drawing code
+    }
+    */
+
+}

@@ -11,7 +11,7 @@ import FirebaseDatabase
 
 class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
     
-    @IBOutlet weak var studentNameField: UITextField!
+    @IBOutlet weak var studentNameField: RoundedTextField!
     var tagsTableView: StudentTagsTableViewController?
     
     let AD = UIApplication.shared.delegate as! AppDelegate
@@ -24,38 +24,24 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         let mainColor = AD.myThemeColor()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(finish))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                                target: self,
+                                                                action: #selector(finish))
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                                 target: self,
+                                                                 action: #selector(done))
         
         self.view.backgroundColor = mainColor
         
-        self.studentNameField.text = ""
-        self.studentNameField.backgroundColor = UIColor.white
-        self.studentNameField.layer.cornerRadius = 3
         self.studentNameField.placeholder = "Name"
-        self.studentNameField.font = UIFont(name: themeFont, size: 17)
         self.studentNameField.autocapitalizationType = .words
         self.studentNameField.autocorrectionType = .no
         self.studentNameField.delegate = self
         self.studentNameField.returnKeyType = UIReturnKeyType.default
         self.studentNameField.keyboardType = .default
         
-        let studentNameIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
-        studentNameIcon.image = UIImage(named: "id card.png")?.withRenderingMode(.alwaysTemplate)
-        studentNameIcon.tintColor = mainColor
-        studentNameIcon.contentMode = .scaleAspectFit
-        let studentNameIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
-        studentNameIconContainer.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
-        studentNameIconContainer.addSubview(studentNameIcon)
-        
-        self.studentNameField.leftViewMode = UITextFieldViewMode.always
-        self.studentNameField.leftView = studentNameIconContainer
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(labelPressed))
-        tap.delegate = self
-//        typeLabel.addGestureRecognizer(tap)
-//        typeLabel.isUserInteractionEnabled = true
+        self.studentNameField.leftImage = UIImage(named: "id card.png")?.withRenderingMode(.alwaysTemplate)
     }
 
     override func didReceiveMemoryWarning() {

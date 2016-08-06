@@ -32,7 +32,6 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         
         // Do any additional setup after loading the view.
         
-        let fontName = "Avenir-Book"
         let mainColor = AD.myThemeColor()
         
         updateTheme()
@@ -41,7 +40,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         self.locationNameTextField.backgroundColor = UIColor.white
         self.locationNameTextField.layer.cornerRadius = 3
         self.locationNameTextField.placeholder = "Enter a name for this location"
-        self.locationNameTextField.font = UIFont(name: fontName, size: 16)
+        self.locationNameTextField.font = UIFont(name: themeFont, size: 16)
         
         locationIDIcon.image = UIImage(named: "id card.png")?.withRenderingMode(.alwaysTemplate)
         locationIDIcon.tintColor = mainColor
@@ -65,7 +64,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         
         self.locationTextLabel.text = "Choose a location"
         self.locationTextLabel.textColor = UIColor(red: 199/255, green: 199/255, blue: 205/255, alpha: 1)
-        self.locationTextLabel.font = UIFont(name: fontName, size: 16)
+        self.locationTextLabel.font = UIFont(name: themeFont, size: 16)
         
         self.locationPickerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(expandMapView)))
         
@@ -73,7 +72,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         self.submitButton.setTitle("Submit", for: [])
         self.submitButton.setTitleColor(UIColor.white, for: [])
         self.submitButton.layer.cornerRadius = 3
-        self.submitButton.titleLabel?.font = UIFont(name: "Avenir-Black", size: 20)
+        self.submitButton.titleLabel?.font = UIFont(name: themeFontBold, size: 20)
         self.submitButton.addTarget(self, action: #selector(submit), for: .touchUpInside)
     }
     
@@ -151,7 +150,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             closeButton.setTitle("Set location", for: [])
             closeButton.setTitleColor(UIColor.white, for: [])
             closeButton.addTarget(self, action: #selector(self.closeMapView), for: .touchUpInside)
-            closeButton.titleLabel?.font = UIFont(name: "Avenir-Book", size: 20)
+            closeButton.titleLabel?.font = UIFont(name: themeFont, size: 20)
             self.locationPickerView.addSubview(closeButton)
             
             self.locationManager.requestWhenInUseAuthorization()
