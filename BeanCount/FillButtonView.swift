@@ -12,7 +12,11 @@ import UIKit
 
 class FillButtonView: UIView {
     
-    var active: Bool = true
+    var active: Bool = true {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     let AD = UIApplication.shared.delegate as! AppDelegate
     

@@ -81,6 +81,7 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
             return
         }
         values["count"] = count!
+        values["active"] = true
         print(values)
         
         // Save user into firebase, under location's students

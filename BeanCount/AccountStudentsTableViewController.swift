@@ -15,12 +15,14 @@ class AccountStudentsTableViewController: UITableViewController {
     var students:[[String : AnyObject]] = []
     
     var db:FIRDatabaseReference!
+    var studentsDB: FIRDatabaseReference!
     let AD = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         db = FIRDatabase.database().reference()
+        studentsDB = db.child("locations").child(AD.selectedLocation!.UID).child("students")
         
         tableView.backgroundColor = AD.myThemeColor()
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 237/255,
@@ -49,7 +51,7 @@ class AccountStudentsTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        self.navigationItem.rightBarButtonItem?.action = #selector(toggleEditing)
+        self.navigationItem.rightBarButtonItem?.action = #selector(startEditing)
         
         if AD.selectedLocation == nil {
             // Tell user to select a location in settings
@@ -57,9 +59,7 @@ class AccountStudentsTableViewController: UITableViewController {
             return
         }
         
-        let students = db.child("locations").child(AD.selectedLocation!.UID).child("students")
-        
-        students.queryOrdered(byChild: "count").observe(.value, with: {(snapshot) in
+        studentsDB.queryOrdered(byChild: "count").observe(.value, with: {(snapshot) in
             self.students = []
             for child in snapshot.children {
                 let snap = child as! FIRDataSnapshot
@@ -72,11 +72,7 @@ class AccountStudentsTableViewController: UITableViewController {
                 
                 values["UID"] = name
                 
-                if (values["count"] as! Int) < self.students.count {
-                    self.students[values["count"] as! Int] = values
-                } else {
-                    self.students.append(values)
-                }
+                self.students.append(values)
                 
                 self.tableView.reloadData()
             }
@@ -92,36 +88,104 @@ class AccountStudentsTableViewController: UITableViewController {
         tableView.backgroundColor = AD.myThemeColor()
     }
     
-    func toggleEditing() {
+    func startEditing() {
+        self.tableView.setEditing(true,
+                                  animated: true)
         
-        if self.tableView.isEditing {
-            // Currently editing. Stop
-        } else {
-            // Not editing. Start
-            self.tableView.setEditing(true,
-                                      animated: true)
-            
-            self.navigationItem.rightBarButtonItem = nil
-            
-            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done,
-                                                                       target: self,
-                                                                       action: #selector(toggleEditing)),
-                                                       UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-                                                                       target: nil,
-                                                                       action: nil),
-                                                       UIBarButtonItem(barButtonSystemItem: .add,
-                                                                       target: self,
-                                                                       action: #selector(addStudent)),
-                                                       UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-                                                                       target: nil,
-                                                                       action: nil)]
-            
+        self.navigationItem.rightBarButtonItem = nil
+        
+        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done,
+                                                                   target: self,
+                                                                   action: #selector(endEditing)),
+                                                   UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                                                   target: nil,
+                                                                   action: nil),
+                                                   UIBarButtonItem(barButtonSystemItem: .add,
+                                                                   target: self,
+                                                                   action: #selector(addStudent)),
+                                                   UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                                                   target: nil,
+                                                                   action: nil)]
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelEditing))
+    }
+    
+    func endEditing() {
+        // Save user data
+        for var student in students {
+            let uid = student.removeValue(forKey: "UID") as! String
+            studentsDB.child(uid).setValue(student)
         }
         
+        cancelEditing()
     }
+    
+    func cancelEditing() {
+        self.navigationItem.rightBarButtonItems = nil
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.navigationItem.rightBarButtonItem?.action = #selector(startEditing)
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(settingsButtonPressed(_:)))
+        
+        self.reload()
+        self.tableView.reloadData()
+    }
+    
+//    func toggleEditing() {
+//        
+//        if self.tableView.isEditing {
+//            // Currently editing. Stop
+//        } else {
+//            // Not editing. Start
+//            self.tableView.setEditing(true,
+//                                      animated: true)
+//            
+//            self.navigationItem.rightBarButtonItem = nil
+//            
+//            self.navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done,
+//                                                                       target: self,
+//                                                                       action: #selector(toggleEditing)),
+//                                                       UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+//                                                                       target: nil,
+//                                                                       action: nil),
+//                                                       UIBarButtonItem(barButtonSystemItem: .add,
+//                                                                       target: self,
+//                                                                       action: #selector(addStudent)),
+//                                                       UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+//                                                                       target: nil,
+//                                                                       action: nil)]
+//            
+//        }
+//        
+//    }
     
     func addStudent() {
         performSegue(withIdentifier: "SegueToAddStudent", sender: self)
+    }
+    
+    @IBAction func settingsButtonPressed(_ sender: AnyObject) {
+        performSegue(withIdentifier: "SegueToSettingsView", sender: self)
+    }
+    
+    func reload() {
+        studentsDB.queryOrdered(byChild: "count").observeSingleEvent(of: .value, with: {(snapshot) in
+            self.students = []
+            for child in snapshot.children {
+                let snap = child as! FIRDataSnapshot
+                
+                let name = snap.key
+                print(name)  // Gets name
+                
+                var values = snap.value as! [String : AnyObject]
+                print(values)
+                
+                values["UID"] = name
+
+                self.students.append(values)
+                
+                self.tableView.reloadData()
+            }
+        })
     }
     
     // MARK: - Table view data source
@@ -150,6 +214,8 @@ class AccountStudentsTableViewController: UITableViewController {
         
         cell.mainLabel.text = self.students[indexPath.row]["name"] as? String
         cell.subLabel.text = "\((self.students[indexPath.row]["count"] as! Int) + 1)"
+        cell.radialView.active = self.students[indexPath.row]["active"] as! Bool
+        print(cell.radialView.active)
         
         return cell
     }
@@ -168,7 +234,8 @@ class AccountStudentsTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath) as! StudentTableViewCell
         
         cell.radialView.active = !cell.radialView.active
-        cell.radialView.setNeedsDisplay()
+        
+        self.students[indexPath.row]["active"] = !(self.students[indexPath.row]["active"] as! Bool)
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
@@ -179,7 +246,9 @@ class AccountStudentsTableViewController: UITableViewController {
         return false
     }
     
-    @IBAction func unwindToStudentsTableView(segue: UIStoryboardSegue) {}
+    @IBAction func unwindToStudentsTableView(segue: UIStoryboardSegue) {
+        endEditing()
+    }
     
     /*
      // Override to support conditional editing of the table view.

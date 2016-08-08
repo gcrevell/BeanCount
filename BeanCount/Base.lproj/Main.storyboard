@@ -540,12 +540,13 @@
                     <navigationItem key="navigationItem" title="Students" id="eSH-QE-CXn">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="CPk-HF-uWf">
                             <connections>
-                                <segue destination="COT-b8-7em" kind="show" id="8jl-OY-g0z"/>
+                                <action selector="settingsButtonPressed:" destination="vZN-O9-NpZ" id="a36-7s-np7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="7gV-xy-tFl" kind="show" identifier="SegueToAddStudent" id="fdc-NJ-2TY"/>
+                        <segue destination="COT-b8-7em" kind="show" identifier="SegueToSettingsView" id="7Ma-Kt-hWW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5J-n4-vzb" userLabel="First Responder" sceneMemberID="firstResponder"/>
