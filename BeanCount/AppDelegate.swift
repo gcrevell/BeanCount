@@ -11,44 +11,6 @@ import Firebase
 import CoreLocation
 import CoreData
 
-extension CGRect {
-    var centerPoint: CGPoint {
-        get {
-            return CGPoint(x: self.width/2, y: self.height/2)
-        }
-    }
-}
-
-extension UIView {
-    func removeAllSubviews() {
-        for view in self.subviews {
-            view.removeFromSuperview()
-        }
-    }
-}
-
-enum Theme: Int {
-    case None = 0
-    case iDTC = 1
-    case iDPA = 2
-    case iDGA = 3
-    case iDAlexa = 4
-    case iDMini = 5
-}
-
-struct Location {
-    let latitude: Double
-    let longitude: Double
-    let name: String
-    let UID: String
-    let city: String
-    let state: String
-    
-    var coordinate: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
-    }
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

@@ -13,6 +13,7 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
     
     @IBOutlet weak var studentNameField: RoundedTextField!
     var tagsTableView: StudentTagsTableViewController?
+    var count: Int?
     
     let AD = UIApplication.shared.delegate as! AppDelegate
     let db = FIRDatabase.database().reference()
@@ -35,6 +36,7 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
         self.view.backgroundColor = mainColor
         
         self.studentNameField.placeholder = "Name"
+        self.studentNameField.tintColor = mainColor
         self.studentNameField.autocapitalizationType = .words
         self.studentNameField.autocorrectionType = .no
         self.studentNameField.delegate = self
@@ -42,6 +44,21 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
         self.studentNameField.keyboardType = .default
         
         self.studentNameField.leftImage = UIImage(named: "id card.png")?.withRenderingMode(.alwaysTemplate)
+        
+        let query = db.child("locations").child(AD.selectedLocation!.UID).child("students").queryOrdered(byChild: "count")
+        
+        query.queryLimited(toLast: 1).observe(.value, with: {(snapshot) in
+            if snapshot.value is NSNull || snapshot.value == nil {
+                self.count = 0
+                return
+            }
+            
+            let values = (snapshot.value as! [String : AnyObject]).first?.value as! [String : AnyObject]
+            
+            print(values)
+            
+            self.count = (values["count"] as! Int) + 1
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,13 +70,17 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
         // Create user UID
         let uid = NSUUID().uuidString
         
-        var values: [String : String] = [:]
+        var values: [String : AnyObject] = [:]
         
         // Get student name and all data
         if let tableView = tagsTableView {
             values = tableView.getTags()
         }
         values["name"] = self.studentNameField.text!
+        if count == nil {
+            return
+        }
+        values["count"] = count!
         print(values)
         
         // Save user into firebase, under location's students

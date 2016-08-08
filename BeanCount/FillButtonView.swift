@@ -20,9 +20,17 @@ class FillButtonView: UIView {
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         // Drawing code
-        let color = AD.myThemeColor()
+        #if !TARGET_INTERFACE_BUILDER
+            // this code will run in the app itself
+            let color = AD.myThemeColor()
+            let size = rect.width
+        #else
+            // this code will execute only in IB
+            let color = UIColor.blue
+            let size = 25
+        #endif
         
-        let outer = CGRect(x: 1, y: 1, width: rect.width - 2, height: rect.height - 2)
+        let outer = CGRect(x: 1, y: 1, width: size - 2, height: size - 2)
         
         var path = UIBezierPath(ovalIn: outer)
         color.setStroke()
@@ -30,7 +38,7 @@ class FillButtonView: UIView {
         path.stroke()
         
         if active {
-            let inner = CGRect(x: 5, y: 5, width: rect.width - 10, height: rect.height - 10)
+            let inner = CGRect(x: 5, y: 5, width: size - 10, height: size - 10)
             
             path = UIBezierPath(ovalIn: inner)
             color.setFill()

@@ -12,6 +12,7 @@ import Firebase
 class AccountStudentsTableViewController: UITableViewController {
     
     var show = false
+    var students:[[String : AnyObject]] = []
     
     var db:FIRDatabaseReference!
     let AD = UIApplication.shared.delegate as! AppDelegate
@@ -49,6 +50,37 @@ class AccountStudentsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         self.navigationItem.rightBarButtonItem?.action = #selector(toggleEditing)
+        
+        if AD.selectedLocation == nil {
+            // Tell user to select a location in settings
+            
+            return
+        }
+        
+        let students = db.child("locations").child(AD.selectedLocation!.UID).child("students")
+        
+        students.queryOrdered(byChild: "count").observe(.value, with: {(snapshot) in
+            self.students = []
+            for child in snapshot.children {
+                let snap = child as! FIRDataSnapshot
+                
+                let name = snap.key
+                print(name)  // Gets name
+                
+                var values = snap.value as! [String : AnyObject]
+                print(values)
+                
+                values["UID"] = name
+                
+                if (values["count"] as! Int) < self.students.count {
+                    self.students[values["count"] as! Int] = values
+                } else {
+                    self.students.append(values)
+                }
+                
+                self.tableView.reloadData()
+            }
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -101,7 +133,7 @@ class AccountStudentsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 20
+        return self.students.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,6 +147,9 @@ class AccountStudentsTableViewController: UITableViewController {
         cell.mainView.clipsToBounds = true
         cell.mainView.backgroundColor = UIColor.white
         cell.mainView.layer.cornerRadius = 4
+        
+        cell.mainLabel.text = self.students[indexPath.row]["name"] as? String
+        cell.subLabel.text = "\((self.students[indexPath.row]["count"] as! Int) + 1)"
         
         return cell
     }

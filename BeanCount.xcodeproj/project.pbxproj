@@ -40,6 +40,9 @@
 		7CBBC35B1D527BFA007F2C92 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CBBC35A1D527BFA007F2C92 /* plus.png */; };
 		7CBBC35D1D527CAF007F2C92 /* AddTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBC35C1D527CAF007F2C92 /* AddTagTableViewCell.swift */; };
 		7CE4095F1D5688860045B55A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4095E1D5688860045B55A /* RoundedButton.swift */; };
+		7CE409611D58F25C0045B55A /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE409601D58F25C0045B55A /* UIViewExtension.swift */; };
+		7CE409631D58F2780045B55A /* CGRectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE409621D58F2780045B55A /* CGRectExtension.swift */; };
+		7CE409651D58F2D00045B55A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE409641D58F2D00045B55A /* Location.swift */; };
 		7CF12A871D3A8317003AE476 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF12A861D3A8317003AE476 /* LoginViewController.swift */; };
 		7CF12A911D3AB84E003AE476 /* username.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF12A8F1D3AB84E003AE476 /* username.png */; };
 		7CF12A921D3AB84E003AE476 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CF12A901D3AB84E003AE476 /* lock.png */; };
@@ -89,6 +92,9 @@
 		7CBBC35A1D527BFA007F2C92 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		7CBBC35C1D527CAF007F2C92 /* AddTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTagTableViewCell.swift; sourceTree = "<group>"; };
 		7CE4095E1D5688860045B55A /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		7CE409601D58F25C0045B55A /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		7CE409621D58F2780045B55A /* CGRectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRectExtension.swift; sourceTree = "<group>"; };
+		7CE409641D58F2D00045B55A /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7CF12A861D3A8317003AE476 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7CF12A8F1D3AB84E003AE476 /* username.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = username.png; sourceTree = "<group>"; };
 		7CF12A901D3AB84E003AE476 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
@@ -217,10 +223,10 @@
 				7CF12A861D3A8317003AE476 /* LoginViewController.swift */,
 				7CFF63D61D41B41000F526CE /* AccountStudentsTableViewController.swift */,
 				7C915A291D3823690081507E /* AppDelegate.swift */,
+				7CE409641D58F2D00045B55A /* Location.swift */,
 				7C915A2D1D3823690081507E /* Main.storyboard */,
 				7CE4095C1D5688360045B55A /* Theme */,
 				7CA1326A1D5039DF0048DDFE /* StudentTableViewCell.swift */,
-				7CFC925F1D5030730083E1E6 /* FillButtonView.swift */,
 				7CF12A931D3ABDE8003AE476 /* CreateAccountViewController.swift */,
 				7CF12A881D3A8813003AE476 /* Images */,
 				7C915A301D3823690081507E /* Assets.xcassets */,
@@ -243,8 +249,11 @@
 		7CE4095C1D5688360045B55A /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				7CE4095D1D5688500045B55A /* Theme UIs */,
+				7CE409601D58F25C0045B55A /* UIViewExtension.swift */,
+				7CE409621D58F2780045B55A /* CGRectExtension.swift */,
+				7CFC925F1D5030730083E1E6 /* FillButtonView.swift */,
 				7CF12A951D3AC017003AE476 /* Theme.swift */,
+				7CE4095D1D5688500045B55A /* Theme UIs */,
 			);
 			name = Theme;
 			sourceTree = "<group>";
@@ -452,12 +461,15 @@
 				7CE4095F1D5688860045B55A /* RoundedButton.swift in Sources */,
 				7C28D1C41D550FD300BDDA77 /* TagTypes.swift in Sources */,
 				7C0741C01D51406A0039D42C /* TagPopoverTableViewController.swift in Sources */,
+				7CE409651D58F2D00045B55A /* Location.swift in Sources */,
 				7CF12A961D3AC017003AE476 /* Theme.swift in Sources */,
 				7C5F009D1D3BCB950023B2D6 /* SettingsViewController.swift in Sources */,
 				7C0741BE1D513E880039D42C /* AddStudentViewController.swift in Sources */,
 				7CBBC3591D527AB6007F2C92 /* StudentTagTableViewCell.swift in Sources */,
+				7CE409611D58F25C0045B55A /* UIViewExtension.swift in Sources */,
 				7CBBC3561D527773007F2C92 /* StudentTagsTableViewController.swift in Sources */,
 				7C84E2351D566EC4007BAB74 /* RoundedTextField.swift in Sources */,
+				7CE409631D58F2780045B55A /* CGRectExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

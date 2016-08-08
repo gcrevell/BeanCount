@@ -96,9 +96,9 @@ class StudentTagsTableViewController: UITableViewController, UIPopoverPresentati
             
             cell.backgroundColor = UIColor.clear
             
-            let mainView = UIView(frame: CGRect(x: 4,
+            let mainView = UIView(frame: CGRect(x: 0,
                                                 y: 4,
-                                                width: cell.frame.width - 8,
+                                                width: cell.frame.width,
                                                 height: cell.frame.height - 8))
             mainView.layer.cornerRadius = 3
             mainView.backgroundColor = UIColor(white: 1, alpha: 0.5)
@@ -174,7 +174,7 @@ class StudentTagsTableViewController: UITableViewController, UIPopoverPresentati
         if indexPath.row == tags.count {
             let addCell = tableView.cellForRow(at: indexPath) as! AddTagTableViewCell
             
-            UIView.animate(withDuration: 1.2,
+            UIView.animate(withDuration: 0.6,
                            delay: 0,
                            usingSpringWithDamping: 1,
                            initialSpringVelocity: 0.3,
@@ -185,8 +185,7 @@ class StudentTagsTableViewController: UITableViewController, UIPopoverPresentati
                             addCell.mainView.layer.cornerRadius = addCell.mainView.frame.height / 2
                             addCell.plusImageView.center = addCell.mainView.frame.centerPoint
                 }, completion: {(completed) in
-//                    addCell.plusImageView.rem
-                    UIView.animate(withDuration: 1.0,
+                    UIView.animate(withDuration: 0.4,
                                    delay: 0.2,
                                    usingSpringWithDamping: 0.8,
                                    initialSpringVelocity: 0.3,
@@ -194,8 +193,8 @@ class StudentTagsTableViewController: UITableViewController, UIPopoverPresentati
                                    animations: { 
                                     addCell.plusImageView.removeFromSuperview()
                                     addCell.mainView.backgroundColor = UIColor.white
-                                    addCell.mainView.frame.size.width = addCell.frame.width - 8
-                                    addCell.mainView.frame.origin.x = 4
+                                    addCell.mainView.frame.size.width = addCell.frame.width
+                                    addCell.mainView.frame.origin.x = 0
                                     addCell.mainView.layer.cornerRadius = 3
                         },
                                    completion: { (completed) in

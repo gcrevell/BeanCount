@@ -12,6 +12,8 @@ class StudentTableViewCell: UITableViewCell {
 
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var radialView: FillButtonView!
+    @IBOutlet weak var mainLabel: UILabel!
+    @IBOutlet weak var subLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
