@@ -70,7 +70,7 @@ class AccountStudentsTableViewController: UITableViewController {
                 var values = snap.value as! [String : AnyObject]
                 print(values)
                 
-                values["UID"] = name
+                values["UID"] = name as AnyObject
                 
                 self.students.append(values)
                 
@@ -179,7 +179,7 @@ class AccountStudentsTableViewController: UITableViewController {
                 var values = snap.value as! [String : AnyObject]
                 print(values)
                 
-                values["UID"] = name
+                values["UID"] = name as AnyObject
 
                 self.students.append(values)
                 
@@ -235,7 +235,7 @@ class AccountStudentsTableViewController: UITableViewController {
         
         cell.radialView.active = !cell.radialView.active
         
-        self.students[indexPath.row]["active"] = !(self.students[indexPath.row]["active"] as! Bool)
+        self.students[indexPath.row]["active"] = !((self.students[indexPath.row]["active"]) as! Bool) as AnyObject
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {

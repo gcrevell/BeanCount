@@ -188,14 +188,14 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func locationToCityState(location: CLLocationCoordinate2D, completion: (placemarks: [CLPlacemark]?, error: NSError?) -> Void) {
+    func locationToCityState(location: CLLocationCoordinate2D, completion: @escaping (_ placemarks: [CLPlacemark]?, _ error: NSError?) -> Void) {
         let lat = location.latitude
         let lon = location.longitude
         
         let loc = CLLocation(latitude: lat, longitude: lon)
         
         CLGeocoder().reverseGeocodeLocation(loc) { (placemarks, error) in
-            completion(placemarks: placemarks, error: error)
+            completion(placemarks, error as NSError?)
         }
     }
     
@@ -238,11 +238,11 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             let city = placemark.locality == nil ? "" : placemark.locality!
             let state = placemark.administrativeArea == nil ? "" : placemark.administrativeArea!
             
-            let values:[String : AnyObject] = ["latitude" : self.currentLocation!.latitude,
-                                               "longitude" : self.currentLocation!.longitude,
-                                               "locationName" : self.locationNameTextField.text!,
-                                               "city" : city,
-                                               "state" : state]
+            let values:[String : AnyObject] = ["latitude" : self.currentLocation!.latitude as AnyObject,
+                                               "longitude" : self.currentLocation!.longitude as AnyObject,
+                                               "locationName" : self.locationNameTextField.text! as AnyObject,
+                                               "city" : city as AnyObject,
+                                               "state" : state as AnyObject]
             
             db.child("locations").child(UID).setValue(values, withCompletionBlock: { (error, dbRef) in
                 if error != nil {

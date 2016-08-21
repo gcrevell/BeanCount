@@ -11,14 +11,35 @@ import UIKit
 @IBDesignable
 class RoundedButton: UIButton {
     
-    @IBInspectable var cornerRadius: CGFloat = 3 {
-        didSet {
-            layer.cornerRadius = cornerRadius
-            layer.masksToBounds = cornerRadius > 0
+    var cornerRadius: CGFloat {
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
+        get {
+            return layer.cornerRadius
         }
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        // Initialization code
+        cornerRadius = 3
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        cornerRadius = 3
+    }
+    
+    override func prepareForInterfaceBuilder() {
+        awakeFromNib()
+    }
+    
     override func awakeFromNib() {
+        super.awakeFromNib()
+        
         self.setTitleColor(UIColor.white, for: [])
         self.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)
         self.titleLabel?.font = UIFont(name: themeFontBold, size: 20)
@@ -31,6 +52,6 @@ class RoundedButton: UIButton {
     override func draw(_ rect: CGRect) {
         // Drawing code
     }
-    */
+     */
 
 }

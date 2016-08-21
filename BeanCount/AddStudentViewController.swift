@@ -74,14 +74,14 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
         
         // Get student name and all data
         if let tableView = tagsTableView {
-            values = tableView.getTags()
+            values = tableView.getTags() as [String : AnyObject]
         }
-        values["name"] = self.studentNameField.text!
+        values["name"] = self.studentNameField.text! as AnyObject
         if count == nil {
             return
         }
-        values["count"] = count!
-        values["active"] = true
+        values["count"] = count! as AnyObject
+        values["active"] = true as AnyObject
         print(values)
         
         // Save user into firebase, under location's students
@@ -124,7 +124,7 @@ class AddStudentViewController: UIViewController, UIGestureRecognizerDelegate, U
     }
     // MARK: - Navigation
 
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "LoadTableView" {
             // Set global table view to the destination
             tagsTableView = segue.destination as? StudentTagsTableViewController
