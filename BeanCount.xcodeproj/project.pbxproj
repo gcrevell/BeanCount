@@ -41,6 +41,7 @@
 		7CBBC3591D527AB6007F2C92 /* StudentTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBC3581D527AB6007F2C92 /* StudentTagTableViewCell.swift */; };
 		7CBBC35B1D527BFA007F2C92 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CBBC35A1D527BFA007F2C92 /* plus.png */; };
 		7CBBC35D1D527CAF007F2C92 /* AddTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBC35C1D527CAF007F2C92 /* AddTagTableViewCell.swift */; };
+		7CC5835C1D6CFE24001D929C /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC5835B1D6CFE24001D929C /* CALayerExtension.swift */; };
 		7CE4095F1D5688860045B55A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4095E1D5688860045B55A /* RoundedButton.swift */; };
 		7CE409611D58F25C0045B55A /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE409601D58F25C0045B55A /* UIViewExtension.swift */; };
 		7CE409631D58F2780045B55A /* CGRectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE409621D58F2780045B55A /* CGRectExtension.swift */; };
@@ -96,6 +97,7 @@
 		7CBBC3581D527AB6007F2C92 /* StudentTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTagTableViewCell.swift; sourceTree = "<group>"; };
 		7CBBC35A1D527BFA007F2C92 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		7CBBC35C1D527CAF007F2C92 /* AddTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTagTableViewCell.swift; sourceTree = "<group>"; };
+		7CC5835B1D6CFE24001D929C /* CALayerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
 		7CE4095E1D5688860045B55A /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		7CE409601D58F25C0045B55A /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		7CE409621D58F2780045B55A /* CGRectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRectExtension.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 		7CE4095C1D5688360045B55A /* Theme */ = {
 			isa = PBXGroup;
 			children = (
+				7CC5835B1D6CFE24001D929C /* CALayerExtension.swift */,
 				7CE409601D58F25C0045B55A /* UIViewExtension.swift */,
 				7CE409621D58F2780045B55A /* CGRectExtension.swift */,
 				7CFC925F1D5030730083E1E6 /* FillButtonView.swift */,
@@ -480,6 +483,7 @@
 				7CBBC3591D527AB6007F2C92 /* StudentTagTableViewCell.swift in Sources */,
 				7CE409611D58F25C0045B55A /* UIViewExtension.swift in Sources */,
 				7CBBC3561D527773007F2C92 /* StudentTagsTableViewController.swift in Sources */,
+				7CC5835C1D6CFE24001D929C /* CALayerExtension.swift in Sources */,
 				7C84E2351D566EC4007BAB74 /* RoundedTextField.swift in Sources */,
 				7CE409631D58F2780045B55A /* CGRectExtension.swift in Sources */,
 			);

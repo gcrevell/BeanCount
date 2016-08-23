@@ -30,7 +30,12 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate {
                                                               action: #selector(dismissKeyboard)))
         
         themeSelect.addTarget(self, action: #selector(themeChanged), for: .valueChanged)
-        usernameTextField.addTarget(self, action: #selector(checkUsernameUnique), for: .allEditingEvents)
+        emailTextField.addTarget(self, action: #selector(checkEmail), for: .editingChanged)
+        usernameTextField.addTarget(self, action: #selector(checkUsernameUnique), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(checkPassword), for: .editingChanged)
+        confirmPasswordTextField.addTarget(self, action: #selector(passwordEqual), for: .editingChanged)
+        
+        updateTheme()
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,6 +45,7 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate {
     
     func themeChanged() {
         AD.selectedTheme = Theme(rawValue: themeSelect.selectedSegmentIndex + 1)
+        print("THE SELECTED THEME IS \(AD.selectedTheme)")
         updateTheme()
     }
     
@@ -66,13 +72,21 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate {
         usernameCheckTask = nil
         
         // TODO: Implement checks
-        // Create account
         // Check email is correct email
-        // Check it doesnt exist in DB
-        // Check username is unique
-        // Check passwords are same, and follow proper rules
+        if !verify(email: emailTextField.text!) {
+            createButton.layer.shake()
+            checkEmail()
+            return
+        }
         
-        // Deactivate button and set image to activity indicator
+        // Check passwords are same, and follow proper rules
+        if !verify(password: passwordTextField.text!) || passwordTextField.text != confirmPasswordTextField.text {
+            createButton.layer.shake()
+            passwordEqual()
+            return
+        }
+        
+        // Deactivate button and display load view
         
         self.view.isUserInteractionEnabled = false
         
@@ -95,7 +109,9 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate {
                 // Successfully created the user account
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "UnwindToLoginView", sender: self)
+                    return
                 }
+                return
             }
             
             var alertMain = ""
@@ -140,6 +156,14 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate {
         }
     }
     
+    func checkEmail() {
+        if self.verify(email: self.emailTextField.text!) {
+            emailTextField.rightImage = UIImage(named: "green check.png")
+        } else {
+            emailTextField.rightImage = UIImage(named: "red x.png")
+        }
+    }
+    
     func checkUsernameUnique() {
         let text = self.usernameTextField.text!
         usernameCheckTask?.suspend()
@@ -175,6 +199,64 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate {
                 }
             }
         }
+    }
+    
+    func checkPassword() {
+        if verify(password: passwordTextField.text!) {
+            passwordTextField.rightImage = UIImage(named: "green check.png")
+        } else {
+            passwordTextField.rightImage = UIImage(named: "red x.png")
+        }
+    }
+    
+    func passwordEqual() {
+        if passwordTextField.text == confirmPasswordTextField.text && verify(password: passwordTextField.text!) {
+            confirmPasswordTextField.rightImage = UIImage(named: "green check.png")
+        } else {
+            confirmPasswordTextField.rightImage = UIImage(named: "red x.png")
+            checkPassword()
+        }
+    }
+    
+    /**
+     Verify an email address stored as a string.
+     
+     This function uses a simple RegEx to verify if an entered email address
+     is a valid email address.
+     
+     The RegEx pattern for this function was used from http://emailregex.com
+     
+     - parameter email: String, the email address to check for validity.
+     
+     - returns: Bool, true if the string contains exactly one email address,
+     false otherwise.
+     */
+    func verify(email: String) -> Bool {
+        // This line used from http://emailregex.com
+        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"
+        let regEx = try! NSRegularExpression(pattern: emailRegex, options: [])
+        
+        return regEx.numberOfMatches(in: email, options: [], range: NSRange(location: 0, length: email.characters.count)) == 1
+    }
+    
+    func verify(password: String) -> Bool {
+        if password.characters.count < 12 {
+            return false
+        }
+        
+        if password.rangeOfCharacter(from: .decimalDigits) == nil {
+            return false
+        }
+        
+        if password.rangeOfCharacter(from: CharacterSet(charactersIn: "!@#$%^&*()-_=+[]{};':,./<>?")) == nil {
+            return false
+        }
+        
+        return true
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     /*

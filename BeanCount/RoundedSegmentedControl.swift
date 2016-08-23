@@ -60,6 +60,8 @@ class RoundedSegmentedControl: UISegmentedControl {
 //            self.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.lightGray,
 //                                         NSFontAttributeName : themeFontBold], for: .selected)
             
+            self.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.lightGray], for: [.normal, .selected])
+            
             let AD = UIApplication.shared.delegate as! AppDelegate
             self.selectedSegmentIndex = AD.selectedTheme != Theme.None ? AD.selectedTheme!.rawValue - 1 : 0
             

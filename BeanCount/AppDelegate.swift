@@ -227,16 +227,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func myThemeColor() -> UIColor {
         if let theme = selectedTheme {
             switch theme {
-            case .iDPA:
+            case .blue:
                 return UIColor(red: 13/255, green: 94/255, blue: 181/255, alpha: 1)
                 
-            case .iDGA:
+            case .red:
                 return UIColor(red: 212/255, green: 36/255, blue: 54/255, alpha: 1)
                 
-            case .iDAlexa:
-                return UIColor(red: 23/255, green: 132/255, blue: 171/255, alpha: 1)
+//            case .lightBlue:
+//                return UIColor(red: 23/255, green: 132/255, blue: 171/255, alpha: 1)
                 
-            case .iDMini:
+            case .orange:
                 return UIColor(red: 247/255, green: 117/255, blue: 33/255, alpha: 1)
                 
             default:
