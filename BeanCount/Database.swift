@@ -23,7 +23,16 @@ class Database: NSObject {
         }
     }
     
-    func makePHPRequest(post: [String: String], onPage page: String, whenFinished: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
+    func check(username: String, completionHandler: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask {
+        let postData = ["username" : username]
+        
+        return makePHPRequest(post: postData, onPage: "CheckUsername.php") { (data, response, error) in
+            completionHandler(data, response, error)
+        }
+    }
+    
+    @discardableResult
+    func makePHPRequest(post: [String: String], onPage page: String, whenFinished: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask {
         print("Function \(#function) and line number \(#line) in file \(#file)")
         
         let session = URLSession.shared
@@ -44,6 +53,8 @@ class Database: NSObject {
         let task = session.dataTask(with: request, completionHandler: whenFinished)
         
         task.resume()
+        
+        return task
     }
     
 }

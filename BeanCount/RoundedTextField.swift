@@ -33,7 +33,6 @@ class RoundedTextField: UITextField {
     
     @IBInspectable var leftImage: UIImage? {
         didSet {
-            print("Here")
             if leftImage == nil {
                 leftImageView = nil
                 leftImageContainer = nil
@@ -57,7 +56,6 @@ class RoundedTextField: UITextField {
             leftImageContainer?.backgroundColor = UIColor(white: 0.9, alpha: 1)
             self.leftViewMode = UITextFieldViewMode.always
             self.leftView = leftImageContainer
-            print(leftImageView)
         }
     }
     
@@ -66,7 +64,29 @@ class RoundedTextField: UITextField {
     
     var rightImage: UIImage? {
         didSet {
+            if rightImage == nil {
+                rightImageView = nil
+                rightImageContainer = nil
+                rightView = nil
+                
+                return
+            }
             
+            rightImageContainer = UIView(frame: CGRect(x: 0,
+                                                      y: 0,
+                                                      width: 41,
+                                                      height: 41))
+            rightImageView = UIImageView(frame: CGRect(x: 9,
+                                                      y: 9,
+                                                      width: 23,
+                                                      height: 23))
+            
+            rightImageView?.image = rightImage
+            rightImageView?.contentMode = .scaleAspectFit
+            rightImageContainer?.addSubview(rightImageView!)
+            rightImageContainer?.backgroundColor = UIColor(white: 0.9, alpha: 1)
+            self.rightViewMode = UITextFieldViewMode.always
+            self.rightView = rightImageContainer
         }
     }
     

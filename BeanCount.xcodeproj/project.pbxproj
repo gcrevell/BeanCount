@@ -14,6 +14,7 @@
 		7C21812E1D551E5200C29F68 /* computer.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C21812B1D551E5200C29F68 /* computer.png */; };
 		7C2181321D55201E00C29F68 /* desk.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2181311D55201E00C29F68 /* desk.png */; };
 		7C2181361D552A3B00C29F68 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2181351D552A3B00C29F68 /* close.png */; };
+		7C24B4F71D6BCF4100A0ECB8 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C24B4F61D6BCF4100A0ECB8 /* LoadingView.swift */; };
 		7C28D1BE1D5509AA00BDDA77 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C28D1BC1D5509AA00BDDA77 /* phone.png */; };
 		7C28D1C41D550FD300BDDA77 /* TagTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C28D1C31D550FD300BDDA77 /* TagTypes.swift */; };
 		7C28D1C81D551D1E00BDDA77 /* open book.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C28D1C71D551D1E00BDDA77 /* open book.png */; };
@@ -65,6 +66,7 @@
 		7C21812B1D551E5200C29F68 /* computer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = computer.png; sourceTree = "<group>"; };
 		7C2181311D55201E00C29F68 /* desk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = desk.png; sourceTree = "<group>"; };
 		7C2181351D552A3B00C29F68 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		7C24B4F61D6BCF4100A0ECB8 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7C28D1BC1D5509AA00BDDA77 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		7C28D1C31D550FD300BDDA77 /* TagTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTypes.swift; sourceTree = "<group>"; };
 		7C28D1C71D551D1E00BDDA77 /* open book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open book.png"; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 		7CE4095D1D5688500045B55A /* Theme UIs */ = {
 			isa = PBXGroup;
 			children = (
+				7C24B4F61D6BCF4100A0ECB8 /* LoadingView.swift */,
 				7C84E2341D566EC4007BAB74 /* RoundedTextField.swift */,
 				7C8719C41D566194006138C0 /* RoundedView.swift */,
 				7CE4095E1D5688860045B55A /* RoundedButton.swift */,
@@ -464,6 +467,7 @@
 				7CF12A871D3A8317003AE476 /* LoginViewController.swift in Sources */,
 				7C418FAE1D4A60A6005DD026 /* LocationsSelectTableViewController.swift in Sources */,
 				7CBBC35D1D527CAF007F2C92 /* AddTagTableViewCell.swift in Sources */,
+				7C24B4F71D6BCF4100A0ECB8 /* LoadingView.swift in Sources */,
 				7CA1326B1D5039DF0048DDFE /* StudentTableViewCell.swift in Sources */,
 				7CE4095F1D5688860045B55A /* RoundedButton.swift in Sources */,
 				7C28D1C41D550FD300BDDA77 /* TagTypes.swift in Sources */,
