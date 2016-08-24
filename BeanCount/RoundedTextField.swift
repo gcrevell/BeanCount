@@ -41,6 +41,12 @@ class RoundedTextField: UITextField {
                 return
             }
             
+            if renderLeftTemplate {
+                leftImage = leftImage?.withRenderingMode(.alwaysTemplate)
+            } else {
+                leftImage = leftImage?.withRenderingMode(.alwaysOriginal)
+            }
+            
             leftImageContainer = UIView(frame: CGRect(x: 0,
                                                       y: 0,
                                                       width: 41,
@@ -61,6 +67,15 @@ class RoundedTextField: UITextField {
     
     var leftImageView: UIImageView?
     var leftImageContainer: UIView?
+    @IBInspectable var renderLeftTemplate: Bool = false {
+        didSet {
+            if renderLeftTemplate {
+                leftImage = leftImage?.withRenderingMode(.alwaysTemplate)
+            } else {
+                leftImage = leftImage?.withRenderingMode(.alwaysOriginal)
+            }
+        }
+    }
     
     var rightImage: UIImage? {
         didSet {
@@ -70,6 +85,12 @@ class RoundedTextField: UITextField {
                 rightView = nil
                 
                 return
+            }
+            
+            if renderRightTemplate {
+                rightImage = rightImage?.withRenderingMode(.alwaysTemplate)
+            } else {
+                rightImage = rightImage?.withRenderingMode(.alwaysOriginal)
             }
             
             rightImageContainer = UIView(frame: CGRect(x: 0,
@@ -92,6 +113,15 @@ class RoundedTextField: UITextField {
     
     var rightImageView: UIImageView?
     var rightImageContainer: UIView?
+    @IBInspectable var renderRightTemplate: Bool = false {
+        didSet {
+            if renderRightTemplate {
+                rightImage = rightImage?.withRenderingMode(.alwaysTemplate)
+            } else {
+                rightImage = rightImage?.withRenderingMode(.alwaysOriginal)
+            }
+        }
+    }
     
     override func awakeFromNib() {
         self.cornerRadius = 3

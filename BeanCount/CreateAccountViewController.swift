@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class CreateAccountViewController: UIViewController, UIAlertViewDelegate {
+class CreateAccountViewController: UIViewController, UIAlertViewDelegate, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var themeSelect: UISegmentedControl!
     
@@ -21,6 +21,10 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate {
     
     var usernameCheckTask: URLSessionDataTask? = nil
     let AD = UIApplication.shared.delegate as! AppDelegate
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +40,8 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate {
         confirmPasswordTextField.addTarget(self, action: #selector(passwordEqual), for: .editingChanged)
         
         updateTheme()
+        
+        passwordTextField.leftView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(displayPasswordRequirements)))
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,6 +64,8 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate {
         usernameTextField.tintColor = themeColor
         passwordTextField.tintColor = themeColor
         confirmPasswordTextField.tintColor = themeColor
+        
+        
     }
     
     func dismissKeyboard() {
@@ -95,7 +103,8 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate {
         
         Database().createAccount(username: self.usernameTextField.text!,
                                  email: self.emailTextField.text!,
-                                 password: self.passwordTextField.text!)
+                                 password: self.passwordTextField.text!,
+                                 theme: AD.selectedTheme != nil ? AD.selectedTheme! : .None)
         { (data, response, error) in
             // Check user creation was successful
             
@@ -255,9 +264,55 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate {
         return true
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    func displayPasswordRequirements() {
+        let requirements = UIViewController()
+        requirements.modalPresentationStyle = .popover
+        requirements.preferredContentSize = CGSize(width: 150, height: 155)
+        
+        let text = UITextView(frame: CGRect(x: 0, y: 0, width: 150, height: 155))
+        text.text = "Password requitements:\n\n" +
+                    "Each password must contain:" +
+                    "\n\n" +
+                    "   • 12+ characters.\n" +
+                    "   • A number.\n" +
+                    "   • A special character."
+        
+        text.allowsEditingTextAttributes = false
+        text.isSelectable = false
+        text.isScrollEnabled = false
+        
+        text.font = UIFont(name: themeFont, size: 12)
+        
+        requirements.view.addSubview(text)
+        
+        let popover = requirements.popoverPresentationController
+        popover?.delegate = self
+        popover?.permittedArrowDirections = .any
+        popover?.sourceView = passwordTextField.leftView
+        popover?.sourceRect = passwordTextField.leftView!.bounds
+        
+        present(requirements, animated: true, completion: nil)
     }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+//    let tags = InformationLabelTableViewController()
+//    tags.modalPresentationStyle = .popover
+//    tags.preferredContentSize = CGSize(width: 200,
+//    height: min(400,
+//    tagsArray.count * 41))
+//    
+//    let popover = tags.popoverPresentationController
+//    popover?.delegate = self
+//    popover?.permittedArrowDirections = .any
+//    popover?.sourceView = recognizer.view!
+//    popover?.sourceRect = recognizer.view!.bounds
+//
+//    tags.editingCell = cell
+//    
+//    present(tags, animated: true, completion: nil)
     
     /*
     // MARK: - Navigation

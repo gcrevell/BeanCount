@@ -42,6 +42,7 @@
 		7CBBC35B1D527BFA007F2C92 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CBBC35A1D527BFA007F2C92 /* plus.png */; };
 		7CBBC35D1D527CAF007F2C92 /* AddTagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBBC35C1D527CAF007F2C92 /* AddTagTableViewCell.swift */; };
 		7CC5835C1D6CFE24001D929C /* CALayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC5835B1D6CFE24001D929C /* CALayerExtension.swift */; };
+		7CC583621D6D1AC2001D929C /* lock question.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC583611D6D1AC2001D929C /* lock question.png */; };
 		7CE4095F1D5688860045B55A /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4095E1D5688860045B55A /* RoundedButton.swift */; };
 		7CE409611D58F25C0045B55A /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE409601D58F25C0045B55A /* UIViewExtension.swift */; };
 		7CE409631D58F2780045B55A /* CGRectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE409621D58F2780045B55A /* CGRectExtension.swift */; };
@@ -98,6 +99,7 @@
 		7CBBC35A1D527BFA007F2C92 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		7CBBC35C1D527CAF007F2C92 /* AddTagTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTagTableViewCell.swift; sourceTree = "<group>"; };
 		7CC5835B1D6CFE24001D929C /* CALayerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerExtension.swift; sourceTree = "<group>"; };
+		7CC583611D6D1AC2001D929C /* lock question.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock question.png"; sourceTree = "<group>"; };
 		7CE4095E1D5688860045B55A /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		7CE409601D58F25C0045B55A /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		7CE409621D58F2780045B55A /* CGRectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRectExtension.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				7C83B9531D3AD5D000B3405D /* mail.png */,
 				7CF12A8F1D3AB84E003AE476 /* username.png */,
 				7CF12A901D3AB84E003AE476 /* lock.png */,
+				7CC583611D6D1AC2001D929C /* lock question.png */,
 			);
 			name = "Login Screen";
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C7D95331D3C720200066530 /* id card.png in Resources */,
+				7CC583621D6D1AC2001D929C /* lock question.png in Resources */,
 				7C915A341D3823690081507E /* LaunchScreen.storyboard in Resources */,
 				7C2181321D55201E00C29F68 /* desk.png in Resources */,
 				7CF12A911D3AB84E003AE476 /* username.png in Resources */,
