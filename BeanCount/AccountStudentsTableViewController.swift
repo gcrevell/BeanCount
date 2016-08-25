@@ -14,15 +14,15 @@ class AccountStudentsTableViewController: UITableViewController {
     var show = false
     var students:[[String : AnyObject]] = []
     
-    var db:FIRDatabaseReference!
-    var studentsDB: FIRDatabaseReference!
+//    var db:FIRDatabaseReference!
+//    var studentsDB: FIRDatabaseReference!
     let AD = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        db = FIRDatabase.database().reference()
-        studentsDB = db.child("locations").child(AD.selectedLocation!.UID).child("students")
+//        db = FIRDatabase.database().reference()
+//        studentsDB = db.child("locations").child(AD.selectedLocation!.UID).child("students")
         
         tableView.backgroundColor = AD.myThemeColor()
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 237/255,
@@ -59,24 +59,24 @@ class AccountStudentsTableViewController: UITableViewController {
             return
         }
         
-        studentsDB.queryOrdered(byChild: "count").observe(.value, with: {(snapshot) in
-            self.students = []
-            for child in snapshot.children {
-                let snap = child as! FIRDataSnapshot
-                
-                let name = snap.key
-                print(name)  // Gets name
-                
-                var values = snap.value as! [String : AnyObject]
-                print(values)
-                
-                values["UID"] = name as AnyObject
-                
-                self.students.append(values)
-                
-                self.tableView.reloadData()
-            }
-        })
+//        studentsDB.queryOrdered(byChild: "count").observe(.value, with: {(snapshot) in
+//            self.students = []
+//            for child in snapshot.children {
+//                let snap = child as! FIRDataSnapshot
+//                
+//                let name = snap.key
+//                print(name)  // Gets name
+//                
+//                var values = snap.value as! [String : AnyObject]
+//                print(values)
+//                
+//                values["UID"] = name as AnyObject
+//                
+//                self.students.append(values)
+//                
+//                self.tableView.reloadData()
+//            }
+//        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -112,10 +112,10 @@ class AccountStudentsTableViewController: UITableViewController {
     
     func endEditing() {
         // Save user data
-        for var student in students {
-            let uid = student.removeValue(forKey: "UID") as! String
-            studentsDB.child(uid).setValue(student)
-        }
+//        for var student in students {
+//            let uid = student.removeValue(forKey: "UID") as! String
+//            studentsDB.child(uid).setValue(student)
+//        }
         
         cancelEditing()
     }
@@ -168,24 +168,24 @@ class AccountStudentsTableViewController: UITableViewController {
     }
     
     func reload() {
-        studentsDB.queryOrdered(byChild: "count").observeSingleEvent(of: .value, with: {(snapshot) in
-            self.students = []
-            for child in snapshot.children {
-                let snap = child as! FIRDataSnapshot
-                
-                let name = snap.key
-                print(name)  // Gets name
-                
-                var values = snap.value as! [String : AnyObject]
-                print(values)
-                
-                values["UID"] = name as AnyObject
-
-                self.students.append(values)
-                
-                self.tableView.reloadData()
-            }
-        })
+//        studentsDB.queryOrdered(byChild: "count").observeSingleEvent(of: .value, with: {(snapshot) in
+//            self.students = []
+//            for child in snapshot.children {
+//                let snap = child as! FIRDataSnapshot
+//                
+//                let name = snap.key
+//                print(name)  // Gets name
+//                
+//                var values = snap.value as! [String : AnyObject]
+//                print(values)
+//                
+//                values["UID"] = name as AnyObject
+//
+//                self.students.append(values)
+//                
+//                self.tableView.reloadData()
+//            }
+//        })
     }
     
     // MARK: - Table view data source

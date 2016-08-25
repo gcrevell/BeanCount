@@ -9,9 +9,9 @@
 import UIKit
 import Firebase
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UIAlertViewDelegate {
 
-    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var forgotButton: UIButton!
@@ -20,89 +20,24 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var rememberLoginSwitch: UISwitch!
     
-    let emailIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
-    let passwordIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
-    
     let AD = UIApplication.shared.delegate as! AppDelegate
-    var db:FIRDatabaseReference?
+    
+    var waitView: LoadingView? = nil
     
     let introArray = ["Good to see you", "Hello, world!", "You look beautiful today", "Howdy", "Good day", "Bonjour"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FIRApp.configure()
-        db = FIRDatabase.database().reference()
-
         // Do any additional setup after loading the view.
         
         rememberLoginSwitch.onTintColor = UIColor.green
         
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         
-        let mainColor = AD.myThemeColor()
-//        let buttonColor = UIColor(red: 246/255, green: 175/255, blue: 41/255, alpha: 1)
-        
-        self.emailField.text = ""
-        self.emailField.backgroundColor = UIColor.white
-        self.emailField.layer.cornerRadius = 3
-        self.emailField.placeholder = "Email"
-        self.emailField.font = UIFont(name: themeFont, size: 16)
-        
-        emailIcon.image = UIImage(named: "mail.png")?.withRenderingMode(.alwaysTemplate)
-        emailIcon.tintColor = mainColor
-        emailIcon.contentMode = .scaleAspectFit
-        let emailIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
-        emailIconContainer.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
-        emailIconContainer.addSubview(emailIcon)
-        
-        self.emailField.leftViewMode = UITextFieldViewMode.always
-        self.emailField.leftView = emailIconContainer
-        
-        self.passwordField.text = ""
-        self.passwordField.backgroundColor = UIColor.white
-        self.passwordField.layer.cornerRadius = 3
-        self.passwordField.placeholder = "Password"
-        self.passwordField.font = UIFont(name: themeFont, size: 16)
-        
-        passwordIcon.image = UIImage(named: "lock.png")?.withRenderingMode(.alwaysTemplate)
-        passwordIcon.tintColor = mainColor
-        passwordIcon.contentMode = .scaleAspectFit
-        let passwordIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
-        passwordIconContainer.backgroundColor = UIColor(white: 0.9, alpha: 1)
-        passwordIconContainer.addSubview(passwordIcon)
-        
-        self.passwordField.leftViewMode = UITextFieldViewMode.always
-        self.passwordField.leftView = passwordIconContainer
-        
-//        self.loginButton.backgroundColor = buttonColor
-//        self.loginButton.layer.cornerRadius = 3
-//        self.loginButton.titleLabel?.font = UIFont(name: themeFontBold, size: 20)
-        self.loginButton.setTitle("Login", for: [])
-//        self.loginButton.setTitleColor(UIColor.white, for: [])
-//        self.loginButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)
-        
-        self.loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
-        
-        self.forgotButton.backgroundColor = UIColor.clear
-        self.forgotButton.titleLabel?.font = UIFont(name: themeFont, size: 12)
-        self.forgotButton.setTitle("Forgot password?", for: [])
-        self.forgotButton.setTitleColor(UIColor.white, for: [])
-        self.forgotButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)
-        
-        self.createButton.backgroundColor = UIColor.clear
-        self.createButton.titleLabel?.font = UIFont(name: themeFont, size: 12)
-        self.createButton.setTitle("Create an account", for: [])
-        self.createButton.setTitleColor(UIColor.white, for: [])
-        self.createButton.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .highlighted)
-        
-        self.titleLabel.textColor = UIColor.white
-        self.titleLabel.font = UIFont(name: themeFontBold, size: 24)
         self.titleLabel.text = introArray[Int(arc4random_uniform(UInt32(introArray.count)))]
         
-        self.subtitleLabel.textColor = UIColor.white
-        self.subtitleLabel.font = UIFont(name: themeFont, size: 14)
-        self.subtitleLabel.text = "Please login below"
+        loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,20 +50,20 @@ class LoginViewController: UIViewController {
         if defaults.bool(forKey: "AUTO_LOGIN") {
             self.rememberLoginSwitch.isOn = true
             
-            self.emailField.text = defaults.string(forKey: "USER_EMAIL")
+            self.usernameField.text = defaults.string(forKey: "USER_EMAIL")
             self.passwordField.text = defaults.string(forKey: "USER_PASSWORD")
             
-            self.emailField.isHidden = true
+            self.usernameField.isHidden = true
             self.passwordField.isHidden = true
             
             login()
         } else {
             self.rememberLoginSwitch.isOn = false
             
-            self.emailField.isHidden = false
+            self.usernameField.isHidden = false
             self.passwordField.isHidden = false
             
-            self.emailField.placeholder = "Email"
+            self.usernameField.placeholder = "Username"
             self.passwordField.placeholder = "Password"
         }
     }
@@ -146,68 +81,77 @@ class LoginViewController: UIViewController {
         let themeColor = AD.myThemeColor()
         view.backgroundColor = themeColor
         
-        passwordIcon.tintColor = themeColor
-        emailIcon.tintColor = themeColor
-        
-        self.titleLabel.text = introArray[Int(arc4random_uniform(UInt32(introArray.count)))]
+        passwordField.tintColor = themeColor
+        usernameField.tintColor = themeColor
     }
     
     func login() {
         dismissKeyboard()
         
-        let overlay = waitScene(ofSize: self.view.frame.size)
-        self.view.addSubview(overlay)
+        self.view.isUserInteractionEnabled = false
         
-        self.loginButton.isEnabled = false
+        waitView = LoadingView(frame: self.view.frame)
+        self.view.addSubview(waitView!)
         
         let defaults = UserDefaults()
         defaults.set(self.rememberLoginSwitch.isOn, forKey: "AUTO_LOGIN")
         
-        FIRAuth.auth()?.signIn(withEmail: self.emailField.text!, password: self.passwordField.text!, completion: {(user, error) in
+        // Login to the database
+        // Get a token for login
+        
+        Database().login(username: usernameField.text!, password: passwordField.text!) { (data, response, error) in
+            var title = ""
+            var subtitle = ""
             
-            if user != nil {
-                print("Logged in")
-                let uid = user!.uid
+            if data == nil {
+                // Network error
+                title = "Network error"
+                subtitle = "There was a network error. Please try again later."
                 
-                self.db!.child("users").child(uid).observeSingleEvent(of: .value, with: {(snapshot) in
-                    
-                    let values = snapshot.value as! [String : AnyObject]
-                    
-                    // Set theme to stored theme
-                    self.AD.selectedTheme = Theme(rawValue: values["theme"] as! Int)
-                    // Set location to stored location
-                    let locationUID = values["selectedLocation"] as! String
-                    self.db!.child("locations").child(locationUID).observeSingleEvent(of: .value, with: {(snapshot) in
-                        
-                        let values = snapshot.value as! [String : AnyObject]
-                        
-                        let latitude = values["latitude"] as! Double
-                        let longitude = values["longitude"] as! Double
-                        let city = values["city"] as! String
-                        let state = values["state"] as! String
-                        let name = values["locationName"] as! String
-                        
-                        self.AD.selectedLocation = Location(latitude: latitude,
-                                                            longitude: longitude,
-                                                            name: name,
-                                                            UID: locationUID,
-                                                            city: city,
-                                                            state: state)
-                        
-                        overlay.removeFromSuperview()
-                        self.loginButton.isEnabled = true
-                        self.passwordField.text = ""
-                        
-                        self.performSegue(withIdentifier: "SegueToCurrentLocation", sender: self)
-                    })
-                })
-                self.emailField.text = ""
-            } else {
-                overlay.removeFromSuperview()
-                self.loginButton.isEnabled = true
-                self.passwordField.text = ""
+                return
             }
-        })
+            
+            let reply = String(data: data!, encoding: .utf8)
+            
+            if reply == "-1" {
+                // User has not confirmed their email
+                title = "Confirm email"
+                subtitle = "Please confirm your email with the link sent to you."
+            } else if reply == "-2" {
+                // User does not exist
+                title = "User not found"
+                subtitle = "No user was found with those credentials. Please check your username and password or create an account."
+            } else {
+                // User exists. Return is: token\nlocationUID\ntheme
+                // Save token
+                // Segue to next view
+                
+                let values = reply!.components(separatedBy: "\n")
+                
+                self.AD.loginToken = values[0]
+                // Load location data
+                // Set local location data to remote location data
+                if let themeNum = Int(values[2]) {
+                    self.AD.selectedTheme = Theme(rawValue: themeNum)
+                }
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "SegueToCurrentLocation", sender: self)
+                }
+                
+                return
+            }
+            
+            DispatchQueue.main.async {
+                let alert = UIAlertView(title: title, message: subtitle, delegate: self, cancelButtonTitle: nil, otherButtonTitles: "Okay")
+                alert.show()
+            }
+        }
+    }
+    
+    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
+        waitView?.removeFromSuperview()
+        view.isUserInteractionEnabled = true
     }
 
     // MARK: - Navigation

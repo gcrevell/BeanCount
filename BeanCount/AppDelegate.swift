@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    var loginToken: String? = nil
+    
     private var _theme: Theme?
     var selectedTheme: Theme? {
         get {

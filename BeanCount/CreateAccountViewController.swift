@@ -51,7 +51,6 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate, UIPopo
     
     func themeChanged() {
         AD.selectedTheme = Theme(rawValue: themeSelect.selectedSegmentIndex + 1)
-        print("THE SELECTED THEME IS \(AD.selectedTheme)")
         updateTheme()
     }
     
@@ -64,8 +63,6 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate, UIPopo
         usernameTextField.tintColor = themeColor
         passwordTextField.tintColor = themeColor
         confirmPasswordTextField.tintColor = themeColor
-        
-        
     }
     
     func dismissKeyboard() {
@@ -75,11 +72,11 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate, UIPopo
     @IBAction func createButtonPressed(_ sender: AnyObject) {
         dismissKeyboard()
         
+        // Suspend checking username if we are
         usernameCheckTask?.suspend()
         usernameCheckTask?.cancel()
         usernameCheckTask = nil
         
-        // TODO: Implement checks
         // Check email is correct email
         if !verify(email: emailTextField.text!) {
             createButton.layer.shake()
@@ -297,22 +294,6 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate, UIPopo
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
-    
-//    let tags = InformationLabelTableViewController()
-//    tags.modalPresentationStyle = .popover
-//    tags.preferredContentSize = CGSize(width: 200,
-//    height: min(400,
-//    tagsArray.count * 41))
-//    
-//    let popover = tags.popoverPresentationController
-//    popover?.delegate = self
-//    popover?.permittedArrowDirections = .any
-//    popover?.sourceView = recognizer.view!
-//    popover?.sourceRect = recognizer.view!.bounds
-//
-//    tags.editingCell = cell
-//    
-//    present(tags, animated: true, completion: nil)
     
     /*
     // MARK: - Navigation
