@@ -28,7 +28,6 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         
         rememberLoginSwitch.onTintColor = UIColor.green
@@ -50,21 +49,21 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
         if defaults.bool(forKey: "AUTO_LOGIN") {
             self.rememberLoginSwitch.isOn = true
             
-            self.usernameField.text = defaults.string(forKey: "USER_EMAIL")
+            self.usernameField.text = defaults.string(forKey: "USERNAME")
             self.passwordField.text = defaults.string(forKey: "USER_PASSWORD")
             
-            self.usernameField.isHidden = true
-            self.passwordField.isHidden = true
+//            self.usernameField.isHidden = true
+//            self.passwordField.isHidden = true
             
             login()
         } else {
             self.rememberLoginSwitch.isOn = false
             
-            self.usernameField.isHidden = false
-            self.passwordField.isHidden = false
-            
-            self.usernameField.placeholder = "Username"
-            self.passwordField.placeholder = "Password"
+//            self.usernameField.isHidden = false
+//            self.passwordField.isHidden = false
+//            
+//            self.usernameField.placeholder = "Username"
+//            self.passwordField.placeholder = "Password"
         }
     }
 
@@ -95,6 +94,11 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
         
         let defaults = UserDefaults()
         defaults.set(self.rememberLoginSwitch.isOn, forKey: "AUTO_LOGIN")
+        
+        if self.rememberLoginSwitch.isOn {
+            defaults.set(usernameField.text!, forKey: "USERNAME")
+            defaults.set(passwordField.text!, forKey: "USER_PASSWORD")
+        }
         
         // Login to the database
         // Get a token for login

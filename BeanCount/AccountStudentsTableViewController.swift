@@ -30,6 +30,9 @@ class AccountStudentsTableViewController: UITableViewController {
                                                                         blue: 237/255,
                                                                         alpha: 0.7)
         
+        tableView.separatorStyle = .none
+        tableView.allowsSelectionDuringEditing = true
+        
         if AD.selectedLocation == nil {
             let label = UILabel()
             label.text = "Please select a location in settings."
@@ -43,40 +46,8 @@ class AccountStudentsTableViewController: UITableViewController {
             return
         }
         
-        tableView.separatorStyle = .none
-        tableView.allowsSelectionDuringEditing = true
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         self.navigationItem.rightBarButtonItem?.action = #selector(startEditing)
-        
-        if AD.selectedLocation == nil {
-            // Tell user to select a location in settings
-            
-            return
-        }
-        
-//        studentsDB.queryOrdered(byChild: "count").observe(.value, with: {(snapshot) in
-//            self.students = []
-//            for child in snapshot.children {
-//                let snap = child as! FIRDataSnapshot
-//                
-//                let name = snap.key
-//                print(name)  // Gets name
-//                
-//                var values = snap.value as! [String : AnyObject]
-//                print(values)
-//                
-//                values["UID"] = name as AnyObject
-//                
-//                self.students.append(values)
-//                
-//                self.tableView.reloadData()
-//            }
-//        })
     }
     
     override func didReceiveMemoryWarning() {
