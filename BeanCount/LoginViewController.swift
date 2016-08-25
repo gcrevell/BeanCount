@@ -87,6 +87,11 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
     func login() {
         dismissKeyboard()
         
+        let username = usernameField.text!
+        let password = passwordField.text!
+        
+        passwordField.text = ""
+        
         self.view.isUserInteractionEnabled = false
         
         waitView = LoadingView(frame: self.view.frame)
@@ -96,14 +101,14 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
         defaults.set(self.rememberLoginSwitch.isOn, forKey: "AUTO_LOGIN")
         
         if self.rememberLoginSwitch.isOn {
-            defaults.set(usernameField.text!, forKey: "USERNAME")
-            defaults.set(passwordField.text!, forKey: "USER_PASSWORD")
+            defaults.set(username, forKey: "USERNAME")
+            defaults.set(password, forKey: "USER_PASSWORD")
         }
         
         // Login to the database
         // Get a token for login
         
-        Database().login(username: usernameField.text!, password: passwordField.text!) { (data, response, error) in
+        Database().login(username: username, password: password) { (data, response, error) in
             var title = ""
             var subtitle = ""
             
@@ -140,6 +145,9 @@ class LoginViewController: UIViewController, UIAlertViewDelegate {
                 }
                 
                 DispatchQueue.main.async {
+                    self.waitView?.removeFromSuperview()
+                    self.view.isUserInteractionEnabled = true
+                    
                     self.performSegue(withIdentifier: "SegueToCurrentLocation", sender: self)
                 }
                 

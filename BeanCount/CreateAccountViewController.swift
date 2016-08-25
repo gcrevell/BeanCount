@@ -156,7 +156,7 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate, UIPopo
                 load.removeFromSuperview()
                 self.view.isUserInteractionEnabled = true
                 
-                let alert = UIAlertView(title: alertMain, message: alertDetail, delegate: self, cancelButtonTitle: nil, otherButtonTitles: "Ok")
+                let alert = UIAlertView(title: alertMain, message: alertDetail, delegate: self, cancelButtonTitle: nil, otherButtonTitles: "Okay")
                 alert.show()
             }
         }

@@ -17,7 +17,7 @@
                         <viewControllerLayoutGuide type="bottom" id="gXB-D3-aeM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3YA-0O-YXg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1A-c6-zdC">
@@ -36,49 +36,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PWl-gg-iVP" customClass="RoundedTextField" customModule="BeanCount" customModuleProvider="target">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="fjH-Wk-V2g"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Username or email"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="username.png"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="renderLeftTemplate" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KzD-nx-FFf" customClass="RoundedTextField" customModule="BeanCount" customModuleProvider="target">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="fqX-A0-uox"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Password"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="lock.png"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="renderLeftTemplate" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29N-ai-riz" customClass="RoundedButton" customModule="BeanCount" customModuleProvider="target">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="AV4-L8-pgn"/>
-                                </constraints>
-                                <state key="normal" title="Login"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1T-wu-x6K">
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buY-hG-gQf">
@@ -110,48 +67,109 @@
                                     <constraint firstItem="1Xl-eT-HBM" firstAttribute="top" secondItem="z1T-wu-x6K" secondAttribute="top" constant="8" id="sUZ-up-PEb"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Fp-H6-Zzv">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RvH-MR-Yf5">
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZF-fc-Bjg">
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AR5-pi-atp"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PWl-gg-iVP" customClass="RoundedTextField" customModule="BeanCount" customModuleProvider="target">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="41" id="fjH-Wk-V2g"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Username or email"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="username.png"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="renderLeftTemplate" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KzD-nx-FFf" customClass="RoundedTextField" customModule="BeanCount" customModuleProvider="target">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="41" id="fqX-A0-uox"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Password"/>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="lock.png"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="renderLeftTemplate" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29N-ai-riz" customClass="RoundedButton" customModule="BeanCount" customModuleProvider="target">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="AV4-L8-pgn"/>
+                                        </constraints>
+                                        <state key="normal" title="Login"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Fp-H6-Zzv">
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZF-fc-Bjg">
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AR5-pi-atp"/>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="AR5-pi-atp" firstAttribute="leading" secondItem="vZF-fc-Bjg" secondAttribute="trailing" constant="8" id="5LS-1f-u5J"/>
+                                            <constraint firstAttribute="height" constant="47" id="5dF-n9-Amq"/>
+                                            <constraint firstItem="vZF-fc-Bjg" firstAttribute="centerY" secondItem="8Fp-H6-Zzv" secondAttribute="centerY" id="Dc0-qE-Baz"/>
+                                            <constraint firstItem="AR5-pi-atp" firstAttribute="top" secondItem="8Fp-H6-Zzv" secondAttribute="top" constant="8" id="WK0-fu-Rf9"/>
+                                            <constraint firstAttribute="trailing" secondItem="AR5-pi-atp" secondAttribute="trailing" constant="20" id="d7W-i8-LZj"/>
+                                            <constraint firstAttribute="width" constant="184" id="hRK-Wt-BdV"/>
+                                            <constraint firstAttribute="bottom" secondItem="AR5-pi-atp" secondAttribute="bottom" constant="8" id="iYU-EJ-sed"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="AR5-pi-atp" firstAttribute="leading" secondItem="vZF-fc-Bjg" secondAttribute="trailing" constant="8" id="5LS-1f-u5J"/>
-                                    <constraint firstAttribute="height" constant="47" id="5dF-n9-Amq"/>
-                                    <constraint firstItem="vZF-fc-Bjg" firstAttribute="centerY" secondItem="8Fp-H6-Zzv" secondAttribute="centerY" id="Dc0-qE-Baz"/>
-                                    <constraint firstItem="AR5-pi-atp" firstAttribute="top" secondItem="8Fp-H6-Zzv" secondAttribute="top" constant="8" id="WK0-fu-Rf9"/>
-                                    <constraint firstAttribute="trailing" secondItem="AR5-pi-atp" secondAttribute="trailing" constant="20" id="d7W-i8-LZj"/>
-                                    <constraint firstAttribute="width" constant="184" id="hRK-Wt-BdV"/>
-                                    <constraint firstAttribute="bottom" secondItem="AR5-pi-atp" secondAttribute="bottom" constant="8" id="iYU-EJ-sed"/>
+                                    <constraint firstItem="8Fp-H6-Zzv" firstAttribute="top" secondItem="29N-ai-riz" secondAttribute="bottom" constant="8" id="0ak-0i-NmO"/>
+                                    <constraint firstAttribute="height" constant="225" id="0gm-n2-O98"/>
+                                    <constraint firstItem="29N-ai-riz" firstAttribute="leading" secondItem="RvH-MR-Yf5" secondAttribute="leading" id="CL4-ax-1Bu"/>
+                                    <constraint firstItem="29N-ai-riz" firstAttribute="leading" secondItem="RvH-MR-Yf5" secondAttribute="leadingMargin" constant="-8" id="DxT-ez-rFc"/>
+                                    <constraint firstItem="29N-ai-riz" firstAttribute="top" secondItem="KzD-nx-FFf" secondAttribute="bottom" constant="30" id="Gjq-yh-Xxr"/>
+                                    <constraint firstAttribute="trailing" secondItem="8Fp-H6-Zzv" secondAttribute="trailing" id="J0g-pC-b6X"/>
+                                    <constraint firstAttribute="bottom" secondItem="8Fp-H6-Zzv" secondAttribute="bottom" id="Kh5-GA-zzn"/>
+                                    <constraint firstItem="KzD-nx-FFf" firstAttribute="top" secondItem="PWl-gg-iVP" secondAttribute="bottom" constant="8" id="T0t-SO-NNt"/>
+                                    <constraint firstAttribute="trailing" secondItem="29N-ai-riz" secondAttribute="trailing" id="TDE-OE-gNx"/>
+                                    <constraint firstItem="PWl-gg-iVP" firstAttribute="leading" secondItem="RvH-MR-Yf5" secondAttribute="leading" id="Vms-8g-cBQ"/>
+                                    <constraint firstItem="PWl-gg-iVP" firstAttribute="top" secondItem="RvH-MR-Yf5" secondAttribute="top" id="c7a-d2-Xgv"/>
+                                    <constraint firstItem="29N-ai-riz" firstAttribute="top" secondItem="KzD-nx-FFf" secondAttribute="bottom" constant="30" id="fbI-iR-a8j"/>
+                                    <constraint firstAttribute="trailing" secondItem="PWl-gg-iVP" secondAttribute="trailing" id="hHj-Mq-I4Q"/>
+                                    <constraint firstItem="8Fp-H6-Zzv" firstAttribute="top" secondItem="29N-ai-riz" secondAttribute="bottom" constant="8" id="itw-91-BJI"/>
+                                    <constraint firstItem="KzD-nx-FFf" firstAttribute="leading" secondItem="RvH-MR-Yf5" secondAttribute="leading" id="oaS-85-R86"/>
+                                    <constraint firstItem="29N-ai-riz" firstAttribute="trailing" secondItem="RvH-MR-Yf5" secondAttribute="trailingMargin" constant="8" id="pRK-3v-Tgy"/>
+                                    <constraint firstAttribute="trailing" secondItem="KzD-nx-FFf" secondAttribute="trailing" id="s8x-AE-8eY"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="381.32999999999998" id="vhP-BT-0pA"/>
+                                    <constraint firstItem="KzD-nx-FFf" firstAttribute="top" secondItem="PWl-gg-iVP" secondAttribute="bottom" constant="8" id="w9O-tA-hOW"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.050980392159999999" green="0.36862745099999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="KzD-nx-FFf" firstAttribute="trailing" secondItem="3YA-0O-YXg" secondAttribute="trailingMargin" id="4dL-1n-lST"/>
-                            <constraint firstItem="PWl-gg-iVP" firstAttribute="leading" secondItem="3YA-0O-YXg" secondAttribute="leadingMargin" id="7S8-tb-5L8"/>
                             <constraint firstItem="l1A-c6-zdC" firstAttribute="trailing" secondItem="3YA-0O-YXg" secondAttribute="trailingMargin" id="B7r-HY-DSh"/>
-                            <constraint firstItem="PWl-gg-iVP" firstAttribute="top" secondItem="VUB-es-7aU" secondAttribute="bottom" constant="150" id="GUz-RC-sal"/>
                             <constraint firstItem="VUB-es-7aU" firstAttribute="leading" secondItem="3YA-0O-YXg" secondAttribute="leadingMargin" id="Gq4-2N-YSF"/>
                             <constraint firstItem="l1A-c6-zdC" firstAttribute="top" secondItem="DJg-dg-QkF" secondAttribute="bottom" constant="25" id="Ope-WM-Hdv"/>
-                            <constraint firstItem="29N-ai-riz" firstAttribute="top" secondItem="KzD-nx-FFf" secondAttribute="bottom" constant="30" id="Pik-PJ-SA7"/>
-                            <constraint firstItem="29N-ai-riz" firstAttribute="trailing" secondItem="3YA-0O-YXg" secondAttribute="trailingMargin" id="Rde-aI-jw3"/>
-                            <constraint firstItem="KzD-nx-FFf" firstAttribute="leading" secondItem="3YA-0O-YXg" secondAttribute="leadingMargin" id="gcl-24-vsH"/>
+                            <constraint firstAttribute="trailing" secondItem="RvH-MR-Yf5" secondAttribute="trailing" priority="999" constant="16" id="eaO-7b-zH6"/>
                             <constraint firstItem="gXB-D3-aeM" firstAttribute="top" secondItem="z1T-wu-x6K" secondAttribute="bottom" constant="8" id="ghu-p9-jQK"/>
                             <constraint firstItem="VUB-es-7aU" firstAttribute="top" secondItem="l1A-c6-zdC" secondAttribute="bottom" constant="8" id="hQz-gO-92q"/>
-                            <constraint firstItem="8Fp-H6-Zzv" firstAttribute="trailing" secondItem="3YA-0O-YXg" secondAttribute="trailingMargin" id="hn1-eL-6kc"/>
                             <constraint firstItem="z1T-wu-x6K" firstAttribute="centerX" secondItem="3YA-0O-YXg" secondAttribute="centerX" id="iDL-aL-EG9"/>
-                            <constraint firstItem="PWl-gg-iVP" firstAttribute="trailing" secondItem="3YA-0O-YXg" secondAttribute="trailingMargin" id="iTB-4R-qGm"/>
-                            <constraint firstItem="8Fp-H6-Zzv" firstAttribute="top" secondItem="29N-ai-riz" secondAttribute="bottom" constant="8" id="khS-d6-llW"/>
                             <constraint firstItem="z1T-wu-x6K" firstAttribute="leading" secondItem="3YA-0O-YXg" secondAttribute="leadingMargin" id="n6b-23-m97"/>
                             <constraint firstItem="VUB-es-7aU" firstAttribute="trailing" secondItem="3YA-0O-YXg" secondAttribute="trailingMargin" id="nCV-do-GzT"/>
-                            <constraint firstItem="29N-ai-riz" firstAttribute="leading" secondItem="3YA-0O-YXg" secondAttribute="leadingMargin" id="nkp-cF-ryh"/>
                             <constraint firstItem="z1T-wu-x6K" firstAttribute="trailing" secondItem="3YA-0O-YXg" secondAttribute="trailingMargin" id="not-qY-T07"/>
-                            <constraint firstItem="KzD-nx-FFf" firstAttribute="top" secondItem="PWl-gg-iVP" secondAttribute="bottom" constant="8" id="u8l-4U-7Qf"/>
+                            <constraint firstItem="RvH-MR-Yf5" firstAttribute="centerX" secondItem="3YA-0O-YXg" secondAttribute="centerX" id="oHf-4y-nyi"/>
+                            <constraint firstItem="RvH-MR-Yf5" firstAttribute="centerY" secondItem="3YA-0O-YXg" secondAttribute="centerY" id="tZI-I8-L5n"/>
+                            <constraint firstItem="RvH-MR-Yf5" firstAttribute="leading" secondItem="3YA-0O-YXg" secondAttribute="leading" priority="999" constant="16" id="uGr-45-gGw"/>
                             <constraint firstItem="l1A-c6-zdC" firstAttribute="leading" secondItem="3YA-0O-YXg" secondAttribute="leadingMargin" id="z2M-BJ-MPD"/>
                         </constraints>
                     </view>
@@ -169,7 +187,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dFy-kH-ACy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1872.4637681159422" y="-995.38043478260875"/>
+            <point key="canvasLocation" x="1871.2" y="-996.25187406296857"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="7on-OP-DMP">
@@ -180,7 +198,7 @@
                         <viewControllerLayoutGuide type="bottom" id="w24-Nv-huE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="j6r-xe-zjm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75J-De-hld">
@@ -285,15 +303,15 @@
             <objects>
                 <tableViewController id="nAl-iH-Vr0" customClass="LocationsSelectTableViewController" customModule="BeanCount" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="103" sectionHeaderHeight="28" sectionFooterHeight="28" id="KLL-WU-cad">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationTableCell" rowHeight="100" id="4z6-eR-SfI" customClass="LocationTableViewCell" customModule="BeanCount" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="92" width="1024" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4z6-eR-SfI" id="f9j-31-2vy">
-                                    <frame key="frameInset" width="375" height="100"/>
+                                    <frame key="frameInset" width="1024" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gmk-vr-Qdr">
@@ -391,7 +409,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Cnr-iZ-Pcc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3Ed-bd-SFt">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQB-WB-Nwc">
@@ -476,15 +494,15 @@
             <objects>
                 <tableViewController id="vZN-O9-NpZ" customClass="AccountStudentsTableViewController" customModule="BeanCount" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" id="0By-W7-hVL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentTableCell" rowHeight="56" id="MMN-oc-afT" customClass="StudentTableViewCell" customModule="BeanCount" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="92" width="1024" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MMN-oc-afT" id="GSP-Zt-pKU">
-                                    <frame key="frameInset" width="375" height="55.5"/>
+                                    <frame key="frameInset" width="1024" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztG-v9-eyL">
@@ -569,7 +587,7 @@
                         <viewControllerLayoutGuide type="bottom" id="JDn-eG-aND"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GIy-Np-DZy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j3L-j8-XxW" customClass="RoundedTextField" customModule="BeanCount" customModuleProvider="target">
@@ -620,15 +638,15 @@
             <objects>
                 <tableViewController id="4LW-s7-tGd" customClass="StudentTagsTableViewController" customModule="BeanCount" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="49" sectionHeaderHeight="28" sectionFooterHeight="28" id="VrE-Ag-sro">
-                        <rect key="frame" x="0.0" y="0.0" width="343" height="501"/>
+                        <rect key="frame" x="0.0" y="0.0" width="984" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentTagCell" rowHeight="49" id="8Mq-G7-uGx" customClass="StudentTagTableViewCell" customModule="BeanCount" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="343" height="49"/>
+                                <rect key="frame" x="0.0" y="28" width="984" height="49"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Mq-G7-uGx" id="xDz-oy-nTr">
-                                    <frame key="frameInset" width="343" height="48.5"/>
+                                    <frame key="frameInset" width="984" height="48"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bNQ-ML-sPT">
@@ -648,10 +666,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddTagCell" rowHeight="45" id="qGO-VD-PaN" customClass="AddTagTableViewCell" customModule="BeanCount" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="77" width="343" height="45"/>
+                                <rect key="frame" x="0.0" y="77" width="984" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qGO-VD-PaN" id="880-Dh-qPW">
-                                    <frame key="frameInset" width="343" height="44.5"/>
+                                    <frame key="frameInset" width="984" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="orC-TN-GGW">
@@ -704,7 +722,7 @@
                         <viewControllerLayoutGuide type="bottom" id="FnQ-cv-UV5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yG8-AF-uxQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -722,7 +740,7 @@
                         <viewControllerLayoutGuide type="bottom" id="a42-Sk-efC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="N46-Fc-OgF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JV0-pH-7jJ" customClass="RoundedSegmentedControl" customModule="BeanCount" customModuleProvider="target">
