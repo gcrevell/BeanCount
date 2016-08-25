@@ -17,7 +17,7 @@
                         <viewControllerLayoutGuide type="bottom" id="gXB-D3-aeM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3YA-0O-YXg">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1A-c6-zdC">
@@ -198,7 +198,7 @@
                         <viewControllerLayoutGuide type="bottom" id="w24-Nv-huE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="j6r-xe-zjm">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75J-De-hld">
@@ -303,15 +303,15 @@
             <objects>
                 <tableViewController id="nAl-iH-Vr0" customClass="LocationsSelectTableViewController" customModule="BeanCount" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="103" sectionHeaderHeight="28" sectionFooterHeight="28" id="KLL-WU-cad">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationTableCell" rowHeight="100" id="4z6-eR-SfI" customClass="LocationTableViewCell" customModule="BeanCount" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="1024" height="100"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4z6-eR-SfI" id="f9j-31-2vy">
-                                    <frame key="frameInset" width="1024" height="100"/>
+                                    <frame key="frameInset" width="414" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gmk-vr-Qdr">
@@ -409,53 +409,69 @@
                         <viewControllerLayoutGuide type="bottom" id="Cnr-iZ-Pcc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3Ed-bd-SFt">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQB-WB-Nwc">
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="1" green="1" blue="0.99919462203979492" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="location name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SKu-vf-HGQ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SKu-vf-HGQ" customClass="RoundedTextField" customModule="BeanCount" customModuleProvider="target">
+                                <color key="backgroundColor" red="1" green="1" blue="0.99919462203979492" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="qrl-wP-3wE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="id card.png"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="renderLeftTemplate" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Enter a name for this location"/>
+                                </userDefinedRuntimeAttributes>
                             </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NkV-oU-SoJ">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NkV-oU-SoJ" customClass="RoundedView" customModule="BeanCount" customModuleProvider="target">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lu6-4g-LWD">
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="lu6-4g-LWD" secondAttribute="height" multiplier="1:1" id="9G9-3b-6wq"/>
-                                        </constraints>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqi-N0-6JS">
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vfu-of-M9I">
+                                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Vfu-of-M9I" secondAttribute="height" multiplier="1:1" id="2Fa-fA-LhB"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="iqi-N0-6JS" firstAttribute="leading" secondItem="lu6-4g-LWD" secondAttribute="trailing" id="V6L-4a-QxG"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vfu-of-M9I" secondAttribute="bottom" id="OuD-AN-ATW"/>
                                     <constraint firstAttribute="trailing" secondItem="iqi-N0-6JS" secondAttribute="trailing" constant="8" id="Xpw-30-UAL"/>
-                                    <constraint firstItem="lu6-4g-LWD" firstAttribute="leading" secondItem="NkV-oU-SoJ" secondAttribute="leading" id="f0Y-oZ-62v"/>
-                                    <constraint firstAttribute="bottom" secondItem="lu6-4g-LWD" secondAttribute="bottom" id="g4t-3k-ubn"/>
+                                    <constraint firstItem="Vfu-of-M9I" firstAttribute="leading" secondItem="NkV-oU-SoJ" secondAttribute="leading" id="ZeU-rb-cxY"/>
+                                    <constraint firstAttribute="trailing" secondItem="iqi-N0-6JS" secondAttribute="trailing" constant="8" id="hob-Zp-kmI"/>
                                     <constraint firstItem="iqi-N0-6JS" firstAttribute="centerY" secondItem="NkV-oU-SoJ" secondAttribute="centerY" id="lsG-32-ZfT"/>
                                     <constraint firstAttribute="height" constant="41" id="mxr-2i-OqR"/>
-                                    <constraint firstItem="lu6-4g-LWD" firstAttribute="top" secondItem="NkV-oU-SoJ" secondAttribute="top" id="qB4-Ca-i1U"/>
+                                    <constraint firstItem="iqi-N0-6JS" firstAttribute="leading" secondItem="Vfu-of-M9I" secondAttribute="trailing" id="pGZ-Yr-K0e"/>
+                                    <constraint firstItem="Vfu-of-M9I" firstAttribute="top" secondItem="NkV-oU-SoJ" secondAttribute="top" id="wTn-Zs-rGN"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2g-Cp-7QH">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2g-Cp-7QH" customClass="RoundedButton" customModule="BeanCount" customModuleProvider="target">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="UET-1c-jKp"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.050980392159999999" green="0.36862745099999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="NkV-oU-SoJ" firstAttribute="leading" secondItem="3Ed-bd-SFt" secondAttribute="leadingMargin" id="5WY-Ez-eEi"/>
                             <constraint firstItem="SKu-vf-HGQ" firstAttribute="trailing" secondItem="3Ed-bd-SFt" secondAttribute="trailingMargin" id="IBa-zm-Boh"/>
@@ -475,7 +491,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="0RX-cG-H3W"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="locationIconView" destination="lu6-4g-LWD" id="7fb-bu-ms0"/>
+                        <outlet property="locationIconView" destination="Vfu-of-M9I" id="hPR-C8-qhd"/>
                         <outlet property="locationNameTextField" destination="SKu-vf-HGQ" id="mmV-rZ-hbY"/>
                         <outlet property="locationPickerView" destination="NkV-oU-SoJ" id="j4w-4d-ANx"/>
                         <outlet property="locationTextLabel" destination="iqi-N0-6JS" id="gzQ-4G-4UH"/>
@@ -487,22 +503,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EHm-cB-EN5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="S0K-Lp-uor" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4831.1999999999998" y="-1714.0929535232385"/>
+            <point key="canvasLocation" x="4830.434782608696" y="-1714.4021739130435"/>
         </scene>
         <!--Students-->
         <scene sceneID="55c-k7-O58">
             <objects>
                 <tableViewController id="vZN-O9-NpZ" customClass="AccountStudentsTableViewController" customModule="BeanCount" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" id="0By-W7-hVL">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentTableCell" rowHeight="56" id="MMN-oc-afT" customClass="StudentTableViewCell" customModule="BeanCount" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="1024" height="56"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MMN-oc-afT" id="GSP-Zt-pKU">
-                                    <frame key="frameInset" width="1024" height="55"/>
+                                    <frame key="frameInset" width="414" height="55.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ztG-v9-eyL">
@@ -587,7 +603,7 @@
                         <viewControllerLayoutGuide type="bottom" id="JDn-eG-aND"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GIy-Np-DZy">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j3L-j8-XxW" customClass="RoundedTextField" customModule="BeanCount" customModuleProvider="target">
@@ -638,15 +654,15 @@
             <objects>
                 <tableViewController id="4LW-s7-tGd" customClass="StudentTagsTableViewController" customModule="BeanCount" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="49" sectionHeaderHeight="28" sectionFooterHeight="28" id="VrE-Ag-sro">
-                        <rect key="frame" x="0.0" y="0.0" width="984" height="1200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="570"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentTagCell" rowHeight="49" id="8Mq-G7-uGx" customClass="StudentTagTableViewCell" customModule="BeanCount" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="984" height="49"/>
+                                <rect key="frame" x="0.0" y="28" width="374" height="49"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Mq-G7-uGx" id="xDz-oy-nTr">
-                                    <frame key="frameInset" width="984" height="48"/>
+                                    <frame key="frameInset" width="374" height="48.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bNQ-ML-sPT">
@@ -666,10 +682,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddTagCell" rowHeight="45" id="qGO-VD-PaN" customClass="AddTagTableViewCell" customModule="BeanCount" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="77" width="984" height="45"/>
+                                <rect key="frame" x="0.0" y="77" width="374" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qGO-VD-PaN" id="880-Dh-qPW">
-                                    <frame key="frameInset" width="984" height="44"/>
+                                    <frame key="frameInset" width="374" height="44.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="orC-TN-GGW">
@@ -722,7 +738,7 @@
                         <viewControllerLayoutGuide type="bottom" id="FnQ-cv-UV5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yG8-AF-uxQ">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -740,7 +756,7 @@
                         <viewControllerLayoutGuide type="bottom" id="a42-Sk-efC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="N46-Fc-OgF">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JV0-pH-7jJ" customClass="RoundedSegmentedControl" customModule="BeanCount" customModuleProvider="target">

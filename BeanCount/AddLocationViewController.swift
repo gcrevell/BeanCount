@@ -14,9 +14,8 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var locationNameTextField: UITextField!
     
-    let locationIDIcon = UIImageView(frame: CGRect(x: 9, y: 9, width: 24, height: 24))
     @IBOutlet weak var locationPickerView: UIView!
-    @IBOutlet weak var locationIconView: UIImageView!
+    @IBOutlet weak var locationIconView: UIView!
     @IBOutlet weak var locationTextLabel: UILabel!
     @IBOutlet weak var submitButton: UIButton!
     
@@ -36,31 +35,18 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         
         updateTheme()
         
-        self.locationNameTextField.text = ""
-        self.locationNameTextField.backgroundColor = UIColor.white
-        self.locationNameTextField.layer.cornerRadius = 3
-        self.locationNameTextField.placeholder = "Enter a name for this location"
-        self.locationNameTextField.font = UIFont(name: themeFont, size: 16)
-        
-        locationIDIcon.image = UIImage(named: "id card.png")?.withRenderingMode(.alwaysTemplate)
-        locationIDIcon.tintColor = mainColor
-        locationIDIcon.contentMode = .scaleAspectFit
-        let locationIDIconContainer = UIView(frame: CGRect(x: 0, y: 0, width: 41, height: 41))
-        locationIDIconContainer.backgroundColor = UIColor(white: 0.9, alpha: 1)
-        locationIDIconContainer.addSubview(locationIDIcon)
-        
-        self.locationNameTextField.leftViewMode = .always
-        self.locationNameTextField.leftView = locationIDIconContainer
-        
         // Setup location view
         self.locationPickerView.clipsToBounds = true
         self.locationPickerView.layer.cornerRadius = 3
         self.locationPickerView.backgroundColor = UIColor.white
         
-        self.locationIconView.image = UIImage(named: "location.png")?.withRenderingMode(.alwaysTemplate)
-        self.locationIconView.contentMode = .scaleAspectFit
-        self.locationIconView.tintColor = mainColor
         self.locationIconView.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        self.locationIconView.tintColor = mainColor
+        
+        let imageView = UIImageView(frame: CGRect(x: 9, y: 9, width: 23, height: 23))
+        imageView.image = UIImage(named: "location.png")?.withRenderingMode(.alwaysTemplate)
+        imageView.contentMode = .scaleAspectFit
+        locationIconView.addSubview(imageView)
         
         self.locationTextLabel.text = "Choose a location"
         self.locationTextLabel.textColor = UIColor(red: 199/255, green: 199/255, blue: 205/255, alpha: 1)
@@ -68,11 +54,6 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         
         self.locationPickerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(expandMapView)))
         
-        self.submitButton.backgroundColor = UIColor(red: 246/255, green: 175/255, blue: 41/255, alpha: 1)
-        self.submitButton.setTitle("Submit", for: [])
-        self.submitButton.setTitleColor(UIColor.white, for: [])
-        self.submitButton.layer.cornerRadius = 3
-        self.submitButton.titleLabel?.font = UIFont(name: themeFontBold, size: 20)
         self.submitButton.addTarget(self, action: #selector(submit), for: .touchUpInside)
     }
     
@@ -86,9 +67,11 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         
         view.backgroundColor = mainColor
         
-        locationIDIcon.tintColor = mainColor
+        locationNameTextField.tintColor = mainColor
         locationIconView.tintColor = mainColor
     }
+    
+    // MARK: - Map location
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         print("My location is \(mapView.centerCoordinate)")
@@ -113,6 +96,17 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         print("My location 2 is \(mapView.centerCoordinate)")
+    }
+    
+    func locationToCityState(location: CLLocationCoordinate2D, completion: @escaping (_ placemarks: [CLPlacemark]?, _ error: NSError?) -> Void) {
+        let lat = location.latitude
+        let lon = location.longitude
+        
+        let loc = CLLocation(latitude: lat, longitude: lon)
+        
+        CLGeocoder().reverseGeocodeLocation(loc) { (placemarks, error) in
+            completion(placemarks, error as NSError?)
+        }
     }
     
     func expandMapView() {
@@ -188,17 +182,6 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func locationToCityState(location: CLLocationCoordinate2D, completion: @escaping (_ placemarks: [CLPlacemark]?, _ error: NSError?) -> Void) {
-        let lat = location.latitude
-        let lon = location.longitude
-        
-        let loc = CLLocation(latitude: lat, longitude: lon)
-        
-        CLGeocoder().reverseGeocodeLocation(loc) { (placemarks, error) in
-            completion(placemarks, error as NSError?)
-        }
-    }
-    
     func submit() {
         if self.currentLocation == nil {
             // No map location set for this location
@@ -212,14 +195,10 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         
         // We're good. Create a new location.
         // Show user things are happening
-        self.submitButton.isEnabled = false
-        let activity = UIActivityIndicatorView()
-        activity.startAnimating()
-        activity.center = CGPoint(x: self.submitButton.frame.size.width/2, y: self.submitButton.frame.size.height/2)
-        self.submitButton.addSubview(activity)
-        self.submitButton.setTitle("", for: [])
+        self.view.isUserInteractionEnabled = false
+        let waitView = LoadingView(frame: self.view.frame)
+        self.view.addSubview(waitView)
         
-        // Add to Firebase.
         // Create location unique ID
         let UID = NSUUID().uuidString
         print("This location's UUID is \(UID)")
@@ -234,33 +213,14 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             }
             
             let placemark = placemarks![0]
-            let db = FIRDatabase.database().reference()
             let city = placemark.locality == nil ? "" : placemark.locality!
             let state = placemark.administrativeArea == nil ? "" : placemark.administrativeArea!
+            let latitude = self.currentLocation!.latitude as Double
+            let longitude = self.currentLocation!.longitude as Double
             
-            let values:[String : AnyObject] = ["latitude" : self.currentLocation!.latitude as AnyObject,
-                                               "longitude" : self.currentLocation!.longitude as AnyObject,
-                                               "locationName" : self.locationNameTextField.text! as AnyObject,
-                                               "city" : city as AnyObject,
-                                               "state" : state as AnyObject]
+            self.AD.selectedLocation = Location(latitude: latitude, longitude: longitude, name: self.locationNameTextField.text!, UID: UID, city: city, state: state)
             
-            db.child("locations").child(UID).setValue(values, withCompletionBlock: { (error, dbRef) in
-                if error != nil {
-                    print("Error: There was an error with uploading the location to the database.")
-                    print(error)
-                    
-                    return
-                }
-                
-                // Success!
-                // Set as current location
-                self.AD.selectedLocation = Location(latitude: self.currentLocation!.latitude, longitude: self.currentLocation!.longitude, name: self.locationNameTextField.text!, UID: UID, city: city, state: state)
-                
-                
-                
-                // Unwind to settings view
-                self.performSegue(withIdentifier: "UnwindToSettingsView", sender: self)
-            })
+            
         }
     }
     
