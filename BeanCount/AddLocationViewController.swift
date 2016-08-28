@@ -17,11 +17,16 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var locationPickerView: UIView!
     @IBOutlet weak var locationIconView: UIView!
     @IBOutlet weak var locationTextLabel: UILabel!
+    
+    @IBOutlet weak var securityView: UIView!
+    @IBOutlet weak var inviteCodeLabel: UILabel!
+    
     @IBOutlet weak var submitButton: UIButton!
     
     @IBOutlet weak var viewHeightConstraint: NSLayoutConstraint!
     
     var currentLocation: CLLocationCoordinate2D?
+    let UID = NSUUID().uuidString
     
     let AD = UIApplication.shared.delegate as! AppDelegate
     let locationManager = CLLocationManager()
@@ -55,6 +60,8 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         self.locationPickerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(expandMapView)))
         
         self.submitButton.addTarget(self, action: #selector(submit), for: .touchUpInside)
+        
+        inviteCodeLabel.text = ""
     }
     
     override func didReceiveMemoryWarning() {
@@ -123,14 +130,19 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         
         self.viewHeightConstraint.constant = width + 41
         
+        self.securityView.isUserInteractionEnabled = false
         self.submitButton.isUserInteractionEnabled = false
         
         UIView.animate(withDuration: 1, animations: {
             self.locationPickerView.frame.size = CGSize(width: width, height: width + 41)
             
+            self.securityView.alpha = 0
+            self.securityView.frame.origin.y += width
+            
             self.submitButton.alpha = 0
-            self.submitButton.frame.origin = CGPoint(x: self.submitButton.frame.origin.x, y: self.submitButton.frame.origin.y + width)
+            self.submitButton.frame.origin.y += width
         }) { (completed) in
+            self.securityView.isHidden = true
             self.submitButton.isHidden = true
             
             let mapView = MKMapView(frame: CGRect(x: 0, y: 0, width: width, height: width))
@@ -167,19 +179,34 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         
         self.viewHeightConstraint.constant = height
         
+        self.securityView.isHidden = false
         self.submitButton.isHidden = false
         
         UIView.animate(withDuration: 1, animations: {
             self.locationPickerView.frame.size = CGSize(width: width, height: height)
             
+            self.securityView.alpha = 1
+            self.securityView.frame.origin.y -= width
+            
             self.submitButton.alpha = 1
-            self.submitButton.frame.origin = CGPoint(x: self.submitButton.frame.origin.x, y: self.locationPickerView.frame.origin.y + 41 + 60)
+            self.submitButton.frame.origin.y -= width
         }) { (completed) in
             self.locationIconView.isHidden = false
             self.locationTextLabel.isHidden = false
             
             self.submitButton.isUserInteractionEnabled = true
         }
+    }
+    
+    @IBAction func inviteSwitch(_ sender: UISwitch) {
+        if sender.isOn {
+            let invite = self.UID.components(separatedBy: "-")[0]
+        
+            inviteCodeLabel.setTextWithTypeAnimation(typedText: invite, characterInterval: 0.0625)
+        } else {
+            inviteCodeLabel.deleteTextWithAnimation(characterInterval: 0.0625)
+        }
+        
     }
     
     func submit() {
@@ -201,7 +228,6 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         // Create location unique ID
-        let UID = NSUUID().uuidString
         print("This location's UUID is \(UID)")
         // Add location Lat, Long, Name, City/State name to firebase with UID as key
         
@@ -229,7 +255,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             let latitude = self.currentLocation!.latitude as Double
             let longitude = self.currentLocation!.longitude as Double
             
-            let newLocation = Location(latitude: latitude, longitude: longitude, name: self.locationNameTextField.text!, UID: UID, city: city, state: state)
+            let newLocation = Location(latitude: latitude, longitude: longitude, name: self.locationNameTextField.text!, UID: self.UID, city: city, state: state)
             
             Database().create(location: newLocation, invite: nil, password: nil, completionHandler: { (data, response, error) in
                 var title = ""

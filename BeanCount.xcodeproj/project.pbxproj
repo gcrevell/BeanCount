@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7C0741BE1D513E880039D42C /* AddStudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0741BD1D513E880039D42C /* AddStudentViewController.swift */; };
 		7C0741C01D51406A0039D42C /* TagPopoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0741BF1D51406A0039D42C /* TagPopoverTableViewController.swift */; };
+		7C16D6461D739A860069A97C /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C16D6451D739A860069A97C /* UILabelExtension.swift */; };
 		7C21812C1D551E5200C29F68 /* lightbulb.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2181291D551E5200C29F68 /* lightbulb.png */; };
 		7C21812D1D551E5200C29F68 /* file cabinet.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C21812A1D551E5200C29F68 /* file cabinet.png */; };
 		7C21812E1D551E5200C29F68 /* computer.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C21812B1D551E5200C29F68 /* computer.png */; };
@@ -63,6 +64,7 @@
 		6F70FB857B23537D3491D75A /* Pods-BeanCount.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeanCount.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeanCount/Pods-BeanCount.release.xcconfig"; sourceTree = "<group>"; };
 		7C0741BD1D513E880039D42C /* AddStudentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStudentViewController.swift; sourceTree = "<group>"; };
 		7C0741BF1D51406A0039D42C /* TagPopoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagPopoverTableViewController.swift; sourceTree = "<group>"; };
+		7C16D6451D739A860069A97C /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		7C2181291D551E5200C29F68 /* lightbulb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightbulb.png; sourceTree = "<group>"; };
 		7C21812A1D551E5200C29F68 /* file cabinet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "file cabinet.png"; sourceTree = "<group>"; };
 		7C21812B1D551E5200C29F68 /* computer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = computer.png; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 		7CE4095C1D5688360045B55A /* Theme */ = {
 			isa = PBXGroup;
 			children = (
+				7C16D6451D739A860069A97C /* UILabelExtension.swift */,
 				7CC5835B1D6CFE24001D929C /* CALayerExtension.swift */,
 				7CE409601D58F25C0045B55A /* UIViewExtension.swift */,
 				7CE409621D58F2780045B55A /* CGRectExtension.swift */,
@@ -467,6 +470,7 @@
 				7C915A2A1D3823690081507E /* AppDelegate.swift in Sources */,
 				7C8719C51D566194006138C0 /* RoundedView.swift in Sources */,
 				7C7285671D6A477F00B49ABE /* Database.swift in Sources */,
+				7C16D6461D739A860069A97C /* UILabelExtension.swift in Sources */,
 				7C418FAF1D4A60A6005DD026 /* LocationTableViewCell.swift in Sources */,
 				7C5F00A31D3BE1880023B2D6 /* AddLocationViewController.swift in Sources */,
 				7CFF63D71D41B41000F526CE /* AccountStudentsTableViewController.swift in Sources */,
