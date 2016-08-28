@@ -198,6 +198,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         self.view.isUserInteractionEnabled = false
         let waitView = LoadingView(frame: self.view.frame)
         self.view.addSubview(waitView)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         // Create location unique ID
         let UID = NSUUID().uuidString
@@ -209,6 +210,16 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
                 print("Error: there was an error with finding the current location name.")
                 print(error)
                 
+                let title = "Location error"
+                let subtitle = "There was an error with the selected location."
+                
+                let alert = UIAlertView(title: title, message: subtitle, delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Okay")
+                alert.show()
+                
+                waitView.removeFromSuperview()
+                self.view.isUserInteractionEnabled = true
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+                
                 return
             }
             
@@ -218,9 +229,45 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             let latitude = self.currentLocation!.latitude as Double
             let longitude = self.currentLocation!.longitude as Double
             
-            self.AD.selectedLocation = Location(latitude: latitude, longitude: longitude, name: self.locationNameTextField.text!, UID: UID, city: city, state: state)
+            let newLocation = Location(latitude: latitude, longitude: longitude, name: self.locationNameTextField.text!, UID: UID, city: city, state: state)
             
-            
+            Database().create(location: newLocation, invite: nil, password: nil, completionHandler: { (data, response, error) in
+                var title = ""
+                var subtitle = ""
+                
+                if data == nil || response == nil || error != nil {
+                    // Network error
+                    title = "Network error"
+                    subtitle = "There was a network error. Please try again later."
+                    
+                    
+                } else {
+                    let reply = String(data: data!, encoding: .utf8)
+                    
+                    if reply == "1" {
+                        // Success
+                        DispatchQueue.main.async {
+                            self.AD.selectedLocation = newLocation
+                            self.performSegue(withIdentifier: "UnwindToSettingsView", sender: self)
+                            return
+                        }
+                        return
+                    }
+                    
+                    title = "Error occurred"
+                    subtitle = "An error occurred when creating the new location. Please try again."
+                }
+                
+                let alert = UIAlertView(title: title, message: subtitle, delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Okay")
+                
+                DispatchQueue.main.async {
+                    alert.show()
+                    
+                    waitView.removeFromSuperview()
+                    self.view.isUserInteractionEnabled = true
+                    self.navigationController?.setNavigationBarHidden(false, animated: true)
+                }
+            })
         }
     }
     

@@ -46,10 +46,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return _location
         }
         set (newLocation) {
-            let defaults = UserDefaults()
-            
-            defaults.set(newLocation?.UID, forKey: "LOCATION_UID")
-            defaults.synchronize()
+            if newLocation != nil {
+                let db = Database()
+                print("Hey there login token is \(loginToken)")
+                print("Hey there location uid is \(newLocation?.UID)")
+                db.updateLocation(forUserToken: loginToken!, withLocation: newLocation!, completionHandler: { (data, response, error) in
+                    print("After updating, error is \(error)")
+                    let reply = String(data: data!, encoding: .utf8)
+                    print("After updating, data is \(reply)")
+                })
+            }
             
             _location = newLocation
         }

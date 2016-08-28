@@ -79,6 +79,7 @@ class SettingsViewController: UIViewController {
     
     func updateLocationLabel() {
         locationLabel.text = AD.selectedLocation == nil ? "Please set your location." : AD.selectedLocation?.name
+        locationLabel.textColor = AD.selectedLocation == nil ? UIColor.lightGray : UIColor.black
     }
     
     func updateLocation() {

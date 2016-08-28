@@ -41,6 +41,37 @@ class Database: NSObject {
         }
     }
     
+    func create(location: Location, invite: String?, password: String?, completionHandler: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
+        var postData = ["latitude" : "\(location.latitude)",
+                        "longitude" : "\(location.longitude)",
+                        "city" : location.city,
+                        "state" : location.state,
+                        "UID" : location.UID]
+        
+        if invite != nil {
+            postData["invite"] = invite!
+        }
+        
+        if password != nil {
+            postData["password"] = password!
+        }
+        
+        makePHPRequest(post: postData, onPage: "CreateLocation.php") { (data, response, error) in
+            completionHandler(data, response, error)
+        }
+    }
+    
+    func updateLocation(forUserToken token: String, withLocation location: Location, completionHandler: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
+        let postData = ["token" : token.replacingOccurrences(of: "+", with: "%2B"),
+                        "locationUID" : location.UID]
+        
+        print("The post data is \(postData)")
+        
+        makePHPRequest(post: postData, onPage: "UpdateLocation.php") { (data, response, error) in
+            completionHandler(data, response, error)
+        }
+    }
+    
     @discardableResult
     func makePHPRequest(post: [String: String], onPage page: String, whenFinished: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask {
         print("Function \(#function) and line number \(#line) in file \(#file)")
@@ -49,6 +80,7 @@ class Database: NSObject {
         var request = URLRequest(url: webURL.appendingPathComponent(page))
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//        request.timeoutInterval = 5
         
         var d = ""
         var sent = ""
