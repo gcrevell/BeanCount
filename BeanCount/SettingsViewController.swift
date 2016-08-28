@@ -83,7 +83,6 @@ class SettingsViewController: UIViewController {
     }
     
     func updateLocation() {
-        print("PRESSED")
         performSegue(withIdentifier: "SegueToLocationsListView", sender: self)
     }
     
@@ -91,9 +90,7 @@ class SettingsViewController: UIViewController {
         self.performSegue(withIdentifier: "UnwindToLogout", sender: self)
     }
     
-    @IBAction func unwindToSettings(segue: UIStoryboardSegue) {
-        
-    }
+    @IBAction func unwindToSettings(segue: UIStoryboardSegue) {}
 
     /*
     // MARK: - Navigation
