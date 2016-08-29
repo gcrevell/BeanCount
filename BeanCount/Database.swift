@@ -81,15 +81,23 @@ class Database: NSObject {
         })
     }
     
+    func searchLocations(search: String, completionHandler: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask {
+        let postData = ["searchTerm" : search]
+        
+        return makePHPRequest(post: postData, onPage: "SearchLocations.php") { (data, response, error) in
+            completionHandler(data, response, error)
+        }
+    }
+    
     @discardableResult
-    func makePHPRequest(post: [String: String], onPage page: String, whenFinished: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask {
+    func makePHPRequest(post: [String: String], onPage page: String, timeout: TimeInterval = 60, whenFinished: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask {
         print("Function \(#function) and line number \(#line) in file \(#file)")
         
         let session = URLSession.shared
         var request = URLRequest(url: webURL.appendingPathComponent(page))
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-//        request.timeoutInterval = 5
+        request.timeoutInterval = timeout
         
         var d = ""
         var sent = ""

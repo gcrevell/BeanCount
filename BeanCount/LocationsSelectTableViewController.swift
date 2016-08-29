@@ -14,8 +14,10 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
     
     var selected: IndexPath?
     
+    var inviteLocation: Location? = nil
     var locations: [Location] = []
     
+    var urlTask: URLSessionDataTask? = nil
     let locationManager = CLLocationManager()
     var coords: CLLocationCoordinate2D? = nil
     
@@ -57,7 +59,15 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
     // MARK: - Table view data source
     
     func loadData() {
+        urlTask?.cancel()
+        urlTask = nil
+        
+        inviteLocation = nil
         locations = []
+        
+        tableView.reloadData()
+        
+        self.tableView.backgroundView = nil
         
         let activity = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         
@@ -67,42 +77,95 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
         self.tableView.backgroundView = activity
         
         if searchController.searchBar.text == "" && coords != nil {
-            _ = Database().loadNearbyLocations(coords: coords!, completionHandler: { (data, response, error) in
+            urlTask = Database().loadNearbyLocations(coords: coords!, completionHandler: { (data, response, error) in
+                if data == nil {
+                    print("FAILURE")
+                    return
+                }
                 let reply = String(data: data!, encoding: .utf8)
                 
-                let json = try! JSONSerialization.jsonObject(with: data!, options: [])
+                let json = try! JSONSerialization.jsonObject(with: data!, options: []) as! [[String : String]]
                 
-                for value in json as! NSArray {
-                    let values = value as! NSDictionary
-                    
-                    let UID = values["UID"] as! String
-                    let city = values["cityName"] as! String
-                    let state = values["stateName"] as! String
-                    let lat = Double(values["latitude"] as! String)!
-                    let lon = Double(values["longitude"] as! String)!
-                    let name = values["name"] as! String
-                    
-                    let newLoc = Location(latitude: lat, longitude: lon, name: name, UID: UID, city: city, state: state)
-                    
-                    self.locations.append(newLoc)
-                }
+                self.parse(data: json)
                 
                 DispatchQueue.main.async {
                     activity.removeFromSuperview()
+                    self.tableView.backgroundView = nil
                     self.tableView.reloadData()
                 }
             })
+        } else if searchController.searchBar.text != "" {
+            urlTask = Database().searchLocations(search: searchController.searchBar.text!, completionHandler: { (data, response, error) in
+                if data == nil {
+                    print("FAILURE2")
+                    return
+                }
+                let reply = String(data: data!, encoding: .utf8)
+                
+                let json = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String : [[String : String]]]
+                
+                let invite = json["Invite"]!
+                print(invite)
+                
+                if invite.count > 0 {
+                    self.inviteLocation = self.parse(location: invite[0])
+                }
+                
+                self.parse(data: json["Public"]!)
+                
+                DispatchQueue.main.async {
+                    activity.removeFromSuperview()
+                    self.tableView.backgroundView = nil
+                    self.tableView.reloadData()
+                }
+            })
+            
         }
+    }
+    
+    func parse(data: [[String : String]]) {
+        for value in data {
+            let newLoc = parse(location: value)
+            
+            self.locations.append(newLoc)
+        }
+    }
+    
+    func parse(location value: [String : String]) -> Location {
+        let UID = value["UID"]!
+        let city = value["cityName"]!
+        let state = value["stateName"]!
+        let lat = Double(value["latitude"]!)!
+        let lon = Double(value["longitude"]!)!
+        let name = value["name"]!
+        
+        return Location(latitude: lat, longitude: lon, name: name, UID: UID, city: city, state: state)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        var count = 0
+        
+        if inviteLocation != nil {
+            count += 1
+        }
+        
+        if locations.count > 0 {
+            count += 1
+        }
+        
+        return count
     }
     
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return 0
-//    }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if inviteLocation != nil && section == 0 {
+            return "Invite only"
+        } else if inviteLocation != nil {
+            return "Public"
+        }
+        
+        return nil
+    }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
@@ -112,13 +175,17 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if inviteLocation != nil && section == 0 {
+            return 1
+        }
+        
         return locations.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationTableCell", for: indexPath) as! LocationTableViewCell
         
-        let location = locations[indexPath.row]
+        let location = inviteLocation != nil && indexPath.section == 0 ? inviteLocation! : locations[indexPath.row]
         
         cell.location = location
         
@@ -211,6 +278,8 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
     
     func updateSearchResults(for searchController: UISearchController) {
         print(searchController.searchBar.text)
+        
+        loadData()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
