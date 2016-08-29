@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class Database: NSObject {
     
@@ -46,7 +47,8 @@ class Database: NSObject {
                         "longitude" : "\(location.longitude)",
                         "city" : location.city,
                         "state" : location.state,
-                        "UID" : location.UID]
+                        "UID" : location.UID,
+                        "locationName" : location.name]
         
         if invite != nil {
             postData["invite"] = invite!
@@ -65,11 +67,18 @@ class Database: NSObject {
         let postData = ["token" : token.replacingOccurrences(of: "+", with: "%2B"),
                         "locationUID" : location.UID]
         
-        print("The post data is \(postData)")
-        
         makePHPRequest(post: postData, onPage: "UpdateLocation.php") { (data, response, error) in
             completionHandler(data, response, error)
         }
+    }
+    
+    func loadNearbyLocations(coords: CLLocationCoordinate2D, completionHandler: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) -> URLSessionDataTask {
+        let postData = ["latitude" : "\(coords.latitude)",
+                        "longitude" : "\(coords.longitude)"]
+        
+        return makePHPRequest(post: postData, onPage: "LoadNearby.php", whenFinished: { (data, response, error) in
+            completionHandler(data, response, error)
+        })
     }
     
     @discardableResult

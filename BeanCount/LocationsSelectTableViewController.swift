@@ -10,21 +10,20 @@ import UIKit
 import Firebase
 import MapKit
 
-class LocationsSelectTableViewController: UITableViewController, UISearchResultsUpdating {
+class LocationsSelectTableViewController: UITableViewController, UISearchResultsUpdating, CLLocationManagerDelegate {
     
     var selected: IndexPath?
+    
+    var locations: [Location] = []
+    
+    let locationManager = CLLocationManager()
+    var coords: CLLocationCoordinate2D? = nil
     
     let AD = UIApplication.shared.delegate as! AppDelegate
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.tableView.backgroundColor = AD.myThemeColor()
         self.tableView.separatorStyle = .none
@@ -33,7 +32,16 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
         self.definesPresentationContext = true
+        searchController.searchBar.placeholder = "Search by name or invite code"
         self.tableView.tableHeaderView = searchController.searchBar
+        
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
         
 //        loadData()
     }
@@ -49,7 +57,7 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
     // MARK: - Table view data source
     
     func loadData() {
-        print("Reload")
+        locations = []
         
         let activity = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         
@@ -57,6 +65,34 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
         activity.startAnimating()
         
         self.tableView.backgroundView = activity
+        
+        if searchController.searchBar.text == "" && coords != nil {
+            _ = Database().loadNearbyLocations(coords: coords!, completionHandler: { (data, response, error) in
+                let reply = String(data: data!, encoding: .utf8)
+                
+                let json = try! JSONSerialization.jsonObject(with: data!, options: [])
+                
+                for value in json as! NSArray {
+                    let values = value as! NSDictionary
+                    
+                    let UID = values["UID"] as! String
+                    let city = values["cityName"] as! String
+                    let state = values["stateName"] as! String
+                    let lat = Double(values["latitude"] as! String)!
+                    let lon = Double(values["longitude"] as! String)!
+                    let name = values["name"] as! String
+                    
+                    let newLoc = Location(latitude: lat, longitude: lon, name: name, UID: UID, city: city, state: state)
+                    
+                    self.locations.append(newLoc)
+                }
+                
+                DispatchQueue.main.async {
+                    activity.removeFromSuperview()
+                    self.tableView.reloadData()
+                }
+            })
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -76,39 +112,39 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return locations.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationTableCell", for: indexPath) as! LocationTableViewCell
         
-//        let location = recievedLocations[sortedStates[indexPath.section]]![indexPath.row]
-//        
-//        cell.location = location
-//        
-//        cell.clipsToBounds = true
-//        
-//        cell.mainView.layer.cornerRadius = 4
-//        cell.mainView.backgroundColor = UIColor.white
-//        cell.mainView.clipsToBounds = true
-//        cell.backgroundColor = UIColor.clear
-//        
-//        cell.mapView.centerCoordinate = location.coordinate
-//        cell.mapView.isUserInteractionEnabled = false
-//        
-//        cell.mapView.removeAnnotations(cell.mapView.annotations)
-//        let annotation = MKPointAnnotation()
-//        annotation.coordinate = location.coordinate
-//        cell.mapView.addAnnotation(annotation)
-////        cell.mapView.center = cell.mainView.center
-//        
-//        let span = MKCoordinateSpan(latitudeDelta: 0.0075, longitudeDelta: 0.0075)
-//        let region = MKCoordinateRegion(center: location.coordinate, span: span)
-//        
-//        cell.mapView.setRegion(region, animated: false)
-//        
-//        cell.mainTitle.text = location.name
-//        cell.subTitle.text = "\(location.city), \(location.state)"
+        let location = locations[indexPath.row]
+        
+        cell.location = location
+        
+        cell.clipsToBounds = true
+        
+        cell.mainView.layer.cornerRadius = 4
+        cell.mainView.backgroundColor = UIColor.white
+        cell.mainView.clipsToBounds = true
+        cell.backgroundColor = UIColor.clear
+        
+        cell.mapView.centerCoordinate = location.coordinate
+        cell.mapView.isUserInteractionEnabled = false
+        
+        cell.mapView.removeAnnotations(cell.mapView.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location.coordinate
+        cell.mapView.addAnnotation(annotation)
+//        cell.mapView.center = cell.mainView.center
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.0375, longitudeDelta: 0.0375)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        
+        cell.mapView.setRegion(region, animated: false)
+        
+        cell.mainTitle.text = location.name
+        cell.subTitle.text = "\(location.city), \(location.state)"
         
         return cell
     }
@@ -175,6 +211,16 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
     
     func updateSearchResults(for searchController: UISearchController) {
         print(searchController.searchBar.text)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue = manager.location?.coordinate
+        
+        if coords == nil {
+            coords = locValue
+            loadData()
+        }
+        coords = locValue
     }
     
     /*
