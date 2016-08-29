@@ -90,7 +90,9 @@ class SettingsViewController: UIViewController {
         self.performSegue(withIdentifier: "UnwindToLogout", sender: self)
     }
     
-    @IBAction func unwindToSettings(segue: UIStoryboardSegue) {}
+    @IBAction func unwindToSettings(segue: UIStoryboardSegue) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
 
     /*
     // MARK: - Navigation

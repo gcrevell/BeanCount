@@ -12,6 +12,7 @@ import Firebase
 
 class AddLocationViewController: UIViewController, MKMapViewDelegate {
     
+    // MARK: Variables
     @IBOutlet weak var locationNameTextField: UITextField!
     
     @IBOutlet weak var locationPickerView: UIView!
@@ -19,6 +20,8 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var locationTextLabel: UILabel!
     
     @IBOutlet weak var securityView: UIView!
+    @IBOutlet weak var passwordTextField: RoundedTextField!
+    @IBOutlet weak var inviteSwitch: UISwitch!
     @IBOutlet weak var inviteCodeLabel: UILabel!
     
     @IBOutlet weak var submitButton: UIButton!
@@ -30,6 +33,8 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
     
     let AD = UIApplication.shared.delegate as! AppDelegate
     let locationManager = CLLocationManager()
+    
+    // MARK: - Overrides
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,20 +67,13 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         self.submitButton.addTarget(self, action: #selector(submit), for: .touchUpInside)
         
         inviteCodeLabel.text = ""
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func updateTheme() {
-        let mainColor = AD.myThemeColor()
-        
-        view.backgroundColor = mainColor
-        
-        locationNameTextField.tintColor = mainColor
-        locationIconView.tintColor = mainColor
     }
     
     // MARK: - Map location
@@ -114,6 +112,21 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         CLGeocoder().reverseGeocodeLocation(loc) { (placemarks, error) in
             completion(placemarks, error as NSError?)
         }
+    }
+    
+    // MARK: - UI
+    
+    func updateTheme() {
+        let mainColor = AD.myThemeColor()
+        
+        view.backgroundColor = mainColor
+        
+        locationNameTextField.tintColor = mainColor
+        locationIconView.tintColor = mainColor
+    }
+    
+    func dismissKeyboard() {
+        self.view.endEditing(false)
     }
     
     func expandMapView() {
@@ -164,7 +177,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
     }
     
     func closeMapView() {
-        print("Closing map")
+        dismissKeyboard()
         
         for view in self.locationPickerView.subviews {
             if view != locationIconView && view != locationTextLabel {
@@ -194,11 +207,14 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             self.locationIconView.isHidden = false
             self.locationTextLabel.isHidden = false
             
+            self.securityView.isUserInteractionEnabled = true
             self.submitButton.isUserInteractionEnabled = true
         }
     }
     
     @IBAction func inviteSwitch(_ sender: UISwitch) {
+        dismissKeyboard()
+        
         if sender.isOn {
             let invite = self.UID.components(separatedBy: "-")[0]
         
@@ -210,6 +226,8 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
     }
     
     func submit() {
+        dismissKeyboard()
+        
         if self.currentLocation == nil {
             // No map location set for this location
             return
@@ -230,6 +248,18 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
         // Create location unique ID
         print("This location's UUID is \(UID)")
         // Add location Lat, Long, Name, City/State name to firebase with UID as key
+        
+        // Invite & password
+        var invite: String? = nil
+        var password: String? = nil
+        
+        if inviteSwitch.isOn {
+            invite = self.UID.components(separatedBy: "-")[0]
+        }
+        
+        if passwordTextField.text != nil && passwordTextField.text != "" {
+            password = passwordTextField.text
+        }
         
         locationToCityState(location: self.currentLocation!) { (placemarks, error) in
             if error != nil {
@@ -257,7 +287,7 @@ class AddLocationViewController: UIViewController, MKMapViewDelegate {
             
             let newLocation = Location(latitude: latitude, longitude: longitude, name: self.locationNameTextField.text!, UID: self.UID, city: city, state: state)
             
-            Database().create(location: newLocation, invite: nil, password: nil, completionHandler: { (data, response, error) in
+            Database().create(location: newLocation, invite: invite, password: password, completionHandler: { (data, response, error) in
                 var title = ""
                 var subtitle = ""
                 

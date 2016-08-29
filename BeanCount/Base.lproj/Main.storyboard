@@ -496,7 +496,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hEc-fW-LHn">
                                         <color key="onTintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <action selector="inviteSwitch:" destination="i5B-rB-VnN" eventType="valueChanged" id="0gp-tI-kNr"/>
+                                            <action selector="inviteSwitch:" destination="i5B-rB-VnN" eventType="valueChanged" id="fXe-M5-Ywk"/>
                                         </connections>
                                     </switch>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9j-hA-A3J">
@@ -553,10 +553,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="inviteCodeLabel" destination="a9j-hA-A3J" id="1EY-Fq-vu5"/>
+                        <outlet property="inviteSwitch" destination="hEc-fW-LHn" id="7mj-vV-aUR"/>
                         <outlet property="locationIconView" destination="Vfu-of-M9I" id="hPR-C8-qhd"/>
                         <outlet property="locationNameTextField" destination="SKu-vf-HGQ" id="mmV-rZ-hbY"/>
                         <outlet property="locationPickerView" destination="NkV-oU-SoJ" id="j4w-4d-ANx"/>
                         <outlet property="locationTextLabel" destination="iqi-N0-6JS" id="gzQ-4G-4UH"/>
+                        <outlet property="passwordTextField" destination="efW-QS-Jh2" id="tUf-np-NBe"/>
                         <outlet property="securityView" destination="UCO-r0-72r" id="C2c-rZ-JOg"/>
                         <outlet property="submitButton" destination="o2g-Cp-7QH" id="o6B-lG-9nN"/>
                         <outlet property="viewHeightConstraint" destination="mxr-2i-OqR" id="iDG-hF-J0o"/>
