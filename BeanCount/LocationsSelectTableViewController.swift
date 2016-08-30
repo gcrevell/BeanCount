@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import MapKit
 
-class LocationsSelectTableViewController: UITableViewController, UISearchResultsUpdating, CLLocationManagerDelegate {
+class LocationsSelectTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, CLLocationManagerDelegate {
     
     var selected: IndexPath?
     
@@ -34,6 +34,9 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
         self.definesPresentationContext = true
+        searchController.searchBar.enablesReturnKeyAutomatically = true
+        searchController.searchBar.delegate = self
+        searchController.searchBar.searchBarStyle = .minimal
         searchController.searchBar.placeholder = "Search by name or invite code"
         self.tableView.tableHeaderView = searchController.searchBar
         
@@ -82,7 +85,7 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
                     print("FAILURE")
                     return
                 }
-                let reply = String(data: data!, encoding: .utf8)
+//                let reply = String(data: data!, encoding: .utf8)
                 
                 let json = try! JSONSerialization.jsonObject(with: data!, options: []) as! [[String : String]]
                 
@@ -100,7 +103,7 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
                     print("FAILURE2")
                     return
                 }
-                let reply = String(data: data!, encoding: .utf8)
+//                let reply = String(data: data!, encoding: .utf8)
                 
                 let json = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String : [[String : String]]]
                 
@@ -205,7 +208,7 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
         cell.mapView.addAnnotation(annotation)
 //        cell.mapView.center = cell.mainView.center
         
-        let span = MKCoordinateSpan(latitudeDelta: 0.0375, longitudeDelta: 0.0375)
+        let span = MKCoordinateSpan(latitudeDelta: 0.0075, longitudeDelta: 0.0075)
         let region = MKCoordinateRegion(center: location.coordinate, span: span)
         
         cell.mapView.setRegion(region, animated: false)
@@ -227,19 +230,22 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
         }
         
 //        self.AD.selectedLocation = recievedLocations[sortedStates[indexPath.section]]![indexPath.row]
-//        
-//        var oldCell: LocationTableViewCell?
-//        
-//        if let current = selected {
-//            selected = nil
-//            oldCell = tableView.cellForRow(at: current) as? LocationTableViewCell
-//        }
-//        
-//        selected = indexPath
-//        
-//        let currentCell = tableView.cellForRow(at: indexPath) as! LocationTableViewCell
-//        
-//        tableView.beginUpdates()
+        
+        var oldCell: LocationTableViewCell?
+        
+        if let current = selected {
+            selected = nil
+            oldCell = tableView.cellForRow(at: current) as? LocationTableViewCell
+        }
+        
+        selected = indexPath
+        
+        let currentCell = tableView.cellForRow(at: indexPath) as! LocationTableViewCell
+        
+        tableView.beginUpdates()
+        
+        oldCell?.compressMap(true, tableView: tableView)
+        currentCell.expandMap(true, tableView: tableView)
 //        oldCell?.mapView.frame = CGRect(x: 0,
 //                                        y: 0,
 //                                        width: tableView.frame.width,
@@ -279,7 +285,29 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
     func updateSearchResults(for searchController: UISearchController) {
         print(searchController.searchBar.text)
         
+        if selected != nil {
+            let oldCell = tableView.cellForRow(at: selected!) as? LocationTableViewCell
+            oldCell?.compressMap(false, tableView: tableView)
+            selected = nil
+        }
+        
         loadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.searchBarStyle = .prominent
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if searchBar.text == "" {
+            searchBar.searchBarStyle = .minimal
+        }
+//        searchBar.backgroundImage = nil
+//        searchBar.barTintColor = UIColor.white
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.searchBarStyle = .minimal
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
