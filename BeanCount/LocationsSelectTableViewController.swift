@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import MapKit
 
-class LocationsSelectTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, CLLocationManagerDelegate {
+class LocationsSelectTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, CLLocationManagerDelegate, UIAlertViewDelegate {
     
     var selected: IndexPath?
     
@@ -47,8 +47,6 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
-        
-//        loadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -142,11 +140,14 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
         let lon = Double(value["longitude"]!)!
         let name = value["name"]!
         
-        return Location(latitude: lat, longitude: lon, name: name, UID: UID, city: city, state: state)
+        var loc = Location(latitude: lat, longitude: lon, name: name, UID: UID, city: city, state: state)
+        
+        loc.hasPassword = value["passwordProtected"] == "1"// || value["passwordProtected"] == nil
+        
+        return loc
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         var count = 0
         
         if inviteLocation != nil {
@@ -206,7 +207,6 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
         let annotation = MKPointAnnotation()
         annotation.coordinate = location.coordinate
         cell.mapView.addAnnotation(annotation)
-//        cell.mapView.center = cell.mainView.center
         
         let span = MKCoordinateSpan(latitudeDelta: 0.0075, longitudeDelta: 0.0075)
         let region = MKCoordinateRegion(center: location.coordinate, span: span)
@@ -223,13 +223,19 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
         tableView.deselectRow(at: indexPath, animated: false)
         
         if indexPath == selected {
-            AD.selectedLocation = (tableView.cellForRow(at: indexPath) as! LocationTableViewCell).location
+            let loc = (tableView.cellForRow(at: indexPath) as! LocationTableViewCell).location
             
-            self.performSegue(withIdentifier: "UnwindToSettingsView", sender: self)
+            if loc?.hasPassword == true {
+                let alert = UIAlertView(title: "Enter password", message: "Enter the password for \(loc!.name)", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Enter")
+                alert.alertViewStyle = .secureTextInput
+//                alert.addSubview(UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 50)))
+                
+                alert.show()
+            }
+            
+//            self.performSegue(withIdentifier: "UnwindToSettingsView", sender: self)
             return
         }
-        
-//        self.AD.selectedLocation = recievedLocations[sortedStates[indexPath.section]]![indexPath.row]
         
         var oldCell: LocationTableViewCell?
         
@@ -246,30 +252,6 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
         
         oldCell?.compressMap(true, tableView: tableView)
         currentCell.expandMap(true, tableView: tableView)
-//        oldCell?.mapView.frame = CGRect(x: 0,
-//                                        y: 0,
-//                                        width: tableView.frame.width,
-//                                        height: tableView.frame.width)
-//        
-//        UIView.animate(withDuration: 0.8,
-//                       delay: 0,
-//                       usingSpringWithDamping: 0.7,
-//                       initialSpringVelocity: 0.3,
-//                       options: .beginFromCurrentState,
-//                       animations: {
-//            oldCell?.mainView.frame.size.height = 90
-//            if oldCell != nil {
-//                print("Here")
-//                let x = oldCell!.mainView.frame.width - oldCell!.mainView.frame.height
-//                oldCell!.mapView.frame = CGRect(x: x,
-//                                                y: 0,
-//                                                width: oldCell!.mainView.frame.height,
-//                                                height: oldCell!.mainView.frame.height)
-//            }
-//            currentCell.mapView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.width)
-//            
-//            tableView.endUpdates()
-//            }, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -302,8 +284,6 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
         if searchBar.text == "" {
             searchBar.searchBarStyle = .minimal
         }
-//        searchBar.backgroundImage = nil
-//        searchBar.barTintColor = UIColor.white
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -320,40 +300,9 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
         coords = locValue
     }
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
+    func willPresent(_ alertView: UIAlertView) {
+//        alertView.addSubview(UITextField(frame: CGRect(x: 100, y: 100, width: 100, height: 20)))
+    }
     
     /*
      // MARK: - Navigation
