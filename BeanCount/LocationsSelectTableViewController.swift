@@ -226,9 +226,8 @@ class LocationsSelectTableViewController: UITableViewController, UISearchResults
             let loc = (tableView.cellForRow(at: indexPath) as! LocationTableViewCell).location
             
             if loc?.hasPassword == true {
-                let alert = UIAlertView(title: "Enter password", message: "Enter the password for \(loc!.name)", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Enter")
+                let alert = UIAlertView(title: "Enter password", message: "Enter the password for \(loc!.name).", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Enter")
                 alert.alertViewStyle = .secureTextInput
-//                alert.addSubview(UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 50)))
                 
                 alert.show()
             }

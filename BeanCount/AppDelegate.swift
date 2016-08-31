@@ -39,56 +39,101 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    private var _location: Location?
+    var location: Location?
     var selectedLocation: Location? {
         get {
             
-            return _location
+            return location
         }
         set (newLocation) {
             if newLocation != nil {
                 let db = Database()
                 db.updateLocation(forUserToken: loginToken!, withLocation: newLocation!, completionHandler: { (data, response, error) in
+                    if data == nil {
+                        // Unable to connect
+                        print("There was a network connection while setting the users location.")
+                        return
+                    }
                     
+                    let reply = String(data: data!, encoding: .utf8)
+                    
+                    if reply == "-1" {
+                        // Incorrect password used
+                        print("An incorrect (or no) password was used when updating the user's location.")
+                    }
+                    
+                    if reply == "" {
+                        // Unknown error with SQL statement
+                        print("An unknown error occurred while setting the users location.")
+                    }
                 })
             }
             
-            _location = newLocation
+            location = newLocation
         }
+    }
+    
+    func set(location: Location?, completionHandler: @escaping (_ response: Int) -> Void) {
+        self.location = location
+        
+        let db = Database()
+        db.updateLocation(forUserToken: loginToken!, withLocation: location, completionHandler: { (data, response, error) in
+            var value = -1
+            
+            if data == nil {
+                // Network error
+                value = -2
+            } else {
+                let reply = String(data: data!, encoding: .utf8)
+                
+                if reply == "-3" {
+                    // Incorrect password
+                    value = -3
+                } else if reply == "" {
+                    // SQL error
+                    value = -4
+                } else {
+                    // yay! worked!
+                    value = 0
+                }
+            }
+            
+            completionHandler(value)
+        })
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-//        FIRApp.configure()
+        //        FIRApp.configure()
         let defaults = UserDefaults()
-//        let db = FIRDatabase.database().reference()
+        //        let db = FIRDatabase.database().reference()
         
-//        if let uid = defaults.string(forKey: "LOCATION_UID") {
-//            db.child("locations").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-//                
-//                if snapshot.value == nil || snapshot.value is NSNull {
-//                    print("Could not find location in Firebase")
-//                    return
-//                }
-//                
-//                let data = snapshot.value! as! [String : AnyObject]
-//                print("My location data: \(data)")
-//                
-//                let latitude = data["latitude"] as! Double
-//                let longitude = data["longitude"] as! Double
-//                let name = data["locationName"] as! String
-//                let city = data["city"] as! String
-//                let state = data["state"] as! String
-//                
-//                self.selectedLocation = Location(latitude: latitude,
-//                                                    longitude: longitude,
-//                                                    name: name,
-//                                                    UID: uid,
-//                                                    city: city,
-//                                                    state: state)
-//            })
-//        }
+        //        if let uid = defaults.string(forKey: "LOCATION_UID") {
+        //            db.child("locations").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        //
+        //                if snapshot.value == nil || snapshot.value is NSNull {
+        //                    print("Could not find location in Firebase")
+        //                    return
+        //                }
+        //
+        //                let data = snapshot.value! as! [String : AnyObject]
+        //                print("My location data: \(data)")
+        //
+        //                let latitude = data["latitude"] as! Double
+        //                let longitude = data["longitude"] as! Double
+        //                let name = data["locationName"] as! String
+        //                let city = data["city"] as! String
+        //                let state = data["state"] as! String
+        //
+        //                self.selectedLocation = Location(latitude: latitude,
+        //                                                    longitude: longitude,
+        //                                                    name: name,
+        //                                                    UID: uid,
+        //                                                    city: city,
+        //                                                    state: state)
+        //            })
+        //        }
         
         return true
     }
@@ -146,85 +191,85 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     /*
-    // MARK: - Core Data iOS 9
-    
-    lazy var applicationDocumentsDirectory: NSURL = {
-        // The directory the application uses to store the Core Data store file. This code uses a directory named "Gabriel.Revells.CoreData9Test" in the application's documents Application Support directory.
-        let urls = FileManager.default.urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)
-        return urls[urls.count-1]
-    }()
-    
-    lazy var managedObjectModel: NSManagedObjectModel = {
-        // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = Bundle.main.urlForResource("CoreData9Test", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOf: modelURL)!
-    }()
-    
-    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-        // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
-        // Create the coordinator and store
-        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.appendingPathComponent("SingleViewCoreData.sqlite")
-        var failureReason = "There was an error creating or loading the application's saved data."
-        do {
-            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
-        } catch {
-            // Report any error we got.
-            var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
-            
-            dict[NSUnderlyingErrorKey] = error as NSError
-            let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
-            // Replace this with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
-            abort()
-        }
-        
-        return coordinator
-    }()
-    
-    lazy var managedObjectContext: NSManagedObjectContext = {
-        // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
-        let coordinator = self.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = coordinator
-        return managedObjectContext
-    }()
-    
-    // MARK: - Core Data Saving support
-    
-    func saveContext () {
-        if #available(iOS 10.0, *) {
-            let context = persistentContainer.viewContext
-            
-            if context.hasChanges {
-                do {
-                    try context.save()
-                } catch {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    let nserror = error as NSError
-                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-                }
-            }
-        } else {
-            // Fallback on earlier versions
-            if managedObjectContext.hasChanges {
-                do {
-                    try managedObjectContext.save()
-                } catch {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    let nserror = error as NSError
-                    NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                    abort()
-                }
-            }
-        }
-    }
- */
+     // MARK: - Core Data iOS 9
+     
+     lazy var applicationDocumentsDirectory: NSURL = {
+     // The directory the application uses to store the Core Data store file. This code uses a directory named "Gabriel.Revells.CoreData9Test" in the application's documents Application Support directory.
+     let urls = FileManager.default.urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)
+     return urls[urls.count-1]
+     }()
+     
+     lazy var managedObjectModel: NSManagedObjectModel = {
+     // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
+     let modelURL = Bundle.main.urlForResource("CoreData9Test", withExtension: "momd")!
+     return NSManagedObjectModel(contentsOf: modelURL)!
+     }()
+     
+     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+     // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
+     // Create the coordinator and store
+     let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+     let url = self.applicationDocumentsDirectory.appendingPathComponent("SingleViewCoreData.sqlite")
+     var failureReason = "There was an error creating or loading the application's saved data."
+     do {
+     try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
+     } catch {
+     // Report any error we got.
+     var dict = [String: AnyObject]()
+     dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
+     dict[NSLocalizedFailureReasonErrorKey] = failureReason
+     
+     dict[NSUnderlyingErrorKey] = error as NSError
+     let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+     // Replace this with code to handle the error appropriately.
+     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+     NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
+     abort()
+     }
+     
+     return coordinator
+     }()
+     
+     lazy var managedObjectContext: NSManagedObjectContext = {
+     // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
+     let coordinator = self.persistentStoreCoordinator
+     var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+     managedObjectContext.persistentStoreCoordinator = coordinator
+     return managedObjectContext
+     }()
+     
+     // MARK: - Core Data Saving support
+     
+     func saveContext () {
+     if #available(iOS 10.0, *) {
+     let context = persistentContainer.viewContext
+     
+     if context.hasChanges {
+     do {
+     try context.save()
+     } catch {
+     // Replace this implementation with code to handle the error appropriately.
+     // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+     let nserror = error as NSError
+     fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+     }
+     }
+     } else {
+     // Fallback on earlier versions
+     if managedObjectContext.hasChanges {
+     do {
+     try managedObjectContext.save()
+     } catch {
+     // Replace this implementation with code to handle the error appropriately.
+     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+     let nserror = error as NSError
+     NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+     abort()
+     }
+     }
+     }
+     }
+     */
     
     // MARK: - Global functions
     
@@ -237,8 +282,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case .red:
                 return UIColor(red: 212/255, green: 36/255, blue: 54/255, alpha: 1)
                 
-//            case .lightBlue:
-//                return UIColor(red: 23/255, green: 132/255, blue: 171/255, alpha: 1)
+                //            case .lightBlue:
+                //                return UIColor(red: 23/255, green: 132/255, blue: 171/255, alpha: 1)
                 
             case .orange:
                 return UIColor(red: 247/255, green: 117/255, blue: 33/255, alpha: 1)

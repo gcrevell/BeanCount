@@ -63,9 +63,12 @@ class Database: NSObject {
         }
     }
     
-    func updateLocation(forUserToken token: String, withLocation location: Location, completionHandler: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
-        let postData = ["token" : token.replacingOccurrences(of: "+", with: "%2B"),
-                        "locationUID" : location.UID]
+    func updateLocation(forUserToken token: String, withLocation location: Location?, completionHandler: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
+        var postData = ["token" : token.replacingOccurrences(of: "+", with: "%2B")]
+        
+        if location != nil {
+            postData["locationUID"] = location!.UID
+        }
         
         makePHPRequest(post: postData, onPage: "UpdateLocation.php") { (data, response, error) in
             completionHandler(data, response, error)
