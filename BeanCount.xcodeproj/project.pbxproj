@@ -23,6 +23,7 @@
 		7C29E4281D3B069D006088CD /* green check.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C29E4261D3B069D006088CD /* green check.png */; };
 		7C418FAE1D4A60A6005DD026 /* LocationsSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C418FAC1D4A60A6005DD026 /* LocationsSelectTableViewController.swift */; };
 		7C418FAF1D4A60A6005DD026 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C418FAD1D4A60A6005DD026 /* LocationTableViewCell.swift */; };
+		7C45B7451D77351A00CD8E6B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C45B7441D77351A00CD8E6B /* Images.swift */; };
 		7C5F009D1D3BCB950023B2D6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F009C1D3BCB950023B2D6 /* SettingsViewController.swift */; };
 		7C5F009F1D3BCE250023B2D6 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C5F009E1D3BCE250023B2D6 /* location.png */; };
 		7C5F00A31D3BE1880023B2D6 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F00A21D3BE1880023B2D6 /* AddLocationViewController.swift */; };
@@ -78,6 +79,7 @@
 		7C29E4261D3B069D006088CD /* green check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green check.png"; sourceTree = "<group>"; };
 		7C418FAC1D4A60A6005DD026 /* LocationsSelectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsSelectTableViewController.swift; sourceTree = "<group>"; };
 		7C418FAD1D4A60A6005DD026 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		7C45B7441D77351A00CD8E6B /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		7C5F00991D3B55CB0023B2D6 /* BeanCount.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = BeanCount.entitlements; sourceTree = "<group>"; };
 		7C5F009C1D3BCB950023B2D6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C5F009E1D3BCE250023B2D6 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 		7CE4095C1D5688360045B55A /* Theme */ = {
 			isa = PBXGroup;
 			children = (
+				7C45B7441D77351A00CD8E6B /* Images.swift */,
 				7C16D6451D739A860069A97C /* UILabelExtension.swift */,
 				7CC5835B1D6CFE24001D929C /* CALayerExtension.swift */,
 				7CE409601D58F25C0045B55A /* UIViewExtension.swift */,
@@ -485,6 +488,7 @@
 				7C0741C01D51406A0039D42C /* TagPopoverTableViewController.swift in Sources */,
 				7CF289951D5A77E40092F3DC /* RoundedSegmentedControl.swift in Sources */,
 				7CE409651D58F2D00045B55A /* Location.swift in Sources */,
+				7C45B7451D77351A00CD8E6B /* Images.swift in Sources */,
 				7CF12A961D3AC017003AE476 /* Theme.swift in Sources */,
 				7C5F009D1D3BCB950023B2D6 /* SettingsViewController.swift in Sources */,
 				7C0741BE1D513E880039D42C /* AddStudentViewController.swift in Sources */,

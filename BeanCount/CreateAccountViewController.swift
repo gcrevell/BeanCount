@@ -164,9 +164,9 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate, UIPopo
     
     func checkEmail() {
         if self.verify(email: self.emailTextField.text!) {
-            emailTextField.rightImage = UIImage(named: "green check.png")
+            emailTextField.rightImage = UIImage(.greenCheck)
         } else {
-            emailTextField.rightImage = UIImage(named: "red x.png")
+            emailTextField.rightImage = UIImage(.redX)
         }
     }
     
@@ -177,7 +177,7 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate, UIPopo
         usernameCheckTask = nil
         
         if text == "" {
-            self.usernameTextField.rightImage = UIImage(named: "red x.png")
+            self.usernameTextField.rightImage = UIImage(.redX)
             
             return
         }
@@ -194,13 +194,13 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate, UIPopo
                 if String(data: data!, encoding: .utf8) == "0" {
                     // User name does not exist
                     DispatchQueue.main.async {
-                        self.usernameTextField.rightImage = UIImage(named: "green check.png")
+                        self.usernameTextField.rightImage = UIImage(.greenCheck)
                     }
                 } else {
                     // User name does exist
                     // Tell user username is unavaiable
                     DispatchQueue.main.async {
-                        self.usernameTextField.rightImage = UIImage(named: "red x.png")
+                        self.usernameTextField.rightImage = UIImage(.redX)
                     }
                 }
             }
@@ -209,17 +209,17 @@ class CreateAccountViewController: UIViewController, UIAlertViewDelegate, UIPopo
     
     func checkPassword() {
         if verify(password: passwordTextField.text!) {
-            passwordTextField.rightImage = UIImage(named: "green check.png")
+            passwordTextField.rightImage = UIImage(.greenCheck)
         } else {
-            passwordTextField.rightImage = UIImage(named: "red x.png")
+            passwordTextField.rightImage = UIImage(.redX)
         }
     }
     
     func passwordEqual() {
         if passwordTextField.text == confirmPasswordTextField.text && verify(password: passwordTextField.text!) {
-            confirmPasswordTextField.rightImage = UIImage(named: "green check.png")
+            confirmPasswordTextField.rightImage = UIImage(.greenCheck)
         } else {
-            confirmPasswordTextField.rightImage = UIImage(named: "red x.png")
+            confirmPasswordTextField.rightImage = UIImage(.redX)
             checkPassword()
         }
     }
